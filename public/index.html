@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/responsive-list.css">
+    <link rel="stylesheet" href="css/pils.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Home</title>
 </head>
@@ -26,7 +27,7 @@
     <main>       
         <section>
             <header>
-                <h2>Al de stations</h2>
+                <h2>Stations</h2>
                 <select name="list-or-map" id="list-or-map-select">
                     <option value="list">lijst</option>
                 </select>
@@ -48,50 +49,25 @@
                     </tr>
                 </table>
             </div>
-<<<<<<< HEAD
-            <input type="checkbox" id="page-nav-toggle-checkbox">         
-            <nav class="page-nav">
-                <a href="#">navigation link</a>
-                <a href="#">navigation link</a>
-            </nav>
-        </header>
-        <main>       
-            <h1>Id en locaties van weerstationnen</h1>
-            <div class="Tabel">
-                <table>
-                    <tr>
-                        <th>Weerstation ID</th>
-                        <th>Locatie Coordinaten</th>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Latitude: 50.87870224351123, Longitude: 4.699849529479012</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Latitude: 50.92838073572026, Longitude: 5.396747069771264</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Latitude: 51.130484168693656, Longitude: 3.9069838098835685</td>
-                    </tr>
-                </table>
-            </div>
-            
-            <section>                
-                <h1>Sensor data van de afgelopen 24 uur</h1>
-                <div class="list">
-                    <div class="chart">
-                        <canvas id="temperature-chart"></canvas>
-                    </div>
-                    <div class="chart">
-                        <canvas id="windspeed-chart"></canvas>
-                    </div>
-=======
         </section>
         <section>
             <header>
                 <h2>Geselecteerde stations</h2>
+                <section class="stickyPills">
+                    <div class="pillsContainer">
+                        <button class="filter">
+                            Filter
+                        </button>
+                        <div class="chipsSlider">
+                            <div class="innerWrapper">
+                                <a class="pill">
+                                    hasselt
+                                    <i class="close" aria-hidden="false"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </header>
         </section>      
         <section>
@@ -104,7 +80,6 @@
                 </div>
                 <div class="responsive-list-item">
                     <canvas id="windspeed-chart"></canvas>
->>>>>>> 4db8c8447198a101f5ea98c7ac2765b81edbda7a
                 </div>
             </div>
         </section>
