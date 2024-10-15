@@ -3,35 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/responsive-list.css">
+    <link rel="stylesheet" href="css/map.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <title>UCLL Meetstations</title>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+
+    <title>Home</title>
 </head>
 <body>
-    <div class="page">
-        <header class="page-header">
-            <div>
-                <h2>UCLL Meetstations</h2>
-                <label for="page-nav-toggle-checkbox" class="page-nav-toggle-label">☰</label>
+    <header class="stick-to-top">        
+        <div class="wrapper">
+            <div class="responsive-navbar">
+                <div>
+                    <h1>UCLL</h1>
+                    <label for="nav-toggle-checkbox" id="nav-toggle-label">☰</label>
+                </div>
+                <input type="checkbox" id="nav-toggle-checkbox">         
+                <nav>
+                    <a href="/">Home</a>
+                    <a href="#">Product</a>
+                    <a href="#">Contact</a>
+                </nav>
             </div>
-            <input type="checkbox" id="page-nav-toggle-checkbox">         
-            <nav class="page-nav">
-                <a href="#">navigation link</a>
-                <a href="#">navigation link</a>
-            </nav>
-        </header>
-        <main>
-            <section>                
-                <h2>Gegevens van de afgelopen 24 uur</h2>
-                <canvas id="temperature-chart" class="chart"></canvas>
-                <canvas id="windspeed-chart" class="chart"></canvas>
+        </div>
+    </header>
+    <main>       
+        <div class="wrapper">
+            <section>
+                <header>
+                    <h2>De stations</h2>
+                    <select name="list-or-map" id="list-or-map-select">
+                        <option value="map">kaart</option>
+                        <option value="list">lijst</option>
+                    </select>
+                </header>
+                <div class="map-container">
+                    <div id="map"></div>
+                </div>
+                <div class="container-scroll-x hide">
+                    <table id="table">
+                        <tr>
+                            <th></th>
+                            <th>Id</th>
+                            <th>Locatie</th>
+                        </tr>
+                    </table>
+                </div>            
             </section>
-        </main>
-        <footer>
-            <h2>footer</h2>
-        </footer>
+            <section id="section-selected-data">
+                <header>
+                    <h2>Data geselecteerde stations</h2>
+                </header>
+                <div class="responsive-list">
+                    <div class="responsive-list-item">
+                        <canvas id="temperature-chart"></canvas>
+                    </div>
+                    <div class="responsive-list-item">
+                        <canvas id="windspeed-chart"></canvas>
+                    </div>
+                </div>
+            </section>
+            <section></section>
+        </div>
+    </main>
+    <div class="back-to-top">
+        <div class="wrapper">
+            <a href="#">naar boven</a>
+        </div>
     </div>
+    <footer>
+        <div class="wrapper">
+            <nav>
+                <a href="/">Home</a>
+                <a href="#">Product</a>
+                <a href="#">Contact</a>
+            </nav>
+        </div>
+    </footer>
 </body>
-<script src="javascript/chart.js"></script>
+<script src="js/main.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/test_map.js"></script>
 </html>

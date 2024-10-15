@@ -1,9 +1,4 @@
-body > header {
-    position: sticky;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    
+.responsive-navbar {    
     width: 100%;
 
     display: flex;
@@ -13,28 +8,32 @@ body > header {
     padding-top: 5px;
     padding-bottom: 5px;
     
-    background-color: var(--color-secondary);
     color: var(--color-font-2);
-    
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.stick-to-top {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 2000;
 }
 
 @media (min-width: 600px) {
-    body > header {
+    .responsive-navbar {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
     }
 }
 
-body > header > div {
+.responsive-navbar > div {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
 
-body > header > nav {
+.responsive-navbar nav {
     display: none;
     flex-direction: column;
     justify-content: space-around;
@@ -43,14 +42,14 @@ body > header > nav {
 }
 
 @media (min-width: 600px) {
-    body > header > nav {
+    .responsive-navbar nav {
         display: flex;
         flex-direction: row;
         gap: 20px;
     }
 }
 
-body > header > nav > a {
+.responsive-navbar nav a {
     font-weight: bold;
     color: var(--color-font-2);
 }
