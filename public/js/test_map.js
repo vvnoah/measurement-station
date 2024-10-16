@@ -63,10 +63,10 @@ fetch('data/flanders.geojson')
 function addMarkers(stations) {
     stations.forEach(station => {
         var marker = L.circleMarker([station.latitude, station.longitude], {
-            radius: 10,
+            radius: 6,
             color: "#ff0000",
             fillColor: "#ff0000",
-            fillOpacity: 0.5
+            fillOpacity: 1
         }).addTo(map);
 
         // POPUP::
