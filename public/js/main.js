@@ -36,6 +36,11 @@ fetch_data().then(data => {
         // Listen for when the checkbox is checked or unchecked
         checkbox.addEventListener("change", function () {
             if (checkbox.checked) {
+                if (selected.length >= 3) {
+                    alert("For your comfort you can only select 3 stations at the same time");
+                    checkbox.checked = false; // Deselect this checkbox if limit is reached
+                    return;
+                }
                 console.log(`Station ${station.id} selected`);
                 selected.push(station);
 
