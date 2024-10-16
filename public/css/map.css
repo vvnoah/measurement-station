@@ -16,6 +16,14 @@
     text-align: center;
 }
 
+.map-container {
+    padding: 50px;
+    text-align: center;
+}
+
+.leaflet-control-attribution {
+    display: none;
+}
 
 /* .leaflet-overlay-pane {
     z-index: 500;
