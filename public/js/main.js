@@ -33,6 +33,7 @@ function initialize_station_table(data, temperature_chart, windspeed_chart, tabl
         const selected_cell = row.insertCell(0);
         const id_cell = row.insertCell(1);
         const location_cell = row.insertCell(2);
+        //hy
 
         // Create and append checkbox
         const checkbox = createCheckbox(station, temperature_chart, windspeed_chart);
