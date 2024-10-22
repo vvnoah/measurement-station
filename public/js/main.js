@@ -1,3 +1,7 @@
+const {
+    color
+} = require("chart.js/helpers");
+
 document.getElementById('list-or-map-select').addEventListener('change', function () {
     const selectedValue = this.value;
     const mapElement = document.querySelector('#map');
@@ -46,13 +50,37 @@ fetch_data().then(data => {
                 console.log(`Station ${station.id} selected`);
                 selected.push(station);
 
-                temperature_chart.data.datasets.push({ id: station.id, label: station.location, data: station.temperature });
+                let marker = window.markers[station.id];
+                if (marker) {
+                    marker.setStyle({
+                        color: "green",
+                        fillColor: "green"
+                    })
+                }
+
+                temperature_chart.data.datasets.push({
+                    id: station.id,
+                    label: station.location,
+                    data: station.temperature
+                });
                 temperature_chart.update();
-                windspeed_chart.data.datasets.push({ id: station.id, label: station.location, data: station.windspeed });
+                windspeed_chart.data.datasets.push({
+                    id: station.id,
+                    label: station.location,
+                    data: station.windspeed
+                });
                 windspeed_chart.update();
-                rainfall_chart.data.datasets.push({ id: station.id, label: station.location, data: station.rainfall });
+                rainfall_chart.data.datasets.push({
+                    id: station.id,
+                    label: station.location,
+                    data: station.rainfall
+                });
                 rainfall_chart.update();
-                airquality_chart.data.datasets.push({id: station.id, label: station.location, data: station.airquality });
+                airquality_chart.data.datasets.push({
+                    id: station.id,
+                    label: station.location,
+                    data: station.airquality
+                });
                 airquality_chart.update();
             } else {
                 console.log(`Station ${station.id} deselected`);
@@ -74,9 +102,9 @@ fetch_data().then(data => {
                     }
                 });
                 windspeed_chart.update();
-                
+
                 rainfall_chart.data.datasets.find((dataset, index) => {
-                    if(dataset.id === station.id) {
+                    if (dataset.id === station.id) {
                         rainfall_chart.data.datasets.splice(index, 1);
                         return true;
                     }
@@ -130,19 +158,10 @@ function update_datasets(data) {
         data: station.windspeed
     }));
 
-    rainfall = data.map(station => ({
-        id: station.id,
-        label: station.location,
-        data: station.rainfall
-    }));
-
-    airquality = data.map(station => ({
-        id: station.id,
-        label: station.location,
-        data: station.airquality
-    }));
-
-    let datasets = { temperature, windspeed, rainfall, airquality };
+    let datasets = {
+        temperature,
+        windspeed
+    };
     console.log(datasets);
     return datasets;
 }
