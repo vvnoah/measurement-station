@@ -98,7 +98,9 @@ function addMarkers(stations) {
         });
 
         // POPUP::
-        marker.bindPopup(`<b>${station.location}</b><br>temp:${station.temperature[0].y}`);
+        var today = new Date();
+        var h = today.getHours();
+        marker.bindPopup(`<b>${station.location}</b><br>Temperature:${station.temperature[h].y}°C<br>Windspeed:${station.windspeed[h].y}km/u`);
     });
 }
 
