@@ -60,7 +60,7 @@ fetch('data/flanders.geojson')
     .catch(error => console.error('Error loading the geoJSON file:', error));
 
 lastClickedMarker = null;
-
+var i = 1;
 function addMarkers(stations) {
     stations.forEach(station => {
         var marker = L.circleMarker([station.latitude, station.longitude], {
@@ -69,16 +69,22 @@ function addMarkers(stations) {
             fillColor: "#ff0000",
             fillOpacity: 1
         }).addTo(map);
-
+        marker.id = i;
+        i++;
         // change marker color to green when the marker is clicked
         // marker stay green when other marker is clicked
+        let clickmarkers = [];
+
+
         marker.on('click', function () {
             marker.setStyle({
                 color: "green",
                 fillColor: "green"
             });
-
-            // the second marker turns back to green
+            
+            clickmarkers.push(marker.id);
+            console.log(clickmarkers);
+            // the second marker turns back to red
             if (lastClickedMarker && lastClickedMarker != marker) {
                 lastClickedMarker.setStyle({
                     color: "red",
