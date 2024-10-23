@@ -1,7 +1,7 @@
 document.getElementById('list-or-map-select').addEventListener('change', function () {
     const selectedValue = this.value;
     const mapElement = document.querySelector('#map');
-    const listElement = document.querySelector('.container-scroll-x');
+    const listElement = document.querySelector('#datatable-container');
 
     if (selectedValue === 'map') {
         console.log('map');
@@ -19,10 +19,10 @@ fetch_data().then(data => {
     let temperature_chart = create_line_chart("temperature-chart", "Temperatuur (°C)");
     let windspeed_chart = create_line_chart("windspeed-chart", "Windsnelheid (km/u)");
 
-    let table = document.getElementById("table");
+    let table_body = document.querySelector("#datatable tbody");
 
     data.forEach(station => {
-        let row = table.insertRow(-1);
+        let row = table_body.insertRow(-1);
 
         let selected_cell = row.insertCell(0);
         let id_cell = row.insertCell(1);

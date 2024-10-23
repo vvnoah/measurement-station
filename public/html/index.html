@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/card.css">
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -49,13 +50,17 @@
                 <div class="map-container">
                     <div id="map"></div>
                 </div>
-                <div class="container-scroll-x hide">
-                    <table id="table">
-                        <tr>
-                            <th></th>
-                            <th>Id</th>
-                            <th>Locatie</th>
-                        </tr>
+                <div id="#datatable-container">
+                    <table id="datatable" class="stripe">
+                        <thead>
+                            <tr>
+                                <th>Selected</th>
+                                <th>Id</th>
+                                <th>Location</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
                     </table>
                 </div>            
             </section>
@@ -167,7 +172,15 @@
         </div>
     </footer>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#datatable").DataTable();
+    });
+</script>
 <script src="js/main.js"></script>
 <script src="js/charts.js"></script>
 <script src="js/test_map.js"></script>
+<script src="js/table.js"></script>
 </html>
