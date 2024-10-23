@@ -25,7 +25,7 @@ new L.Control.Zoom({
 async function fetch_data() {
     const response = await fetch('/api/stations');
     const data = await response.json();
-    console.log(data); 
+    console.log(data);
     return data;
 }
 
@@ -43,7 +43,7 @@ fetch('data/flanders.geojson')
                 };
             },
             pointToLayer: function (feature, latlng) {
-                return null;  // Prevent markers from being displayed from the GeoJSON
+                return null; // Prevent markers from being displayed from the GeoJSON
             }
         }).addTo(map);
 
@@ -59,6 +59,7 @@ fetch('data/flanders.geojson')
     })
     .catch(error => console.error('Error loading the geoJSON file:', error));
 
+lastClickedMarker = null;
 
 function addMarkers(stations) {
     stations.forEach(station => {
@@ -68,6 +69,33 @@ function addMarkers(stations) {
             fillColor: "#ff0000",
             fillOpacity: 1
         }).addTo(map);
+
+        // change marker color to green when the marker is clicked
+        // marker stay green when other marker is clicked
+        marker.on('click', function () {
+            marker.setStyle({
+                color: "green",
+                fillColor: "green"
+            });
+
+            // the second marker turns back to green
+            if (lastClickedMarker && lastClickedMarker != marker) {
+                lastClickedMarker.setStyle({
+                    color: "red",
+                    fillColor: "red"
+                });
+            }
+
+            lastClickedMarker = marker;
+        });
+
+        // when you close the popup the marker turns red
+        marker.on('popupclose', function () {
+            marker.setStyle({
+                color: "red",
+                fillColor: "red"
+            });
+        });
 
         // POPUP::
         marker.bindPopup(`<b>${station.location}</b><br>temp:${station.temperature[0].y}`);
