@@ -70,7 +70,7 @@ function addMarkers(stations) {
         }).addTo(map);
 
         // POPUP::
-        marker.bindPopup(`<b>${station.location}</b><br>Lat: ${station.latitude}, Lng: ${station.longitude}`);
+        marker.bindPopup(`<b>${station.location}</b><br>temp:${station.temperature[0].y}`);
     });
 }
 
