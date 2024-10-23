@@ -61,6 +61,7 @@ fetch('data/flanders.geojson')
 
 lastClickedMarker = null;
 var i = 1;
+let clickmarkers = [];
 function addMarkers(stations) {
     stations.forEach(station => {
         var marker = L.circleMarker([station.latitude, station.longitude], {
@@ -73,35 +74,40 @@ function addMarkers(stations) {
         i++;
         // change marker color to green when the marker is clicked
         // marker stay green when other marker is clicked
-        let clickmarkers = [];
+        
 
 
         marker.on('click', function () {
+            const markerIndex = clickmarkers.indexOf(marker.id);
+            
+            if(clickmarkers.length < 3)
+            {
             marker.setStyle({
                 color: "green",
                 fillColor: "green"
             });
-            
             clickmarkers.push(marker.id);
-            console.log(clickmarkers);
-            // the second marker turns back to red
-            if (lastClickedMarker && lastClickedMarker != marker) {
-                lastClickedMarker.setStyle({
+            } else if (markerIndex > -1) {
+                // Als de marker al groen is, deze deselecteren (terug naar rood)
+                marker.setStyle({
                     color: "red",
                     fillColor: "red"
                 });
-            }
-
-            lastClickedMarker = marker;
+                // Verwijder de marker uit de lijst
+                clickmarkers.splice(markerIndex, 1);
+            }      
+            console.log(clickmarkers.length);
         });
 
         // when you close the popup the marker turns red
+        /*
         marker.on('popupclose', function () {
             marker.setStyle({
                 color: "red",
                 fillColor: "red"
             });
         });
+        */
 
         // POPUP::
         var today = new Date();
