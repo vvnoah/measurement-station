@@ -30,69 +30,35 @@ fetch_data().then(data => {
         let id_cell = row.insertCell(1);
         let location_cell = row.insertCell(2);
 
-        // Insert the checkbox and add an event listener
+        // Insert the checkbox and add a data attribute for station ID
         let checkbox = document.createElement("input");
         checkbox.type = "checkbox";
         checkbox.name = "selected";
+        checkbox.setAttribute("data-id", station.id); // Reference for synchronization
 
-        // Listen for when the checkbox is checked or unchecked
+        // Add change listener to handle checkbox interaction
         checkbox.addEventListener("change", function () {
+            let marker = markersMap[station.id];
             if (checkbox.checked) {
                 if (selected.length >= 3) {
-                    alert("For your comfort you can only select 3 stations at the same time");
-                    checkbox.checked = false; // Deselect this checkbox if limit is reached
+                    alert("For your comfort, you can only select 3 stations at the same time.");
+                    checkbox.checked = false; // Prevent selection
                     return;
                 }
                 console.log(`Station ${station.id} selected`);
                 selected.push(station);
-
-                temperature_chart.data.datasets.push({ id: station.id, label: station.location, data: station.temperature });
-                temperature_chart.update();
-                windspeed_chart.data.datasets.push({ id: station.id, label: station.location, data: station.windspeed });
-                windspeed_chart.update();
-                rainfall_chart.data.datasets.push({ id: station.id, label: station.location, data: station.rainfall });
-                rainfall_chart.update();
-                airquality_chart.data.datasets.push({id: station.id, label: station.location, data: station.airquality });
-                airquality_chart.update();
+                marker.setStyle({
+                    color: "green",
+                    fillColor: "green"
+                });
             } else {
                 console.log(`Station ${station.id} deselected`);
-                selected.pop(station);
-
-                temperature_chart.data.datasets.find((dataset, index) => {
-                    if (dataset.id === station.id) {
-                        temperature_chart.data.datasets.splice(index, 1);
-                        return true;
-                    }
+                selected = selected.filter(s => s.id !== station.id);
+                marker.setStyle({
+                    color: "red",
+                    fillColor: "red"
                 });
-                temperature_chart.update();
-
-                windspeed_chart.data.datasets.find((dataset, index) => {
-                    if (dataset.id === station.id) {
-                        console.log(index)
-                        windspeed_chart.data.datasets.splice(index, 1);
-                        return true;
-                    }
-                });
-                windspeed_chart.update();
-                
-                rainfall_chart.data.datasets.find((dataset, index) => {
-                    if(dataset.id === station.id) {
-                        rainfall_chart.data.datasets.splice(index, 1);
-                        return true;
-                    }
-                });
-                rainfall_chart.update();
-
-                airquality_chart.data.datasets.find((dataset, index) => {
-                    if (dataset.id === station.id) {
-                        airquality_chart.data.datasets.splice(index, 1);
-                        return true;
-                    }
-                });
-                airquality_chart.update();
             }
-
-            update_section_visibility();
         });
 
         selected_cell.appendChild(checkbox);
@@ -102,6 +68,7 @@ fetch_data().then(data => {
 
     update_section_visibility();
 });
+
 
 async function fetch_data() {
     const response = await fetch('/api/stations');

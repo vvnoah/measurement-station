@@ -61,6 +61,7 @@ fetch('data/flanders.geojson')
 
 lastClickedMarker = null;
 var i = 1;
+let markersMap = {}; // Map of station IDs to marker objects
 let clickmarkers = [];
 function addMarkers(stations) {
     stations.forEach(station => {
@@ -70,51 +71,47 @@ function addMarkers(stations) {
             fillColor: "#ff0000",
             fillOpacity: 1
         }).addTo(map);
-        marker.id = i;
-        i++;
-        // change marker color to green when the marker is clicked
-        // marker stay green when other marker is clicked
-        
 
+        marker.stationId = station.id; // Add station ID for reference
+        markersMap[station.id] = marker; // Save marker in the map for later use
 
+        // Marker click event
         marker.on('click', function () {
-            const markerIndex = clickmarkers.indexOf(marker.id);
-            
-            if(clickmarkers.length < 3)
-            {
-            marker.setStyle({
-                color: "green",
-                fillColor: "green"
-            });
-            clickmarkers.push(marker.id);
-            } else if (markerIndex > -1) {
-                // Als de marker al groen is, deze deselecteren (terug naar rood)
-                marker.setStyle({
-                    color: "red",
-                    fillColor: "red"
-                });
-                // Verwijder de marker uit de lijst
-                clickmarkers.splice(markerIndex, 1);
-            }      
-            console.log(clickmarkers.length);
+            const markerIndex = clickmarkers.indexOf(marker.stationId);
+            let checkbox = document.querySelector(`input[name="selected"][data-id="${station.id}"]`);
+
+            if (clickmarkers.length < 3 || markerIndex > -1) {
+                if (markerIndex === -1) {
+                    // Select marker
+                    marker.setStyle({
+                        color: "green",
+                        fillColor: "green"
+                    });
+                    clickmarkers.push(marker.stationId);
+                    checkbox.checked = true; // Check the corresponding checkbox
+                    checkbox.dispatchEvent(new Event('change')); // Trigger change event
+                } else {
+                    // Deselect marker
+                    marker.setStyle({
+                        color: "red",
+                        fillColor: "red"
+                    });
+                    clickmarkers.splice(markerIndex, 1);
+                    checkbox.checked = false; // Uncheck the corresponding checkbox
+                    checkbox.dispatchEvent(new Event('change')); // Trigger change event
+                }
+            } else {
+                alert("You can only select up to 3 stations at the same time.");
+            }
         });
 
-        // when you close the popup the marker turns red
-        /*
-        marker.on('popupclose', function () {
-            marker.setStyle({
-                color: "red",
-                fillColor: "red"
-            });
-        });
-        */
-
-        // POPUP::
+        // Add popup for more info
         var today = new Date();
         var h = today.getHours();
         marker.bindPopup(`<b>${station.location}</b><br>Temperature:${station.temperature[h].y}°C<br>Windspeed:${station.windspeed[h].y}km/u`);
     });
 }
+
 
 fetch_data().then(data => {
     addMarkers(data.stations);
