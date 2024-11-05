@@ -19,7 +19,7 @@ body {
     min-height: 100svh;
 
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 14px;
+    font-size: 18px;
 
     color: var(--color-font-1);
 }
@@ -40,9 +40,6 @@ body > main {
 }
 
 section {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
     padding-inline: var(--spacing-inline-sm);    
     padding-top: var(--spacing-section);
 }
@@ -103,8 +100,4 @@ body > footer nav a {
 
 .hide {
     display: none;
-}
-
-#datatable-container {
-    
 }
