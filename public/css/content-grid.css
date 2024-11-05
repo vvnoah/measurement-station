@@ -1,13 +1,10 @@
 .content-grid {
     --max-width-breakout: 1000px; 
-    --max-width-content: 800px;
-
+    --max-width-content: 1000px;
     --padding-inline-content-grid: 1rem;
-
     --breakout-size: calc(
       (var(--max-width-breakout) - var(--max-width-content)) / 2
-    );
-  
+    );  
     display: grid;
     grid-template-columns:
         [full-width-start] minmax(var(--padding-inline-content-grid), 1fr)
@@ -19,23 +16,19 @@
     
     grid-auto-rows: max-content;
 }
-
 .content-grid > :not(.breakout, .full-width),
 .full-width > :not(.breakout, .full-width) {
   grid-column: content;
 }
-
 .content-grid > .breakout {
     grid-column: breakout;
-}
-  
+}  
 .content-grid > .full-width {
     grid-column: full-width;
 
     display: grid;
     grid-template-columns: inherit;
 }
-
 img.full-width {
     width: 100%;
     max-height: 45vh;

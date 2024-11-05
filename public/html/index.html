@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/content-grid.css">
     <link rel="stylesheet" href="css/responsive-list.css">
     <link rel="stylesheet" href="css/map.css" >
     <link rel="stylesheet" href="css/card.css">
@@ -21,143 +22,139 @@
     <title>Home</title>
 </head>
 <body>
-    <header class="stick-to-top">      
-        <div class="wrapper">
-            <div class="responsive-navbar">
-                <div>
-                    <h1>UCLL</h1>
-                    <label for="nav-toggle-checkbox" id="nav-toggle-label">☰</label>
+    <div class="content-grid stick-to-top">
+        <div id="navbar-container" class="full-width">
+            <div id="navbar">
+                <div id="navbar-header">
+                    <span id="navbar-title">Title</span>
+                    <label for="navbar-toggle" id="navbar-toggle-label">☰</label>
                 </div>
-                <input type="checkbox" id="nav-toggle-checkbox">         
-                <nav>
+                <input type="checkbox" name="navbar-toggle" id="navbar-toggle">
+                <nav id="navbar-navigation">
                     <a href="/">Home</a>
-                    <a href="/test">Test</a>
                 </nav>
             </div>
         </div>
-    </header>
-    <main>       
-        <div class="wrapper">
-            <section>
-                <header>
-                    <h2>De stations</h2>
-                    <select name="list-or-map" id="list-or-map-select">
-                        <option value="map">kaart</option>
-                        <option value="list">lijst</option>
-                    </select>
-                </header>
-                <div class="map-container">
-                    <div id="map"></div>
-                </div>
-                <div id="datatable-container" class="hide">
-                    <table id="datatable" class="stripe">
-                        <thead>
-                            <tr>
-                                <th>Selected</th>
-                                <th>Id</th>
-                                <th>Location</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>            
-            </section>
-            <section>
-                <header>
-                    <h2>Geselecteerde Stations</h2>
-                    <h2><span id="amount-selected">3</span>/3</h2>
-                </header>
-                <body class="card-container">
-                    <div class="card">
-                        <div class="card-header">
+    </div>
+    <main class="content-grid">
+        <section>
+            <header>
+                <h2>De stations</h2>
+                <select name="list-or-map" id="list-or-map-select">
+                    <option value="map">kaart</option>
+                    <option value="list">lijst</option>
+                </select>
+            </header>
+            <div class="map-container">
+                <div id="map"></div>
+            </div>
+            <div id="datatable-container" class="hide">
+                <table id="datatable" class="stripe">
+                    <thead>
+                        <tr>
+                            <th>Selected</th>
+                            <th>Id</th>
+                            <th>Location</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>            
+        </section>
+        <section>
+            <header>
+                <h2>Geselecteerde Stations</h2>
+                <h2><span id="amount-selected">3</span>/3</h2>
+            </header>
+            <body class="card-container">
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="color"></div>
+                            <h3>Diepenbeek</h3>
+                        </div>
+                        <button>X</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="temperature">
                             <div>
-                                <div class="color"></div>
-                                <h3>Diepenbeek</h3>
+                                <span>23°C</span>
+                                <p>Zonnig</p>
                             </div>
-                            <button>X</button>
+                            <img class="icon" src="img/sun.png" alt="sun">
                         </div>
-                        <div class="card-body">
-                            <div class="temperature">
-                                <div>
-                                    <span>23°C</span>
-                                    <p>Zonnig</p>
-                                </div>
-                                <img class="icon" src="img/sun.png" alt="sun">
-                            </div>
-                            <div class="extra-data">
-                                <span>Wind: 6km/u</span>
-                                <span>Neerslag: 2%</span>
-                                <span>Vochtigheid: 60%</span>
-                            </div>
-                        </div>
-                    </div>                    
-                    <div class="card">
-                        <div class="card-header">
-                            <div>
-                                <div class="color"></div>
-                                <h3>Diepenbeek</h3>
-                            </div>
-                            <button>X</button>
-                        </div>
-                        <div class="card-body">
-                            <div class="temperature">
-                                <div>
-                                    <span>23°C</span>
-                                    <p>Zonnig</p>
-                                </div>
-                                <img class="icon" src="img/sun.png" alt="sun">
-                            </div>
-                            <div class="extra-data">
-                                <span>Wind: 6km/u</span>
-                                <span>Neerslag: 2%</span>
-                                <span>Vochtigheid: 60%</span>
-                            </div>
+                        <div class="extra-data">
+                            <span>Wind: 6km/u</span>
+                            <span>Neerslag: 2%</span>
+                            <span>Vochtigheid: 60%</span>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <div>
-                                <div class="color"></div>
-                                <h3>Diepenbeek</h3>
-                            </div>
-                            <button>X</button>
+                </div>                    
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="color"></div>
+                            <h3>Diepenbeek</h3>
                         </div>
-                        <div class="card-body">
-                            <div class="temperature">
-                                <div>
-                                    <span>23°C</span>
-                                    <p>Zonnig</p>
-                                </div>
-                                <img class="icon" src="img/sun.png" alt="sun">
-                            </div>
-                            <div class="extra-data">
-                                <span>Wind: 6km/u</span>
-                                <span>Neerslag: 2%</span>
-                                <span>Vochtigheid: 60%</span>
-                            </div>
-                        </div>
-                    </div>                   
-                </body>
-            </section>
-            <section id="section-selected-data">
-                <header>
-                    <h2>Data geselecteerde stations</h2>
-                </header>
-                <div class="responsive-list">
-                    <div class="responsive-list-item">
-                        <canvas id="temperature-chart"></canvas>
+                        <button>X</button>
                     </div>
-                    <div class="responsive-list-item">
-                        <canvas id="windspeed-chart"></canvas>
+                    <div class="card-body">
+                        <div class="temperature">
+                            <div>
+                                <span>23°C</span>
+                                <p>Zonnig</p>
+                            </div>
+                            <img class="icon" src="img/sun.png" alt="sun">
+                        </div>
+                        <div class="extra-data">
+                            <span>Wind: 6km/u</span>
+                            <span>Neerslag: 2%</span>
+                            <span>Vochtigheid: 60%</span>
+                        </div>
                     </div>
                 </div>
-            </section>
-            <section></section>
-        </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="color"></div>
+                            <h3>Diepenbeek</h3>
+                        </div>
+                        <button>X</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="temperature">
+                            <div>
+                                <span>23°C</span>
+                                <p>Zonnig</p>
+                            </div>
+                            <img class="icon" src="img/sun.png" alt="sun">
+                        </div>
+                        <div class="extra-data">
+                            <span>Wind: 6km/u</span>
+                            <span>Neerslag: 2%</span>
+                            <span>Vochtigheid: 60%</span>
+                        </div>
+                    </div>
+                </div>                   
+            </body>
+        </section>
+        <section id="section-selected-data">
+            <header>
+                <h2>Data geselecteerde stations</h2>
+            </header>
+            <div class="responsive-list">
+                <div class="responsive-list-item">
+                    <canvas id="temperature-chart"></canvas>
+                </div>
+                <div class="responsive-list-item">
+                    <canvas id="windspeed-chart"></canvas>
+                </div>
+            </div>
+        </section>
     </main>
-    <div class="back-to-top">
-        <div class="wrapper">
+    <div class="back-to-top content-grid">
+        <div>
             <a href="#">naar boven</a>
         </div>
     </div>
