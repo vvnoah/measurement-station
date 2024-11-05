@@ -18,6 +18,8 @@ let selected = [];
 fetch_data().then(data => {
     let temperature_chart = create_line_chart("temperature-chart", "Temperatuur (°C)");
     let windspeed_chart = create_line_chart("windspeed-chart", "Windsnelheid (km/u)");
+    let rainfall_chart = create_line_chart("rainfall-chart", "Neerslag (mm)");
+    let airquality_chart = create_line_chart("airquality-chart", "PPM-waarden");
 
     let table_body = document.querySelector("#datatable tbody");
 
@@ -48,6 +50,10 @@ fetch_data().then(data => {
                 temperature_chart.update();
                 windspeed_chart.data.datasets.push({ id: station.id, label: station.location, data: station.windspeed });
                 windspeed_chart.update();
+                rainfall_chart.data.datasets.push({ id: station.id, label: station.location, data: station.rainfall });
+                rainfall_chart.update();
+                airquality_chart.data.datasets.push({id: station.id, label: station.location, data: station.airquality });
+                airquality_chart.update();
             } else {
                 console.log(`Station ${station.id} deselected`);
                 selected.pop(station);
@@ -68,6 +74,22 @@ fetch_data().then(data => {
                     }
                 });
                 windspeed_chart.update();
+                
+                rainfall_chart.data.datasets.find((dataset, index) => {
+                    if(dataset.id === station.id) {
+                        rainfall_chart.data.datasets.splice(index, 1);
+                        return true;
+                    }
+                });
+                rainfall_chart.update();
+
+                airquality_chart.data.datasets.find((dataset, index) => {
+                    if (dataset.id === station.id) {
+                        airquality_chart.data.datasets.splice(index, 1);
+                        return true;
+                    }
+                });
+                airquality_chart.update();
             }
 
             update_section_visibility();
@@ -108,7 +130,19 @@ function update_datasets(data) {
         data: station.windspeed
     }));
 
-    let datasets = { temperature, windspeed };
+    rainfall = data.map(station => ({
+        id: station.id,
+        label: station.location,
+        data: station.rainfall
+    }));
+
+    airquality = data.map(station => ({
+        id: station.id,
+        label: station.location,
+        data: station.airquality
+    }));
+
+    let datasets = { temperature, windspeed, rainfall, airquality };
     console.log(datasets);
     return datasets;
 }
