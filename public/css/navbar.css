@@ -1,7 +1,7 @@
 #navbar-container {
     --clr-navbar-header: white;
     --clr-navbar-links: white;
-    --clr-bg-navbar: red;
+    --clr-bg-navbar: var(--color-secondary);
 
     container-type: inline-size;
     padding-block: 0.5rem;
