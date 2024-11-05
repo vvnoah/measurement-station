@@ -14,12 +14,15 @@ document.getElementById('list-or-map-select').addEventListener('change', functio
     }
 });
 
+//global var
 let selected = [];
+let temperature_chart, windspeed_chart, rainfall_chart, airquality_chart;
+
 fetch_data().then(data => {
-    let temperature_chart = create_line_chart("temperature-chart", "Temperatuur (°C)");
-    let windspeed_chart = create_line_chart("windspeed-chart", "Windsnelheid (km/u)");
-    let rainfall_chart = create_line_chart("rainfall-chart", "Neerslag (mm)");
-    let airquality_chart = create_line_chart("airquality-chart", "PPM-waarden");
+    temperature_chart = create_line_chart("temperature-chart", "Temperatuur (°C)");
+    windspeed_chart = create_line_chart("windspeed-chart", "Windsnelheid (km/u)");
+    rainfall_chart = create_line_chart("rainfall-chart", "Neerslag (mm)");
+    airquality_chart = create_line_chart("airquality-chart", "PPM-waarden");
 
     let table_body = document.querySelector("#datatable tbody");
 
@@ -36,7 +39,7 @@ fetch_data().then(data => {
         checkbox.name = "selected";
         checkbox.setAttribute("data-id", station.id); // Reference for synchronization
 
-        // Add change listener to handle checkbox interaction
+        // change bij map/lijst
         checkbox.addEventListener("change", function () {
             let marker = markersMap[station.id];
             if (checkbox.checked) {
@@ -47,20 +50,29 @@ fetch_data().then(data => {
                 }
                 console.log(`Station ${station.id} selected`);
                 selected.push(station);
-                marker.setStyle({
-                    color: "green",
-                    fillColor: "green"
-                });
+                clickmarkers.push(station.id); // Sync map array
+
+                addDatasetToChart(temperature_chart, station, 'temperature');
+                addDatasetToChart(windspeed_chart, station, 'windspeed');
+                addDatasetToChart(rainfall_chart, station, 'rainfall');
+                addDatasetToChart(airquality_chart, station, 'airquality');
+
+                if (marker) marker.setStyle({ color: "green", fillColor: "green" });
             } else {
                 console.log(`Station ${station.id} deselected`);
                 selected = selected.filter(s => s.id !== station.id);
-                marker.setStyle({
-                    color: "red",
-                    fillColor: "red"
-                });
-            }
-        });
+                clickmarkers = clickmarkers.filter(id => id !== station.id); // Sync map array
 
+                removeDatasetFromChart(temperature_chart, station.id);
+                removeDatasetFromChart(windspeed_chart, station.id);
+                removeDatasetFromChart(rainfall_chart, station.id);
+                removeDatasetFromChart(airquality_chart, station.id);
+
+                if (marker) marker.setStyle({ color: "red", fillColor: "red" });
+            }
+            update_section_visibility();
+        });
+        console.log(selected);
         selected_cell.appendChild(checkbox);
         id_cell.textContent = station.id;
         location_cell.textContent = station.location;
@@ -112,4 +124,35 @@ function update_datasets(data) {
     let datasets = { temperature, windspeed, rainfall, airquality };
     console.log(datasets);
     return datasets;
+}
+
+function addDatasetToChart(chart, station, dataType) {
+    chart.data.datasets.push({
+        id: station.id,
+        label: station.location,
+        data: station[dataType] // Assumes data for each type (temperature, windspeed, etc.) is an array
+    });
+    chart.update();
+}
+
+function removeDatasetFromChart(chart, stationId) {
+    chart.data.datasets = chart.data.datasets.filter(dataset => dataset.id !== stationId);
+    chart.update();
+}
+
+function create_line_chart(elementId, title) {
+    return new Chart(document.getElementById(elementId).getContext('2d'), {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: []
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: title
+            }
+        }
+    });
 }
