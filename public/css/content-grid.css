@@ -1,6 +1,6 @@
 .content-grid {
-    --max-width-breakout: 1000px; 
-    --max-width-content: 1000px;
+    --max-width-breakout: 1400px; 
+    --max-width-content: 1200px;
     --padding-inline-content-grid: 1rem;
     --breakout-size: calc(
       (var(--max-width-breakout) - var(--max-width-content)) / 2

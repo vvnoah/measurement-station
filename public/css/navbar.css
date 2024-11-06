@@ -8,6 +8,13 @@
 
     background-color: var(--clr-bg-navbar);
 }
+.stick-to-top {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 2000;
+    background-color: var(--color-secondary);
+}
 #navbar-header {
     display: flex;
     justify-content: space-between;
@@ -46,10 +53,4 @@
         flex-direction: row;
         gap: 2rem;
     }
-}
-.stick-to-top {
-    position: sticky;
-    top: 0;
-    left: 0;
-    z-index: 2000;
 }
