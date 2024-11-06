@@ -1,16 +1,16 @@
-document.getElementById('list-or-map-select').addEventListener('change', function () {
-    const selectedValue = this.value;
+document.getElementById('toggle-map-list').addEventListener('change', function () {
+    const isMapView = this.checked;
     const mapElement = document.querySelector('#map');
     const listElement = document.querySelector('#datatable-container');
 
-    if (selectedValue === 'map') {
-        console.log('map');
-        mapElement.classList.remove('hide');
-        listElement.classList.add('hide');
-    } else if (selectedValue === 'list') {
-        console.log('list');
+    if (isMapView) {
+        //console.log('Switching to Map View');
         mapElement.classList.add('hide');
         listElement.classList.remove('hide');
+    } else {
+        //console.log('Switching to List View');
+        mapElement.classList.remove('hide');
+        listElement.classList.add('hide');
     }
 });
 
