@@ -14,7 +14,9 @@
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/clay/lib/css/atlas.css">
 
+    <script src="https://cdn.jsdelivr.net/npm/clay/lib/js/clay.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://d3js.org/d3.v6.min.js"></script>
@@ -40,10 +42,20 @@
         <section>
             <header>
                 <h2>De stations</h2>
-                <select name="list-or-map" id="list-or-map-select">
+                <!-- <select name="list-or-map" id="list-or-map-select">
                     <option value="map">kaart</option>
                     <option value="list">lijst</option>
-                </select>
+                </select> -->
+                <div class="form-group" id="list-or-map-select" name="list-or-map">
+                    <label class="toggle-switch">
+                        <input id="toggle-map-list" class="toggle-switch-check" type="checkbox" style="background-color: #4caf50;"/>
+                        <span aria-hidden="true" class="toggle-switch-bar">
+                            <span class="toggle-switch-handle" data-label-off="Map View" data-label-on="List View">
+                            </span>
+                        </span>
+                    </label>
+                </div>
+
             </header>
             <div class="map-container">
                 <div id="map"></div>
