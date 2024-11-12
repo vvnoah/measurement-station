@@ -1,0 +1,81 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/content-grid.css">
+    <link rel="stylesheet" href="css/responsive-list.css">
+    <link rel="stylesheet" href="css/map.css">
+    <link rel="stylesheet" href="css/card.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+
+    <title>Details Page</title>
+</head>
+
+<body>
+    <div class="content-grid stick-to-top">
+        <div id="navbar-container" class="full-width">
+            <div id="navbar">
+                <div id="navbar-header">
+                    <span id="navbar-title">Details Page</span>
+                    <label for="navbar-toggle" id="navbar-toggle-label">☰</label>
+                </div>
+                <input type="checkbox" name="navbar-toggle" id="navbar-toggle">
+                <nav id="navbar-navigation">
+                    <a href="/">Home Page</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <main class="content-grid">
+        <section>
+
+        </section>
+        <section id="section-selected-data">
+            <header>
+                <h2>Data geselecteerde stations</h2>
+            </header>
+            <div class="responsive-list">
+                <div class="responsive-list-item">
+                    <canvas id="temperature-chart"></canvas>
+                </div>
+                <div class="responsive-list-item">
+                    <canvas id="windspeed-chart"></canvas>
+                </div>
+                <div class="responsive-list-item">
+                    <canvas id="rainfall-chart"></canvas>
+                </div>
+                <div class="responsive-list-item">
+                    <canvas id="airquality-chart"></canvas>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div class="back-to-top content-grid">
+        <div>
+            <a href="#">naar boven</a>
+        </div>
+    </div>
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#datatable").DataTable();
+    });
+</script>
+<script src="js/main.js"></script>
+<script src="js/charts.js"></script>
+
+</html>

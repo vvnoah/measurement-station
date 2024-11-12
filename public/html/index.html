@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,7 @@
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/content-grid.css">
     <link rel="stylesheet" href="css/responsive-list.css">
-    <link rel="stylesheet" href="css/map.css" >
+    <link rel="stylesheet" href="css/map.css">
     <link rel="stylesheet" href="css/card.css">
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
@@ -23,6 +24,7 @@
 
     <title>Home</title>
 </head>
+
 <body>
     <div class="content-grid stick-to-top">
         <div id="navbar-container" class="breakout">
@@ -34,6 +36,7 @@
                 <input type="checkbox" name="navbar-toggle" id="navbar-toggle">
                 <nav id="navbar-navigation">
                     <a href="/">Home</a>
+                    <a href="/detailsPage.html">Details Page</a>
                 </nav>
             </div>
         </div>
@@ -48,7 +51,8 @@
                 </select> -->
                 <div class="form-group" id="list-or-map-select" name="list-or-map">
                     <label class="toggle-switch">
-                        <input id="toggle-map-list" class="toggle-switch-check" type="checkbox" style="background-color: #4caf50;"/>
+                        <input id="toggle-map-list" class="toggle-switch-check" type="checkbox"
+                            style="background-color: #4caf50;" />
                         <span aria-hidden="true" class="toggle-switch-bar">
                             <span class="toggle-switch-handle" data-label-off="Map View" data-label-on="List View">
                             </span>
@@ -72,7 +76,7 @@
                     <tbody>
                     </tbody>
                 </table>
-            </div>            
+            </div>
         </section>
         <section id="section-selected-data">
             <header>
@@ -117,32 +121,35 @@
                 url: '/api/stations',
                 dataSrc: ''
             },
-            
-            columns: [
-            {
-                data: null,
-                render: function (data, type, row) {
-                    return '<input type="checkbox" class="select-checkbox">';
+
+            columns: [{
+                    data: null,
+                    render: function (data, type, row) {
+                        return '<input type="checkbox" class="select-checkbox">';
+                    }
+                },
+                {
+                    data: 'id'
+                },
+                {
+                    data: 'location'
                 }
-            },
-                {data: 'id'},
-                {data: 'location'} 
             ]
         });
     });
 
     $('#datatable tbody').on('change', '.select-checkbox', function () {
-                var totalChecked = $('#datatable tbody .select-checkbox:checked').length;
+        var totalChecked = $('#datatable tbody .select-checkbox:checked').length;
 
-                if (totalChecked > 3) {
-                    // If more than 3 checkboxes are checked, uncheck the last one
-                    $(this).prop('checked', false);
-                    alert('You can only select a maximum of 3 items.');
-                }
-            });
-
+        if (totalChecked > 3) {
+            // If more than 3 checkboxes are checked, uncheck the last one
+            $(this).prop('checked', false);
+            alert('You can only select a maximum of 3 items.');
+        }
+    });
 </script>
 <script src="js/main.js"></script>
 <script src="js/charts.js"></script>
 <script src="js/test_map.js"></script>
+
 </html>
