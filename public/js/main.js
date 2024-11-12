@@ -25,14 +25,15 @@ fetch_data().then(data => {
     airquality_chart = create_line_chart("airquality-chart", "PPM-waarden");
 
     let table_body = document.querySelector("#datatable tbody");
-
+    
     data.forEach(station => {
+        /*
         let row = table_body.insertRow(-1);
 
         let selected_cell = row.insertCell(0);
         let id_cell = row.insertCell(1);
         let location_cell = row.insertCell(2);
-
+*/
         // Insert the checkbox and add a data attribute for station ID
         let checkbox = document.createElement("input");
         checkbox.type = "checkbox";

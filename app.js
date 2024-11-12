@@ -226,8 +226,8 @@ const stations = [
     },{
         id: 3,
         location: "Molenstraat Hasselt",
-        latitude: "51.2194",
-        longitude: "4.4025",
+        latitude: "50.9304",
+        longitude: "5.3372",
         temperature: [
             { x: "0:00", y: 16.0 },
             { x: "1:00", y: 15.7 },
@@ -559,8 +559,8 @@ const stations = [
     {
         id: 6,
         location: "kleine Markt Antwerpen",
-        latitude: "50.9304",
-        longitude: "5.3372",
+        latitude: "51.2194",
+        longitude: "4.4025",
         temperature: [
             { x: "0:00", y: 17.0 },
             { x: "1:00", y: 16.5 },

@@ -91,9 +91,44 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
 <script>
+    /*
     $(document).ready(function () {
         $("#datatable").DataTable();
     });
+    
+*/
+    //let stations = fetch("api/stations")
+
+    $(document).ready(function () {
+        $("#datatable").DataTable({
+            ajax: {
+                url: '/api/stations',
+                dataSrc: ''
+            },
+            
+            columns: [
+            {
+                data: null,
+                render: function (data, type, row) {
+                    return '<input type="checkbox" class="select-checkbox">';
+                }
+            },
+                {data: 'id'},
+                {data: 'location'} 
+            ]
+        });
+    });
+
+    $('#datatable tbody').on('change', '.select-checkbox', function () {
+                var totalChecked = $('#datatable tbody .select-checkbox:checked').length;
+
+                if (totalChecked > 3) {
+                    // If more than 3 checkboxes are checked, uncheck the last one
+                    $(this).prop('checked', false);
+                    alert('You can only select a maximum of 3 items.');
+                }
+            });
+
 </script>
 <script src="js/main.js"></script>
 <script src="js/charts.js"></script>
