@@ -1,0 +1,38 @@
+.filter-container {
+    container-type: inline-size;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+.filter-header {
+    display: flex;
+    gap: 0.25rem;
+}
+.filter-menu-toggle {
+    margin-block: 0.25rem;
+}
+.active-filter-container {
+    display: flex;
+    flex-direction: row;
+    gap: 0.25rem;
+    flex-grow: 1;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-inline: 0.25rem;
+}
+.active-filter {
+    background-color: lightgray;
+    flex-shrink: 0;
+    margin-block: 0.25rem;
+}
+.active-filter span {
+    padding-block: 0.25rem;
+    padding-inline: 0.35rem;
+}
+.filter-menu-container {
+    border: 1px solid black;
+    display: grid;
+    gap: 5px;
+    padding-inline: 0.25rem; padding-block: 0.25rem;
+}
+.filter-option {}

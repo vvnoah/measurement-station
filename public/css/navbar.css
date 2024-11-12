@@ -46,8 +46,6 @@
         align-items: center;
     }
     #navbar-toggle-label {display: none;}
-    #navbar-title {font-size: 2em;}
-    #navbar-navigation {font-size: 1.2em}
     #navbar-navigation, #navbar-toggle:checked + #navbar-navigation {
         display: flex;
         flex-direction: row;

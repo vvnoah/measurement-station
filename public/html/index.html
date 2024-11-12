@@ -8,9 +8,8 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/content-grid.css">
-    <link rel="stylesheet" href="css/responsive-list.css">
     <link rel="stylesheet" href="css/map.css" >
-    <link rel="stylesheet" href="css/card.css">
+    <link rel="stylesheet" href="css/filter.css">
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
@@ -19,14 +18,14 @@
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://d3js.org/d3.v6.min.js"></script>
 
-    <title>Home</title>
+    <title>UCLL-MEETSTATIONS</title>
 </head>
 <body>
     <div class="content-grid stick-to-top">
-        <div id="navbar-container" class="breakout">
+        <div id="navbar-container">
             <div id="navbar">
                 <div id="navbar-header">
-                    <span id="navbar-title">Title</span>
+                    <span id="navbar-title">UCLL-MEETSTATIONS</span>
                     <label for="navbar-toggle" id="navbar-toggle-label">☰</label>
                 </div>
                 <input type="checkbox" name="navbar-toggle" id="navbar-toggle">
@@ -39,7 +38,7 @@
     <main class="content-grid">
         <section>
             <header>
-                <h2>De stations</h2>
+                <h2>Stations</h2>
                 <select name="list-or-map" id="list-or-map-select">
                     <option value="map">kaart</option>
                     <option value="list">lijst</option>
@@ -62,22 +61,68 @@
                 </table>
             </div>            
         </section>
-        <section id="section-selected-data">
+        <section>
             <header>
-                <h2>Data geselecteerde stations</h2>
+                <h2>Overzicht Geselecteerde Stations</h2>
             </header>
-            <div class="responsive-list">
-                <div class="responsive-list-item">
-                    <canvas id="temperature-chart"></canvas>
+            <div class="section-body">
+                <div class="filter-container">
+                    <div class="filter-header">
+                        <button class="filter-menu-toggle">toggle</button>
+                        <div class="active-filter-container">
+                            <div class="active-filter">
+                                <span>temperatuur</span><button>x</button>
+                            </div>
+                            <div class="active-filter">
+                                <span>temperatuur</span><button>x</button>
+                            </div>
+                            <div class="active-filter">
+                                <span>temperatuur</span><button>x</button>
+                            </div>
+                            <div class="active-filter">
+                                <span>temperatuur</span><button>x</button>
+                            </div>
+                            <div class="active-filter">
+                                <span>temperatuur</span><button>x</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-menu-container">
+                        <div class="filter-option"><button>temperatuur</button></div>
+                    </div>
                 </div>
-                <div class="responsive-list-item">
-                    <canvas id="windspeed-chart"></canvas>
-                </div>
-                <div class="responsive-list-item">
-                    <canvas id="rainfall-chart"></canvas>
-                </div>
-                <div class="responsive-list-item">
-                    <canvas id="airquality-chart"></canvas>
+            </div>
+            <br>
+
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <div style="min-height:200px; display: grid; gap:10px">
+                    <div style="min-height:200px; padding: 5px; display: flex; flex-direction: column; gap: 5px; background-color:blue; color:white;">
+                        <div style="margin-bottom: 5px;"><b>Temperatuur</b></div>                        
+                        <div style="flex-grow: 1;">
+                            <div><span>Station 1</span><span>10°C</span></div>
+                            <div><span>Station 2</span><span>12°C</span></div>
+                            <div><span>Station 3</span><span>11°C</span></div>
+                        </div>
+                        <div><button>meer</button></div>
+                    </div>
+                    <div style="min-height:200px; padding: 5px; display: flex; flex-direction: column; gap: 5px; background-color:blue; color:white;">
+                        <div style="margin-bottom: 5px;"><b>text</b></div>                        
+                        <div style="flex-grow: 1;">
+                            <div><span>Station 1</span></div>
+                            <div><span>Station 2</span></div>
+                            <div><span>Station 3</span></div>
+                        </div>
+                        <div><button>meer</button></div>
+                    </div>
+                    <div style="min-height:200px; padding: 5px; display: flex; flex-direction: column; gap: 5px; background-color:blue; color:white;">
+                        <div style="margin-bottom: 5px;"><b>text</b></div>                        
+                        <div style="flex-grow: 1;">
+                            <div><span>Station 1</span></div>
+                            <div><span>Station 2</span></div>
+                            <div><span>Station 3</span></div>
+                        </div>
+                        <div><button>meer</button></div>
+                    </div>
                 </div>
             </div>
         </section>

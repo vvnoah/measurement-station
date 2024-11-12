@@ -1146,10 +1146,6 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/html/index.html'));
 });
 
-app.get('/test', (req, res) => {
-    res.sendFile(path.join(__dirname, '/public/html/test.html'));
-});
-
 app.get('/api/stations', (req, res) => {
     res.json(stations);
 });
