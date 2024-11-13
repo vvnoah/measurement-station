@@ -26,7 +26,7 @@
 
     <script src="js/main.js"></script>
     <script src="js/charts.js"></script>
-
+    
     <title>Details Page</title>
 </head>
 
@@ -81,26 +81,11 @@
             <a href="#">naar boven</a>
         </div>
     </div>
-    
-    <script>
-        //dit nog in andere file steken
-        // Initialiseer flatpickr voor een enkele datumselectie
-        flatpickr("#singleDate", {
-            dateFormat: "Y-m-d", // Standaard datumnotatie
-            allowInput: true, // Sta handmatige invoer toe
-        });
-
-        // Initialiseer flatpickr voor een datumreeksselectie
-        flatpickr("#dateRange", {
-            mode: "range", // Zet modus op 'range' voor begindatum en einddatum
-            dateFormat: "Y-m-d",
-            allowInput: true,
-        });
-    </script>
 </body>
 <script>
     $(document).ready(function () {
         $("#datatable").DataTable();
     });
 </script>
+<script src="js/calender.js"></script>
 </html>
