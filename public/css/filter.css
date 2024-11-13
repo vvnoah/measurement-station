@@ -20,7 +20,7 @@
     margin-block: 0.25rem;
     padding-block: 0.4rem;
     padding-inline: 0.6rem;
-    border-radius: 1em;
+    border-radius: 1.2em;
 }
 .filter-menu-toggle:focus, .filter-menu-toggle:hover {
     transform: scale(1.05);
@@ -46,7 +46,7 @@
     padding-block: 0.4rem;
     padding-inline: 0.6rem;
     border: 2px solid gray;
-    border-radius: 1em;
+    border-radius: 1.2em;
 }
 .active-filter button {
     border: none;
