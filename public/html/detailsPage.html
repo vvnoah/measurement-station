@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -15,68 +14,32 @@
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/clay/lib/css/atlas.css">
 
-    <script src="https://cdn.jsdelivr.net/npm/clay/lib/js/clay.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://d3js.org/d3.v6.min.js"></script>
 
-    <title>Home</title>
+    <title>Details Page</title>
 </head>
 
 <body>
     <div class="content-grid stick-to-top">
-        <div id="navbar-container" class="breakout">
+        <div id="navbar-container" class="full-width">
             <div id="navbar">
                 <div id="navbar-header">
-                    <span id="navbar-title">Title</span>
+                    <span id="navbar-title">Details Page</span>
                     <label for="navbar-toggle" id="navbar-toggle-label">☰</label>
                 </div>
                 <input type="checkbox" name="navbar-toggle" id="navbar-toggle">
                 <nav id="navbar-navigation">
-                    <a href="/">Home</a>
-                    <a href="/detailsPage.html">Details Page</a>
+                    <a href="/">Home Page</a>
                 </nav>
             </div>
         </div>
     </div>
     <main class="content-grid">
         <section>
-            <header>
-                <h2>De stations</h2>
-                <!-- <select name="list-or-map" id="list-or-map-select">
-                    <option value="map">kaart</option>
-                    <option value="list">lijst</option>
-                </select> -->
-                <div class="form-group" id="list-or-map-select" name="list-or-map">
-                    <label class="toggle-switch">
-                        <input id="toggle-map-list" class="toggle-switch-check" type="checkbox"
-                            style="background-color: #4caf50;" />
-                        <span aria-hidden="true" class="toggle-switch-bar">
-                            <span class="toggle-switch-handle" data-label-off="Map View" data-label-on="List View">
-                            </span>
-                        </span>
-                    </label>
-                </div>
 
-            </header>
-            <div class="map-container">
-                <div id="map"></div>
-            </div>
-            <div id="datatable-container" class="hide">
-                <table id="datatable" class="stripe">
-                    <thead>
-                        <tr>
-                            <th>Selected</th>
-                            <th>Id</th>
-                            <th>Location</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
         </section>
         <section id="section-selected-data">
             <header>
@@ -104,12 +67,15 @@
         </div>
     </div>
 </body>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
 <script>
+    $(document).ready(function () {
+        $("#datatable").DataTable();
+    });
 </script>
 <script src="js/main.js"></script>
 <script src="js/charts.js"></script>
-<script src="js/test_map.js"></script>
 
 </html>
