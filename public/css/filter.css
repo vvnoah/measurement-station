@@ -6,33 +6,63 @@
 }
 .filter-header {
     display: flex;
+    align-items: center;
     gap: 0.25rem;
 }
 .filter-menu-toggle {
+    cursor: pointer;
+    align-self: flex-start;
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 4rem;
     margin-block: 0.25rem;
+    padding-block: 0.4rem;
+    padding-inline: 0.6rem;
+    border-radius: 1em;
+}
+.filter-menu-toggle:focus, .filter-menu-toggle:hover {
+    transform: scale(1.05);
+}
+.filter-menu-toggle img {
+    min-height: 1em;
+    min-width: 1em;
 }
 .active-filter-container {
     display: flex;
     flex-direction: row;
     gap: 0.25rem;
-    flex-grow: 1;
     flex-wrap: nowrap;
     overflow-x: auto;
     padding-inline: 0.25rem;
 }
 .active-filter {
     background-color: lightgray;
+    display: flex;
     flex-shrink: 0;
+    
     margin-block: 0.25rem;
+    padding-block: 0.4rem;
+    padding-inline: 0.6rem;
+    border: 2px solid gray;
+    border-radius: 1em;
 }
-.active-filter span {
-    padding-block: 0.25rem;
-    padding-inline: 0.35rem;
+.active-filter button {
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+.active-filter button img {
+    min-height: 1em;
+    min-width: 1em;
+    max-height: 1em;
+    max-width: 1em;
+    filter: invert(.5);
 }
 .filter-menu-container {
     border: 1px solid black;
-    display: grid;
+    display: none;
     gap: 5px;
     padding-inline: 0.25rem; padding-block: 0.25rem;
 }
-.filter-option {}
