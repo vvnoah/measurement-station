@@ -45,7 +45,7 @@
                 <!-- <select name="list-or-map" id="list-or-map-select">
                     <option value="map">kaart</option>
                     <option value="list">lijst</option>
-                </select> -->
+                </select> -->=
                 <div class="form-group" id="list-or-map-select" name="list-or-map">
                     <label class="toggle-switch">
                         <input id="toggle-map-list" class="toggle-switch-check" type="checkbox" style="background-color: #4caf50;"/>
@@ -107,10 +107,10 @@
     $(document).ready(function () {
         $("#datatable").DataTable();
     });
-    
-*/
-    //let stations = fetch("api/stations")
+    */
 
+    //let stations = fetch("api/stations")
+/*
     $(document).ready(function () {
         $("#datatable").DataTable({
             ajax: {
@@ -131,16 +131,17 @@
         });
     });
 
+
+
     $('#datatable tbody').on('change', '.select-checkbox', function () {
                 var totalChecked = $('#datatable tbody .select-checkbox:checked').length;
-
                 if (totalChecked > 3) {
                     // If more than 3 checkboxes are checked, uncheck the last one
                     $(this).prop('checked', false);
                     alert('You can only select a maximum of 3 items.');
                 }
             });
-
+*/
 </script>
 <script src="js/main.js"></script>
 <script src="js/charts.js"></script>
