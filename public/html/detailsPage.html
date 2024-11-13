@@ -15,10 +15,17 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/clay/lib/css/atlas.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+
+    <script src="js/main.js"></script>
+    <script src="js/charts.js"></script>
 
     <title>Details Page</title>
 </head>
@@ -41,7 +48,6 @@
     </div>
     <main class="content-grid">
         <section>
-
         </section>
         <section id="section-selected-data">
             <header>
@@ -57,8 +63,15 @@
                 <div class="responsive-list-item">
                     <canvas id="rainfall-chart"></canvas>
                 </div>
-                <div class="responsive-list-item">
-                    <canvas id="airquality-chart"></canvas>
+                <div>
+                    <h2>Selecteer een datum of een datumbereik</h2>
+                    <!-- Input voor het selecteren van één enkele datum -->
+                    <label for="singleDate">Enkele Datum:</label>
+                    <input type="text" id="singleDate" placeholder="Selecteer een datum">
+
+                    <!-- Input voor het selecteren van een datumbereik -->
+                    <label for="dateRange">Datumreeks:</label>
+                    <input type="text" id="dateRange" placeholder="Selecteer een begindatum en einddatum">
                 </div>
             </div>
         </section>
@@ -68,16 +81,26 @@
             <a href="#">naar boven</a>
         </div>
     </div>
-</body>
+    
+    <script>
+        //dit nog in andere file steken
+        // Initialiseer flatpickr voor een enkele datumselectie
+        flatpickr("#singleDate", {
+            dateFormat: "Y-m-d", // Standaard datumnotatie
+            allowInput: true, // Sta handmatige invoer toe
+        });
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+        // Initialiseer flatpickr voor een datumreeksselectie
+        flatpickr("#dateRange", {
+            mode: "range", // Zet modus op 'range' voor begindatum en einddatum
+            dateFormat: "Y-m-d",
+            allowInput: true,
+        });
+    </script>
+</body>
 <script>
     $(document).ready(function () {
         $("#datatable").DataTable();
     });
 </script>
-<script src="js/main.js"></script>
-<script src="js/charts.js"></script>
-
 </html>
