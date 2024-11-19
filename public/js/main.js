@@ -154,3 +154,29 @@ $(document).ready(async function () {
         });
     }
 });
+
+// Open de popup
+document.getElementById('details-btn').addEventListener('click', function (event) {
+    event.preventDefault(); // Voorkom standaard "a href"-gedrag
+    openPopup('Dit is de dynamische inhoud van de Details popup!');
+  });
+  
+  // Sluit de popup
+  document.getElementById('close-popup').addEventListener('click', function () {
+    closePopup();
+  });
+  
+  // Functie om popup te openen
+  function openPopup(data) {
+    const popup = document.getElementById('popup');
+    const popupData = document.getElementById('popup-data');
+    
+    popupData.innerHTML = data; // Voeg dynamische data toe
+    popup.classList.remove('hidden'); // Maak popup zichtbaar
+  }
+  
+  // Functie om popup te sluiten
+  function closePopup() {
+    const popup = document.getElementById('popup');
+    popup.classList.add('hidden'); // Verberg popup
+  }

@@ -36,7 +36,7 @@
                 <input type="checkbox" name="navbar-toggle" id="navbar-toggle">
                 <nav id="navbar-navigation">
                     <a href="/" style="text-decoration: underline;">Home</a>
-                    <a href="/detailsPage.html">Details</a>
+                    <a href="#" id="details-btn">Details</a>
                 </nav>
             </div>
         </div>
@@ -44,6 +44,14 @@
     <main class="content-grid">
         <section>
             <header>
+                <!-- Popup-venster -->
+                <div id="popup" class="popup hidden">
+                    <div class="popup-content">
+                        <span id="close-popup" class="close-btn">&times;</span>
+                        <h2>Details</h2>
+                        <p id="popup-data">Hier komt de dynamische data</p>
+                    </div>
+                </div>
                 <h2>De stations</h2>
                 <!-- <select name="list-or-map" id="list-or-map-select">
                     <option value="map">kaart</option>
