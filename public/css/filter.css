@@ -2,15 +2,19 @@
     container-type: inline-size;
     display: grid;
     gap: 1.5rem;
-    --clr-selectable: #0035f4;
-    --clr-selected: #009252;
+    --clr-interactable: hsl(219, 60%, 55%);
+    --clr-static: hsl(0, 0%, 80%);
 }
 .filter-header {
     display: flex;
+    align-items: stretch;
+    color: var(--color-font-1);
+}
+.filter-header div {
+    flex-grow: 1;
+    display: flex;
     align-items: center;
-    gap: 0.25rem;
-    color: var(--color-primary);
-    background-color: var(--clr-selectable);
+    padding-left: 1rem;
 }
 .filter-menu-toggle {
     cursor: pointer;
@@ -23,29 +27,30 @@
     padding-block: 0.4rem;
     padding-inline: 0.6rem;
     color: var(--color-primary);
-    background-color: var(--clr-selectable);
-    border: 4px outset var(--clr-selectable);
+    background-color: var(--clr-interactable);
+    border: 4px outset var(--clr-interactable);
 }
 .filter-menu-toggle:hover {
     text-decoration: underline;
 }
-.filter-menu-toggle img {
-    min-height: 1em;
-    min-width: 1em;
+.filter-menu-toggle:active {
+    border: 4px inset var(--clr-interactable);
 }
 .filter-menu {
-    border: 4px solid var(--clr-selectable);
-    border-top: none;
+    border: 4px ridge var(--clr-interactable);
     display: none;
-    gap: 5px;
-    padding-inline: 0.5rem; padding-block: 0.5rem;
+    gap: 1rem;
+    padding-inline: 1rem;
+    padding-block: 1rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-
+.filter {
+    border: 3px outset var(--clr-interactable);
+}
 .filter label {
     user-select: none;
     font-weight: bold;
-    font-size: 0.8em;
-    border: 3px outset var(--clr-selectable);
+    font-size: 1em;
     padding: 0.25rem;
 }
 .filter input {
@@ -53,14 +58,17 @@
 }
 .filter:has(input:checked){
     color: var(--color-primary);
-    background-color: var(--clr-selected);
-}
-.filter:has(input:checked) label {
-    border: 3px outset var(--clr-selected);
+    background-color: var(--clr-interactable);
 }
 
+.filter-output {
+    display: grid;
+    gap: 1.5rem;
+}
 .filter-output-card {
-    color: var(--color-primary);
-    background-color: var(--clr-selected);
+    display: grid;
+    padding: 1rem;
+    color: var(--color-font-1);
+    border: 4px ridge var(--color-font-1);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
