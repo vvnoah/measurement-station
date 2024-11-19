@@ -16,11 +16,15 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/clay/lib/css/atlas.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
     <script src="https://cdn.jsdelivr.net/npm/clay/lib/js/clay.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script src="js/calender.js"></script>
 
     <title>Home</title>
 </head>
@@ -48,8 +52,9 @@
                 <div id="popup" class="popup hidden">
                     <div class="popup-content">
                         <span id="close-popup" class="close-btn">&times;</span>
-                        <h2>Details</h2>
-                        <p id="popup-data">Hier komt de dynamische data</p>
+                        <div id="popup-body">
+                            <!-- De opgegeven inhoud wordt hier dynamisch geplaatst -->
+                        </div>
                     </div>
                 </div>
                 <h2>De stations</h2>
@@ -114,10 +119,9 @@
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
-<script>
-</script>
 <script src="js/main.js"></script>
 <script src="js/charts.js"></script>
 <script src="js/test_map.js"></script>
+<script src="js/calender.js"></script>
 
 </html>

@@ -98,8 +98,6 @@ $(document).ready(async function () {
         update_section_visibility();
     });
 
-    
-
     // Synchronize table checkboxes with map marker selection
     function syncCheckboxWithMap() {
         $('#datatable tbody .select-checkbox').each(function () {
@@ -155,35 +153,47 @@ $(document).ready(async function () {
     }
 });
 
-// Open de popup
+// HTML-code die je in de popup wilt plaatsen
+const popupContent = `
+<header>
+    <h2>Data geselecteerde stations</h2>
+</header>
+<div class="responsive-list">
+    <div class="responsive-list-item">
+        <canvas id="temperature-chart"></canvas>
+    </div>
+    <div class="responsive-list-item">
+        <canvas id="windspeed-chart"></canvas>
+    </div>
+    <div class="responsive-list-item">
+        <canvas id="rainfall-chart"></canvas>
+    </div>
+    <div>
+        <h2>Selecteer een datum of een datumbereik</h2>
+        <!-- Input voor het selecteren van één enkele datum -->
+        <label for="singleDate">Enkele Datum:</label>
+        <input type="text" id="singleDate" placeholder="Selecteer een datum">
+
+        <!-- Input voor het selecteren van een datumbereik -->
+        <label for="dateRange">Datumreeks:</label>
+        <input type="text" id="dateRange" placeholder="Selecteer een begindatum en einddatum">
+    </div>
+</div>
+`;
+
+// Event listener om de popup te openen met inhoud
 document.getElementById('details-btn').addEventListener('click', function (event) {
-    event.preventDefault(); // Voorkom standaard "a href"-gedrag
-    openPopup('Dit is de dynamische inhoud van de Details popup!');
-  });
-  
-  // Sluit de popup
-  document.getElementById('close-popup').addEventListener('click', function () {
-    closePopup();
-  });
-  
-  // Functie om popup te openen
-  function openPopup(data) {
-    const popup = document.getElementById('popup');
-    const popupData = document.getElementById('popup-data');
-    
-    popupData.innerHTML = data; // Voeg dynamische data toe
-    popup.classList.remove('hidden'); // Maak popup zichtbaar
-  }
-  
-  // Functie om popup te sluiten
-  function closePopup() {
-    const popup = document.getElementById('popup');
-    popup.classList.add('hidden'); // Verberg popup
-  }
-  
-  document.getElementById('popup').addEventListener('click', function (event) {
-    if (event.target === this) {
-      closePopup();
-    }
-  });
-  
+  event.preventDefault(); // Voorkom standaard gedrag van de link
+
+  // Voeg de HTML-inhoud toe aan de popup-body
+  document.getElementById('popup-body').innerHTML = popupContent;
+
+  // Toon de popup
+  document.getElementById('popup').classList.remove('hidden');
+});
+
+// Event listener om de popup te sluiten
+document.getElementById('close-popup').addEventListener('click', function () {
+  document.getElementById('popup').classList.add('hidden');
+  document.getElementById('popup-body').innerHTML = ''; // Maak de inhoud leeg bij sluiten
+});

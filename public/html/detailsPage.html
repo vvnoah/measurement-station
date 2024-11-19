@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -6,49 +7,20 @@
 
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/content-grid.css">
     <link rel="stylesheet" href="css/responsive-list.css">
-    <link rel="stylesheet" href="css/map.css">
-    <link rel="stylesheet" href="css/card.css">
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/clay/lib/css/atlas.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
 
     <script src="js/main.js"></script>
-    <script src="js/charts.js"></script>
-    
-    <title>Details Page</title>
 </head>
 
 <body>
-    <div class="content-grid stick-to-top">
-        <div id="navbar-container" class="breakout">
-            <div id="navbar">
-                <div id="navbar-header">
-                    <span id="navbar-title">Measurment Stations</span>
-                    <label for="navbar-toggle" id="navbar-toggle-label">☰</label>
-                </div>
-                <input type="checkbox" name="navbar-toggle" id="navbar-toggle">
-                <nav id="navbar-navigation">
-                    <a href="/">Home</a>
-                    <a href="/detailsPage.html" style="text-decoration: underline;">Details</a>
-                </nav>
-            </div>
-        </div>
-    </div>
     <main class="content-grid">
-        <section>
-        </section>
         <section id="section-selected-data">
             <header>
                 <h2>Data geselecteerde stations</h2>
@@ -76,16 +48,8 @@
             </div>
         </section>
     </main>
-    <div class="back-to-top content-grid">
-        <div>
-            <a href="#">naar boven</a>
-        </div>
-    </div>
 </body>
-<script>
-    $(document).ready(function () {
-        $("#datatable").DataTable();
-    });
-</script>
+
 <script src="js/calender.js"></script>
+
 </html>
