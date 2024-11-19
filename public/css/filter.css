@@ -1,13 +1,16 @@
 .filter-container {
     container-type: inline-size;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+    display: grid;
+    gap: 1.5rem;
+    --clr-selectable: #0035f4;
+    --clr-selected: #009252;
 }
 .filter-header {
     display: flex;
     align-items: center;
     gap: 0.25rem;
+    color: var(--color-primary);
+    background-color: var(--clr-selectable);
 }
 .filter-menu-toggle {
     cursor: pointer;
@@ -17,52 +20,47 @@
     align-items: center;
     gap: 0.5rem;
     min-width: 4rem;
-    margin-block: 0.25rem;
     padding-block: 0.4rem;
     padding-inline: 0.6rem;
-    border-radius: 1.2em;
+    color: var(--color-primary);
+    background-color: var(--clr-selectable);
+    border: 4px outset var(--clr-selectable);
 }
-.filter-menu-toggle:focus, .filter-menu-toggle:hover {
-    transform: scale(1.05);
+.filter-menu-toggle:hover {
+    text-decoration: underline;
 }
 .filter-menu-toggle img {
     min-height: 1em;
     min-width: 1em;
 }
-.active-filter-container {
-    display: flex;
-    flex-direction: row;
-    gap: 0.25rem;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    padding-inline: 0.25rem;
-}
-.active-filter {
-    background-color: lightgray;
-    display: flex;
-    flex-shrink: 0;
-    
-    margin-block: 0.25rem;
-    padding-block: 0.4rem;
-    padding-inline: 0.6rem;
-    border: 2px solid gray;
-    border-radius: 1.2em;
-}
-.active-filter button {
-    border: none;
-    cursor: pointer;
-    background-color: transparent;
-}
-.active-filter button img {
-    min-height: 1em;
-    min-width: 1em;
-    max-height: 1em;
-    max-width: 1em;
-    filter: invert(.5);
-}
-.filter-menu-container {
-    border: 1px solid black;
+.filter-menu {
+    border: 4px solid var(--clr-selectable);
+    border-top: none;
     display: none;
     gap: 5px;
-    padding-inline: 0.25rem; padding-block: 0.25rem;
+    padding-inline: 0.5rem; padding-block: 0.5rem;
+}
+
+.filter label {
+    user-select: none;
+    font-weight: bold;
+    font-size: 0.8em;
+    border: 3px outset var(--clr-selectable);
+    padding: 0.25rem;
+}
+.filter input {
+    display: none;
+}
+.filter:has(input:checked){
+    color: var(--color-primary);
+    background-color: var(--clr-selected);
+}
+.filter:has(input:checked) label {
+    border: 3px outset var(--clr-selected);
+}
+
+.filter-output-card {
+    color: var(--color-primary);
+    background-color: var(--clr-selected);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

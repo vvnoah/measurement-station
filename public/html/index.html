@@ -59,7 +59,7 @@
                     <tbody>
                     </tbody>
                 </table>
-            </div>            
+            </div>
         </section>
         <section>
             <header>
@@ -67,130 +67,20 @@
             </header>
             <div class="section-body">
                 <div class="filter-container">
-                    <div class="filter-header">
-                        <button class="filter-menu-toggle">
-                            <span><img src="img/list.svg" alt=""></span>
-                            <b>menu</b>                                
-                        </button>
-                        <div class="active-filter-container">
-                            <div class="active-filter">
-                                <span>temperatuur</span>
-                                <button>
-                                    <img src="img/x.svg" alt="remove filter">
-                                </button>
-                            </div>
-                            <div class="active-filter">
-                                <span>temperatuur</span>
-                                <button>
-                                    <img src="img/x.svg" alt="remove filter">
-                                </button>
-                            </div>
-                            <div class="active-filter">
-                                <span>temperatuur</span>
-                                <button>
-                                    <img src="img/x.svg" alt="remove filter">
-                                </button>
-                            </div>
-                            <div class="active-filter">
-                                <span>temperatuur</span>
-                                <button>
-                                    <img src="img/x.svg" alt="remove filter">
-                                </button>
-                            </div>
-                            <div class="active-filter">
-                                <span>temperatuur</span>
-                                <button>
-                                    <img src="img/x.svg" alt="remove filter">
-                                </button>
-                            </div>
-                            <div class="active-filter">
-                                <span>temperatuur</span>
-                                <button>
-                                    <img src="img/x.svg" alt="remove filter">
-                                </button>
-                            </div>
-                            <div class="active-filter">
-                                <span>temperatuur</span>
-                                <button>
-                                    <img src="img/x.svg" alt="remove filter">
-                                </button>
-                            </div>
-                            <div class="active-filter">
-                                <span>temperatuur</span>
-                                <button>
-                                    <img src="img/x.svg" alt="remove filter">
-                                </button>
-                            </div>
-                            <div class="active-filter">
-                                <span>temperatuur</span>
-                                <button>
-                                    <img src="img/x.svg" alt="remove filter">
-                                </button>
-                            </div>
-                            <div class="active-filter">
-                                <span>temperatuur</span>
-                                <button>
-                                    <img src="img/x.svg" alt="remove filter">
-                                </button>
-                            </div>
-                            <div class="active-filter">
-                                <span>temperatuur</span>
-                                <button>
-                                    <img src="img/x.svg" alt="remove filter">
-                                </button>
-                            </div>
+                    <div>
+                        <div class="filter-header">
+                            <button class="filter-menu-toggle">
+                                <b>Filters</b>                                
+                            </button>
+                            <span>(<span id="filter-amount-selected">0</span>)</span>
                         </div>
+                        <div class="filter-menu"></div>
                     </div>
-                    <div class="filter-menu-container">
-                        <div class="filter-option"><button>temperatuur</button></div>
-                        <div class="filter-option"><button>temperatuur</button></div>
-                        <div class="filter-option"><button>temperatuur</button></div>
-                        <div class="filter-option"><button>temperatuur</button></div>
-                        <div class="filter-option"><button>temperatuur</button></div>
-                        <div class="filter-option"><button>temperatuur</button></div>
-                    </div>
-                </div>
-            </div>
-            <br>
-
-            <div style="display: flex; flex-direction: column; gap: 10px;">
-                <div style="min-height:200px; display: grid; gap:10px">
-                    <div style="min-height:200px; padding: 5px; display: flex; flex-direction: column; gap: 5px; background-color:blue; color:white;">
-                        <div style="margin-bottom: 5px;"><b>Temperatuur</b></div>                        
-                        <div style="flex-grow: 1;">
-                            <div><span>Station 1</span><span>10°C</span></div>
-                            <div><span>Station 2</span><span>12°C</span></div>
-                            <div><span>Station 3</span><span>11°C</span></div>
-                        </div>
-                        <div><button>meer</button></div>
-                    </div>
-                    <div style="min-height:200px; padding: 5px; display: flex; flex-direction: column; gap: 5px; background-color:blue; color:white;">
-                        <div style="margin-bottom: 5px;"><b>text</b></div>                        
-                        <div style="flex-grow: 1;">
-                            <div><span>Station 1</span></div>
-                            <div><span>Station 2</span></div>
-                            <div><span>Station 3</span></div>
-                        </div>
-                        <div><button>meer</button></div>
-                    </div>
-                    <div style="min-height:200px; padding: 5px; display: flex; flex-direction: column; gap: 5px; background-color:blue; color:white;">
-                        <div style="margin-bottom: 5px;"><b>text</b></div>                        
-                        <div style="flex-grow: 1;">
-                            <div><span>Station 1</span></div>
-                            <div><span>Station 2</span></div>
-                            <div><span>Station 3</span></div>
-                        </div>
-                        <div><button>meer</button></div>
-                    </div>
+                    <div class="filter-output" style="min-height:200px; display: grid; gap:1rem"></div>
                 </div>
             </div>
         </section>
     </main>
-    <div class="back-to-top content-grid">
-        <div>
-            <a href="#">naar boven</a>
-        </div>
-    </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
