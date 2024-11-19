@@ -153,16 +153,3 @@ $(document).ready(async function () {
     }
 });
 
-// Event listener om de popup te openen met inhoud
-document.getElementById('details-btn').addEventListener('click', function (event) {
-    event.preventDefault(); // Voorkom standaard gedrag van de link
-    document.querySelector('.leaflet-control-zoom').style.display = 'none';
-    // Toon de popup
-    document.getElementById('popup').classList.remove('hidden');
-});
-
-// Event listener om de popup te sluiten
-document.getElementById('close-popup').addEventListener('click', function () {
-    document.querySelector('.leaflet-control-zoom').style.display = 'block';
-    document.getElementById('popup').classList.add('hidden');
-});
