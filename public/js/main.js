@@ -180,3 +180,10 @@ document.getElementById('details-btn').addEventListener('click', function (event
     const popup = document.getElementById('popup');
     popup.classList.add('hidden'); // Verberg popup
   }
+  
+  document.getElementById('popup').addEventListener('click', function (event) {
+    if (event.target === this) {
+      closePopup();
+    }
+  });
+  

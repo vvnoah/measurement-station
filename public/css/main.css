@@ -136,3 +136,14 @@ body > footer nav a {
     cursor: pointer;
   }
   
+  .popup-content {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.3s ease;
+  }
+  
+  .popup:not(.hidden) .popup-content {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
