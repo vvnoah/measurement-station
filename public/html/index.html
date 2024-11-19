@@ -24,8 +24,6 @@
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-    <script src="js/calender.js"></script>
-
     <title>Home</title>
 </head>
 
@@ -53,7 +51,30 @@
                     <div class="popup-content">
                         <span id="close-popup" class="close-btn">&times;</span>
                         <div id="popup-body">
-                            <!-- De opgegeven inhoud wordt hier dynamisch geplaatst -->
+                            <header>
+                                <h2>Data geselecteerde stations</h2>
+                            </header>
+                            <div class="responsive-list">
+                                <div class="responsive-list-item">
+                                    <canvas id="temperature-chart"></canvas>
+                                </div>
+                                <div class="responsive-list-item">
+                                    <canvas id="windspeed-chart"></canvas>
+                                </div>
+                                <div class="responsive-list-item">
+                                    <canvas id="rainfall-chart"></canvas>
+                                </div>
+                                <div>
+                                    <h2>Selecteer een datum of een datumbereik</h2>
+                                    <!-- Input voor het selecteren van één enkele datum -->
+                                    <label for="singleDate">Enkele Datum:</label>
+                                    <input type="text" id="singleDate" placeholder="Selecteer een datum">
+                            
+                                    <!-- Input voor het selecteren van een datumbereik -->
+                                    <label for="dateRange">Datumreeks:</label>
+                                    <input type="text" id="dateRange" placeholder="Selecteer een begindatum en einddatum">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
