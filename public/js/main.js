@@ -110,8 +110,8 @@ function updateMarkerStyle(stationId, isSelected) {
     const marker = markersMap[stationId];
     if (marker) {
         marker.setStyle({
-            color: isSelected ? "green" : "red",
-            fillColor: isSelected ? "green" : "red"
+            color: isSelected ? "blue" : "green",
+            fillColor: isSelected ? "blue" : "green"
         });
     }
 }

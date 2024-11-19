@@ -62,8 +62,8 @@ function addMarkers(stations) {
     stations.forEach(station => {
         const marker = L.circleMarker([station.latitude, station.longitude], {
             radius: 6,
-            color: "red",
-            fillColor: "red",
+            color: "groeen",
+            fillColor: "green",
             fillOpacity: 1
         }).addTo(map);
 
@@ -71,9 +71,11 @@ function addMarkers(stations) {
 
         marker.on('mouseover', function () {
             marker.openPopup();
+            marker.setStyle({radius: 8});
         });
         marker.on('mouseout', function () {
             marker.closePopup();
+            marker.setStyle({ radius: 6 });
         });
 
         // Marker click event
