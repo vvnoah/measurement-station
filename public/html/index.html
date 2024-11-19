@@ -36,7 +36,6 @@
                 <input type="checkbox" name="navbar-toggle" id="navbar-toggle">
                 <nav id="navbar-navigation">
                     <a href="/">Home</a>
-                    <a href="/detailsPage.html">Details Page</a>
                 </nav>
             </div>
         </div>
@@ -48,7 +47,7 @@
                 <!-- <select name="list-or-map" id="list-or-map-select">
                     <option value="map">kaart</option>
                     <option value="list">lijst</option>
-                </select> -->
+                </select> -->=
                 <div class="form-group" id="list-or-map-select" name="list-or-map">
                     <label class="toggle-switch">
                         <input id="toggle-map-list" class="toggle-switch-check" type="checkbox"
@@ -107,6 +106,45 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
 <script>
+    /*
+    $(document).ready(function () {
+        $("#datatable").DataTable();
+    });
+    */
+
+    //let stations = fetch("api/stations")
+    /*
+        $(document).ready(function () {
+            $("#datatable").DataTable({
+                ajax: {
+                    url: '/api/stations',
+                    dataSrc: ''
+                },
+                
+                columns: [
+                {
+                    data: null,
+                    render: function (data, type, row) {
+                        return '<input type="checkbox" class="select-checkbox">';
+                    }
+                },
+                    {data: 'id'},
+                    {data: 'location'} 
+                ]
+            });
+        });
+    
+    
+    
+        $('#datatable tbody').on('change', '.select-checkbox', function () {
+                    var totalChecked = $('#datatable tbody .select-checkbox:checked').length;
+                    if (totalChecked > 3) {
+                        // If more than 3 checkboxes are checked, uncheck the last one
+                        $(this).prop('checked', false);
+                        alert('You can only select a maximum of 3 items.');
+                    }
+                });
+    */
 </script>
 <script src="js/main.js"></script>
 <script src="js/charts.js"></script>

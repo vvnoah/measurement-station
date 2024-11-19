@@ -1,25 +1,20 @@
 // Global variables
-let selected = [];
+let selectedIds = []; // Array to track selected station IDs
 let temperature_chart, windspeed_chart, rainfall_chart, airquality_chart;
-let clickmarkers = [];
-
-let stationData = [];
+let stationData = []; // Store station data for reference
 
 $(document).ready(async function () {
+    // Fetch station data and initialize
+    stationData = await fetch_data();
 
-    // Initialize DataTable with AJAX loading from /api/stations
-
-    stationData = await fetch_data(); // Fetch all station data once
-    
-    // Step 2: Initialize DataTable with the full dataset (stationData)
+    // Initialize DataTable
     const table = $("#datatable").DataTable({
-        data: stationData, // Use the full dataset here
+        data: stationData,
         columns: [
             {
                 data: null,
-                render: function (data, type, row) {
-                    // Render checkbox in the first column
-                    return `<input type="checkbox" class="select-checkbox" data-id="${row.id}">`;
+                render: function (data) {
+                    return `<input type="checkbox" class="select-checkbox" data-id="${data.id}">`;
                 }
             },
             { data: 'id' },
@@ -27,69 +22,50 @@ $(document).ready(async function () {
         ],
     });
 
-    // Event Listener for checkbox click inside DataTable to handle selection
+    // Handle checkbox toggle in the DataTable
     $('#datatable tbody').on('change', '.select-checkbox', function () {
         const stationId = $(this).data('id');
         const isChecked = $(this).is(':checked');
-
-        console.log("c")
-        // Get the station data from DataTable row
-        const rowData = table.row($(this).closest('tr')).data();
-        console.log(rowData)
+        const station = stationData.find(s => s.id === stationId);
 
         if (isChecked) {
-            if (selected.length >= 3) {
-                alert("You can only select a maximum of 3 items.");
+            if (selectedIds.length >= 3) {
+                alert("You can only select a maximum of 3 stations.");
                 $(this).prop('checked', false);
                 return;
             }
-            selected.push(rowData);
-            clickmarkers.push(stationId); // Sync with map markers
-            console.log(clickmarkers);
-            console.log(selected);
-
-            // Add dataset to each chart
-            addDatasetToChart(temperature_chart, rowData, 'temperature');
-            addDatasetToChart(windspeed_chart, rowData, 'windspeed');
-            addDatasetToChart(rainfall_chart, rowData, 'rainfall');
-            addDatasetToChart(airquality_chart, rowData, 'airquality');
-
-            // Set corresponding map marker color
-            const marker = markersMap[stationId];
-            if (marker) marker.setStyle({ color: "green", fillColor: "green" });
+            selectedIds.push(stationId);
+            addDatasetToCharts(station);
         } else {
-            // Remove from selected and uncheck map marker if unchecked in table
-            selected = selected.filter(s => s.id !== stationId);
-            clickmarkers = clickmarkers.filter(id => id !== stationId);
-
-            removeDatasetFromChart(temperature_chart, stationId);
-            removeDatasetFromChart(windspeed_chart, stationId);
-            removeDatasetFromChart(rainfall_chart, stationId);
-            removeDatasetFromChart(airquality_chart, stationId);
-
-            const marker = markersMap[stationId];
-            if (marker) marker.setStyle({ color: "red", fillColor: "red" });
+            selectedIds = selectedIds.filter(id => id !== stationId);
+            removeDatasetFromCharts(stationId);
         }
 
-        // Update section visibility
+        syncMarkersWithSelection();
         update_section_visibility();
     });
 
     // Toggle Map and List View
     document.getElementById('toggle-map-list').addEventListener('change', function () {
-        const isMapView = this.checked;
-        const mapElement = document.querySelector('#map');
-        const listElement = document.querySelector('#datatable-container');
-        if (isMapView) {
-            mapElement.classList.add('hide');
-            listElement.classList.remove('hide');
-        } else {
-            mapElement.classList.remove('hide');
-            listElement.classList.add('hide');
-        }
+        const isChecked = this.checked;
+        document.querySelector('#map').classList.toggle('hide', isChecked);
+        document.querySelector('#datatable-container').classList.toggle('hide', !isChecked);
     });
 
-    // Initialize charts after fetching initial data for labels, etc.
+    // Sync DataTable checkboxes with the selection state on page change
+    table.on('draw', function () {
+        syncCheckboxesWithSelection();
+    });
+
+    // Initialize charts
+    /*
+    temperature_chart = create_line_chart("temperature-chart", "Temperature (°C)");
+    windspeed_chart = create_line_chart("windspeed-chart", "Wind Speed (km/h)");
+    rainfall_chart = create_line_chart("rainfall-chart", "Rainfall (mm)");
+    airquality_chart = create_line_chart("airquality-chart", "Air Quality (PPM)");
+
+    update_section_visibility();
+    */
     fetch_data().then(data => {
         temperature_chart = create_line_chart("temperature-chart", "Temperatuur (°C)");
         windspeed_chart = create_line_chart("windspeed-chart", "Windsnelheid (km/u)");
@@ -98,59 +74,91 @@ $(document).ready(async function () {
         update_section_visibility();
     });
 
-    
-
-    // Synchronize table checkboxes with map marker selection
-    function syncCheckboxWithMap() {
-        $('#datatable tbody .select-checkbox').each(function () {
-            const stationId = $(this).data('id');
-            $(this).prop('checked', selected.some(s => s.id === stationId));
-        });
-    }
-
-    // Update visibility of section based on selection count
-    function update_section_visibility() {
-        document.getElementById("section-selected-data").style.display = selected.length === 0 ? "none" : "block";
-    }
-
-    // Fetch data from the API
-    async function fetch_data() {
-        const response = await fetch('/api/stations');
-        const data = await response.json();
-        return data;
-    }
-
-    // Function to add dataset to a chart
-    function addDatasetToChart(chart, station, dataType) {
-        chart.data.datasets.push({
-            id: station.id,
-            label: station.location,
-            data: station[dataType] // Assumes each type (temperature, windspeed, etc.) is an array
-        });
-        chart.update();
-    }
-
-    // Function to remove dataset from a chart
-    function removeDatasetFromChart(chart, stationId) {
-        chart.data.datasets = chart.data.datasets.filter(dataset => dataset.id !== stationId);
-        chart.update();
-    }
-
-    // Function to create a line chart
-    function create_line_chart(elementId, title) {
-        return new Chart(document.getElementById(elementId).getContext('2d'), {
-            type: 'line',
-            data: {
-                labels: [], // Replace with actual labels if available
-                datasets: []
-            },
-            options: {
-                responsive: true,
-                title: {
-                    display: true,
-                    text: title
-                }
-            }
-        });
-    }
 });
+
+// Fetch data from the API
+/*
+async function fetch_data() {
+    const response = await fetch('/api/stations');
+    return await response.json();
+}
+*/
+// Sync table checkboxes with the selection array
+function syncCheckboxesWithSelection() {
+    $('#datatable tbody .select-checkbox').each(function () {
+        const stationId = $(this).data('id');
+        $(this).prop('checked', selectedIds.includes(stationId));
+    });
+}
+
+// Sync map markers with the selection array
+function syncMarkersWithSelection() {
+    selectedIds.forEach(stationId => updateMarkerStyle(stationId, true));
+    stationData
+        .filter(station => !selectedIds.includes(station.id))
+        .forEach(station => updateMarkerStyle(station.id, false));
+}
+
+// Update marker style
+function updateMarkerStyle(stationId, isSelected) {
+    const marker = markersMap[stationId];
+    if (marker) {
+        marker.setStyle({
+            color: isSelected ? "green" : "red",
+            fillColor: isSelected ? "green" : "red"
+        });
+    }
+}
+
+// Add datasets to all charts
+function addDatasetToCharts(station) {
+    addDatasetToChart(temperature_chart, station, 'temperature');
+    addDatasetToChart(windspeed_chart, station, 'windspeed');
+    addDatasetToChart(rainfall_chart, station, 'rainfall');
+    addDatasetToChart(airquality_chart, station, 'airquality');
+}
+
+// Remove datasets from all charts
+function removeDatasetFromCharts(stationId) {
+    removeDatasetFromChart(temperature_chart, stationId);
+    removeDatasetFromChart(windspeed_chart, stationId);
+    removeDatasetFromChart(rainfall_chart, stationId);
+    removeDatasetFromChart(airquality_chart, stationId);
+}
+
+// Chart helper functions
+function create_line_chart(elementId, title) {
+    return new Chart(document.getElementById(elementId).getContext('2d'), {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: []
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: title
+            }
+        }
+    });
+}
+
+function addDatasetToChart(chart, station, dataType) {
+    chart.data.datasets.push({
+        id: station.id,
+        label: station.location,
+        data: station[dataType],
+    });
+    chart.update();
+}
+
+function removeDatasetFromChart(chart, stationId) {
+    chart.data.datasets = chart.data.datasets.filter(dataset => dataset.id !== stationId);
+    chart.update();
+}
+
+// Update section visibility
+function update_section_visibility() {
+    document.getElementById("section-selected-data").style.display = selectedIds.length > 0 ? "block" : "none";
+}

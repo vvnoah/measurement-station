@@ -57,20 +57,18 @@ fetch('data/flanders.geojson')
 let markersMap = {};
 
 // Function to add markers for stations on the map
+// Add markers to the map
 function addMarkers(stations) {
     stations.forEach(station => {
-        var marker = L.circleMarker([station.latitude, station.longitude], {
+        const marker = L.circleMarker([station.latitude, station.longitude], {
             radius: 6,
-            color: "#ff0000",
-            fillColor: "#ff0000",
+            color: "red",
+            fillColor: "red",
             fillOpacity: 1
         }).addTo(map);
 
-        // Store the station ID in the marker 
-        marker.stationId = station.id;
-        markersMap[station.id] = marker; // Save the marker for synchronization
+        markersMap[station.id] = marker;
 
-        // Display and hide popup on mouse events
         marker.on('mouseover', function () {
             marker.openPopup();
         });
@@ -78,51 +76,30 @@ function addMarkers(stations) {
             marker.closePopup();
         });
 
-        // Toggle marker selection on click
+        // Marker click event
         marker.on('click', function () {
-            const stationIndex = selected.findIndex(s => s.id === station.id);
-            let checkbox = document.querySelector(`.select-checkbox[data-id="${station.id}"]`); // Corrected selector
+            const isSelected = selectedIds.includes(station.id);
 
-            if (checkbox) {
-                console.log("Checkbox found for station:", station.id);
-            } else {
-                console.error("Checkbox not found for station:", station.id);
+            if (!isSelected && selectedIds.length >= 3) {
+                alert("You can only select up to 3 stations.");
+                return;
             }
 
-            if (selected.length < 3 || stationIndex > -1) {
-                if (stationIndex === -1) {
-                    // Select marker
-                    marker.setStyle({ color: "green", fillColor: "green" });
-                    //selected.push(station); // Add to selected list
-                    //clickmarkers.push(marker.stationId);
-
-                    if (checkbox) {
-                        checkbox.checked = true; // Sync with list checkbox
-                        checkbox.dispatchEvent(new Event('change')); // Trigger change event
-                        $(checkbox).trigger('change'); // Trigger change event
-                    }
-                } else {
-                    // Deselect marker
-                    marker.setStyle({ color: "red", fillColor: "red" });
-                    selected.splice(stationIndex, 1); // Remove from selected list
-                    clickmarkers.splice(clickmarkers.indexOf(marker.stationId), 1);
-
-                    if (checkbox) {
-                        checkbox.checked = false; // Sync with list checkbox
-                        checkbox.dispatchEvent(new Event('change')); // Trigger change event
-                        $(checkbox).trigger('change');
-                    }
-                }
+            if (!isSelected) {
+                selectedIds.push(station.id);
+                const stationDataEntry = stationData.find(s => s.id === station.id);
+                addDatasetToCharts(stationDataEntry);
             } else {
-                alert("You can only select up to 3 stations at the same time.");
+                selectedIds = selectedIds.filter(id => id !== station.id);
+                removeDatasetFromCharts(station.id);
             }
+
+            syncCheckboxesWithSelection();
+            syncMarkersWithSelection();
+            update_section_visibility();
         });
 
-
-        // Create a popup with station data and bind to marker
-        var today = new Date();
-        var h = today.getHours(); // Get current hour for data display
-        marker.bindPopup(`<b>${station.location}</b><br>Temperature: ${station.temperature[h].y}°C<br>Windspeed: ${station.windspeed[h].y} km/u`);
+        marker.bindPopup(`<b>${station.location}</b><br>Temperature: ${station.temperature[0].y}°C`);
     });
 }
 
