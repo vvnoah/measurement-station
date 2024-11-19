@@ -10,7 +10,7 @@ $(document).ready(async function () {
     // Initialize DataTable with AJAX loading from /api/stations
 
     stationData = await fetch_data(); // Fetch all station data once
-    
+
     // Step 2: Initialize DataTable with the full dataset (stationData)
     const table = $("#datatable").DataTable({
         data: stationData, // Use the full dataset here
@@ -155,17 +155,14 @@ $(document).ready(async function () {
 
 // Event listener om de popup te openen met inhoud
 document.getElementById('details-btn').addEventListener('click', function (event) {
- event.preventDefault(); // Voorkom standaard gedrag van de link
- document.querySelector('.leaflet-control-zoom').style.display = 'none';
-
-  // Toon de popup
-  document.getElementById('popup').classList.remove('hidden');
+    event.preventDefault(); // Voorkom standaard gedrag van de link
+    document.querySelector('.leaflet-control-zoom').style.display = 'none';
+    // Toon de popup
+    document.getElementById('popup').classList.remove('hidden');
 });
 
 // Event listener om de popup te sluiten
 document.getElementById('close-popup').addEventListener('click', function () {
     document.querySelector('.leaflet-control-zoom').style.display = 'block';
-
-  document.getElementById('popup').classList.add('hidden');
-  document.getElementById('popup-body').innerHTML = ''; // Maak de inhoud leeg bij sluiten
+    document.getElementById('popup').classList.add('hidden');
 });
