@@ -77,5 +77,6 @@
     border: 4px outset var(--clr-interactable);
 }
 .filter-output-card button:active {
+    color: var(--clr-txt-on-interactable);
     border: 4px inset var(--clr-interactable);
 }

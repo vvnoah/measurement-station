@@ -156,7 +156,7 @@ function update_output_new() {
             <b>${filter.type}</b>
             ${stations_info}
             <div style="display:flex;justify-content:end;">
-              <button>details</button>
+              <button><b>details</b></button>
             </div>
         </div>`
     }
