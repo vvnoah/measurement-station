@@ -12,12 +12,13 @@
     <link rel="stylesheet" href="css/responsive-list.css">
     <link rel="stylesheet" href="css/map.css">
     <link rel="stylesheet" href="css/card.css">
+    <link rel="stylesheet" href="css/filter.css">
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/clay/lib/css/atlas.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
+    
     <script src="https://cdn.jsdelivr.net/npm/clay/lib/js/clay.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -83,10 +84,6 @@
                     </div>
                 </div>
                 <h2>De stations</h2>
-                <!-- <select name="list-or-map" id="list-or-map-select">
-                    <option value="map">kaart</option>
-                    <option value="list">lijst</option>
-                </select> -->=
                 <div class="form-group" id="list-or-map-select" name="list-or-map">
                     <label class="toggle-switch">
                         <input id="toggle-map-list" class="toggle-switch-check" type="checkbox"
@@ -114,6 +111,22 @@
                     <tbody>
                     </tbody>
                 </table>
+            </div>
+        </section>
+        <!--Filter for data-->
+        <section>
+            <div class="filter-container">
+                <div>
+                    <div class="filter-header">
+                        <button class="filter-menu-toggle"><b>Sensors</b></button>
+                        <div>
+                            <b>(<span id="filter-amount-selected">0</span><span>/</span><span
+                                    id="filter-amount-total">0</span>)</b>
+                        </div>
+                    </div>
+                    <div class="filter-menu"></div>
+                </div>
+                <div class="filter-output"></div>
             </div>
         </section>
         <section id="section-selected-data">
@@ -144,50 +157,10 @@
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
-<script>
-    /*
-    $(document).ready(function () {
-        $("#datatable").DataTable();
-    });
-    */
-
-    //let stations = fetch("api/stations")
-    /*
-        $(document).ready(function () {
-            $("#datatable").DataTable({
-                ajax: {
-                    url: '/api/stations',
-                    dataSrc: ''
-                },
-                
-                columns: [
-                {
-                    data: null,
-                    render: function (data, type, row) {
-                        return '<input type="checkbox" class="select-checkbox">';
-                    }
-                },
-                    {data: 'id'},
-                    {data: 'location'} 
-                ]
-            });
-        });
-    
-    
-    
-        $('#datatable tbody').on('change', '.select-checkbox', function () {
-                    var totalChecked = $('#datatable tbody .select-checkbox:checked').length;
-                    if (totalChecked > 3) {
-                        // If more than 3 checkboxes are checked, uncheck the last one
-                        $(this).prop('checked', false);
-                        alert('You can only select a maximum of 3 items.');
-                    }
-                });
-    */
-</script>
 <script src="js/main.js"></script>
 <script src="js/charts.js"></script>
 <script src="js/test_map.js"></script>
 <script src="js/calender.js"></script>
+<script src="js/filter-component.js"></script>
 
 </html>

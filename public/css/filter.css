@@ -1,0 +1,94 @@
+.filter-container {
+    container-type: inline-size;
+    display: grid;
+    gap: 1.5rem;
+    --clr-interactable: hsl(219, 60%, 55%);
+    --clr-static: hsl(0, 0%, 80%);
+}
+
+.filter-header {
+    display: flex;
+    align-items: stretch;
+    color: var(--color-font-1);
+}
+
+.filter-header div {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+    border: 4px ridge var(--clr-interactable);
+}
+
+.filter-menu-toggle {
+    cursor: pointer;
+    align-self: flex-start;
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 4rem;
+    padding-block: 0.4rem;
+    padding-inline: 0.6rem;
+    color: var(--color-primary);
+    background-color: var(--clr-interactable);
+    border: 4px outset var(--clr-interactable);
+}
+
+.filter-menu-toggle:active {
+    border: 4px inset var(--clr-interactable);
+}
+
+.filter-menu {
+    border: 4px ridge var(--clr-interactable);
+    border-top: none;
+    display: none;
+    gap: 1rem;
+    padding-inline: 1rem;
+    padding-block: 1rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.filter {
+    border: 3px outset var(--clr-interactable);
+}
+
+.filter label {
+    user-select: none;
+    font-weight: bold;
+    font-size: 1em;
+    padding: 0.25rem;
+}
+
+.filter input {
+    display: none;
+}
+
+.filter:has(input:checked) {
+    color: var(--color-primary);
+    background-color: var(--clr-interactable);
+}
+
+.filter-output {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.filter-output-card {
+    display: grid;
+    padding: 1rem;
+    color: var(--color-font-1);
+    border: 4px ridge var(--color-font-1);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.filter-output-card button {
+    background-color: var(--clr-interactable);
+    color: var(--clr-txt-on-interactable);
+    border: 4px outset var(--clr-interactable);
+}
+
+.filter-output-card button:active {
+    color: var(--clr-txt-on-interactable);
+    border: 4px inset var(--clr-interactable);
+}
