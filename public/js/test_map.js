@@ -11,6 +11,23 @@ var map = L.map('map', {
     zoomSnap: 0.1,
 }).setView([51.1000, 4.4517]);
 
+//legende toevoegen links boven op de kaart
+const legend = L.control({
+    position: "topleft",
+});
+
+legend.onAdd = function () {
+    const div = L.DomUtil.create('div', 'legend');
+    div.innerHTML = `
+    <i class="circle" style="background: blue"></i> Geselecteerd Station<br>
+    <i class="circle" style="background: green"></i> Online Stations<br>
+    <i class="circle" style="background: red"></i> Offline Stations<br>
+  `;
+    return div;
+};
+
+legend.addTo(map);
+
 new L.Control.Zoom({
     position: 'bottomright',
 }).addTo(map);
@@ -71,11 +88,15 @@ function addMarkers(stations) {
 
         marker.on('mouseover', function () {
             marker.openPopup();
-            marker.setStyle({radius: 8});
+            marker.setStyle({
+                radius: 8
+            });
         });
         marker.on('mouseout', function () {
             marker.closePopup();
-            marker.setStyle({ radius: 6 });
+            marker.setStyle({
+                radius: 6
+            });
         });
 
         // Marker click event
