@@ -1,0 +1,38 @@
+toggle-group button[aria-pressed="true"] {
+    background-color: var(--clr-interactable);
+    border: 4px outset var(--clr-interactable);
+    color: var(--clr-txt-on-interactable);
+}
+
+/* Make all buttons in the group the same width */
+toggle-group {
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-auto-flow: column;
+}
+
+/* Eliminate rounded corners on inner edges of buttons. */
+toggle-group button:not(:first-of-type) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+toggle-group button {
+    background-color: var(--clr-background);
+    border: 4px ridge var(--clr-interactable);
+    color: var(--clr-txt-on-background);
+}
+
+toggle-group button:hover {
+    cursor: pointer;
+}
+
+toggle-group button:not(:last-of-type) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+/* Prevent clicks on elements nested inside buttons */
+toggle-group button * {
+    pointer-events: none;
+}

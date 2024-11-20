@@ -2,6 +2,15 @@
     --color-primary: white;
     --color-secondary: rgb(224, 0, 73);
 
+    --clr-background: rgb(230, 230, 230);
+    --clr-txt-on-background: rgb(63, 63, 63);
+
+    --clr-interactable: hsl(219, 60%, 55%);
+    --clr-txt-on-interactable: var(--clr-background);
+
+    --clr-static: rgb(63, 63, 63);
+    --clr-txt-on-static: var(--clr-background);
+
     --color-font-1: rgb(63, 63, 63);
     --color-font-2: rgb(230, 230, 230);
 
@@ -41,6 +50,7 @@ body > main {
 
 section {  
     padding-top: var(--spacing-section);
+    display: grid;
 }
 
 section > header {
@@ -48,6 +58,18 @@ section > header {
     justify-content: space-between;
     align-items: stretch;
     margin-bottom: 10px;
+}
+
+.map-container{ display: none !important;}
+#section-view-stations:has(button[value~="map"][aria-pressed="true"])
+.map-container{
+  display: flex !important;
+}
+
+#datatable-container{ display: none !important;}
+#section-view-stations:has(button[value~="table"][aria-pressed="true"])
+#datatable-container{
+  display: block !important;
 }
 
 .back-to-top {
@@ -174,12 +196,12 @@ body > footer nav a {
   }
   
   /* Datum input styling */
-  label {
+  /* label {
     font-weight: bold;
     margin-right: 10px;
     display: inline-block;
     margin-top: 15px;
-  }
+  } */
   
   input[type="text"] {
     width: calc(100% - 20px); /* Vul de breedte van de container */

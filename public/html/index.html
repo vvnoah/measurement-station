@@ -12,14 +12,14 @@
     <link rel="stylesheet" href="css/map.css" >
     <link rel="stylesheet" href="css/filter.css">
     <link rel="stylesheet" href="css/map.css">
-    <link rel="stylesheet" href="css/card.css">
+    <link rel="stylesheet" href="css/toggle-group.css">
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/clay/lib/css/atlas.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
-    <script src="https://cdn.jsdelivr.net/npm/clay/lib/js/clay.js"></script>
+    <script src="js/toggle-group.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://d3js.org/d3.v6.min.js"></script>
@@ -45,25 +45,13 @@
         </div>
     </div>
     <main class="content-grid">
-        <section>
-            <header>
-                
+        <section id="section-view-stations">          
+            <header>                
                 <h2>De stations</h2>
-                <!-- <select name="list-or-map" id="list-or-map-select">
-                    <option value="map">kaart</option>
-                    <option value="list">lijst</option>
-                </select> -->
-                <div class="form-group" id="list-or-map-select" name="list-or-map">
-                    <label class="toggle-switch">
-                        <input id="toggle-map-list" class="toggle-switch-check" type="checkbox"
-                            style="background-color: #4caf50;" />
-                        <span aria-hidden="true" class="toggle-switch-bar">
-                            <span class="toggle-switch-handle" data-label-off="Map View" data-label-on="List View">
-                            </span>
-                        </span>
-                    </label>
-                </div>
-
+                <toggle-group>
+                    <button value="map" aria-pressed="true">Kaart</button>
+                    <button value="table">Tabel</button>
+                </toggle-group>
             </header>
             <div class="map-container">
                 <div id="map"></div>
@@ -83,22 +71,28 @@
             </div>
         </section>
         <section>
-            <div class="section-body">
-                <div class="filter-container">
-                    <div>
-                        <div class="filter-header">
-                            <button class="filter-menu-toggle">
-                                <b>Sensors</b>                                
-                            </button>
-                            <div>
-                                <b>(<span id="filter-amount-selected">0</span><span>/</span><span id="filter-amount-total">0</span>)</b>
-                            </div>
+            <div class="filter-container">
+                <div>
+                    <div class="filter-header">
+                        <button class="filter-menu-toggle">Sensors</button>
+                        <div>
+                            <b>(<span id="filter-amount-selected">0</span><span>/</span><span id="filter-amount-total">0</span>)</b>
                         </div>
-                        <div class="filter-menu"></div>
                     </div>
-                    <div class="filter-output"></div>
+                    <div class="filter-menu"></div>
                 </div>
+                <div class="filter-output"></div>
             </div>
+        </section>
+        <section>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
         </section>
         <div id="popup" class="popup hidden">
             <div class="popup-content">

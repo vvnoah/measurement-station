@@ -15,6 +15,7 @@
     display: flex;
     align-items: center;
     padding-left: 1rem;
+    border: 4px ridge var(--clr-interactable);
 }
 .filter-menu-toggle {
     cursor: pointer;
@@ -30,14 +31,12 @@
     background-color: var(--clr-interactable);
     border: 4px outset var(--clr-interactable);
 }
-.filter-menu-toggle:hover {
-    text-decoration: underline;
-}
 .filter-menu-toggle:active {
     border: 4px inset var(--clr-interactable);
 }
 .filter-menu {
     border: 4px ridge var(--clr-interactable);
+    border-top: none;
     display: none;
     gap: 1rem;
     padding-inline: 1rem;
@@ -71,4 +70,12 @@
     color: var(--color-font-1);
     border: 4px ridge var(--color-font-1);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.filter-output-card button {
+    background-color: var(--clr-interactable);
+    color: var(--clr-txt-on-interactable);
+    border: 4px outset var(--clr-interactable);
+}
+.filter-output-card button:active {
+    border: 4px inset var(--clr-interactable);
 }

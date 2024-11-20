@@ -155,6 +155,9 @@ function update_output_new() {
         <div class="filter-output-card" id="filter-output-card-${filter.id}">
             <b>${filter.type}</b>
             ${stations_info}
+            <div style="display:flex;justify-content:end;">
+              <button>details</button>
+            </div>
         </div>`
     }
   })
