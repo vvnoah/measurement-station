@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,16 +11,23 @@
     <link rel="stylesheet" href="css/content-grid.css">
     <link rel="stylesheet" href="css/map.css" >
     <link rel="stylesheet" href="css/filter.css">
+    <link rel="stylesheet" href="css/map.css">
+    <link rel="stylesheet" href="css/card.css">
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/clay/lib/css/atlas.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
+    <script src="https://cdn.jsdelivr.net/npm/clay/lib/js/clay.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <title>UCLL Meetstations</title>
 </head>
+
 <body>
     <div class="content-grid stick-to-top">
         <div id="navbar-container">
@@ -30,7 +38,8 @@
                 </div>
                 <input type="checkbox" name="navbar-toggle" id="navbar-toggle">
                 <nav id="navbar-navigation">
-                    <a href="/">Home</a>
+                    <a href="/" style="text-decoration: underline;">Home</a>
+                    <a href="#" id="details-btn">Details</a>
                 </nav>
             </div>
         </div>
@@ -38,11 +47,23 @@
     <main class="content-grid">
         <section>
             <header>
-                <h2>Stations</h2>
-                <select name="list-or-map" id="list-or-map-select">
+                
+                <h2>De stations</h2>
+                <!-- <select name="list-or-map" id="list-or-map-select">
                     <option value="map">kaart</option>
                     <option value="list">lijst</option>
-                </select>
+                </select> -->
+                <div class="form-group" id="list-or-map-select" name="list-or-map">
+                    <label class="toggle-switch">
+                        <input id="toggle-map-list" class="toggle-switch-check" type="checkbox"
+                            style="background-color: #4caf50;" />
+                        <span aria-hidden="true" class="toggle-switch-bar">
+                            <span class="toggle-switch-handle" data-label-off="Map View" data-label-on="List View">
+                            </span>
+                        </span>
+                    </label>
+                </div>
+
             </header>
             <div class="map-container">
                 <div id="map"></div>
@@ -79,18 +100,77 @@
                 </div>
             </div>
         </section>
-        <section></section>
+        <div id="popup" class="popup hidden">
+            <div class="popup-content">
+                <span id="close-popup" class="close-btn">&times;</span>
+                <div id="popup-body">
+                    <header>
+                        <h2>Data van geselecteerde stations</h2>
+                    </header>
+                    <div>
+                            <!--
+                            <-- Input voor het selecteren van één enkele datum ->
+                            <label for="singleDate">Enkele Datum:</label>
+                            <input type="text" id="singleDate" placeholder="Selecteer een datum">
+                            -->
+                            <!-- Input voor het selecteren van een datumbereik -->
+                            <label for="dateRange">selecteer 1 datum(dubbel klik) of een periode:</label>
+                            <input type="text" id="dateRange" placeholder="Selecteer een begindatum en einddatum">
+                    </div>
+                    <!-- hier nog een grafiek plaatse + zorgen dat de -->
+                    <div style="background-color: gray;min-height: 200px;"></div> 
+                </div>
+            </div>
+        </div>
     </main>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
 <script>
+    /*
     $(document).ready(function () {
         $("#datatable").DataTable();
     });
+    */
+
+    //let stations = fetch("api/stations")
+    /*
+        $(document).ready(function () {
+            $("#datatable").DataTable({
+                ajax: {
+                    url: '/api/stations',
+                    dataSrc: ''
+                },
+                
+                columns: [
+                {
+                    data: null,
+                    render: function (data, type, row) {
+                        return '<input type="checkbox" class="select-checkbox">';
+                    }
+                },
+                    {data: 'id'},
+                    {data: 'location'} 
+                ]
+            });
+        });
+    
+    
+    
+        $('#datatable tbody').on('change', '.select-checkbox', function () {
+                    var totalChecked = $('#datatable tbody .select-checkbox:checked').length;
+                    if (totalChecked > 3) {
+                        // If more than 3 checkboxes are checked, uncheck the last one
+                        $(this).prop('checked', false);
+                        alert('You can only select a maximum of 3 items.');
+                    }
+                });
+    */
 </script>
 <script src="js/main.js"></script>
 <script src="js/charts.js"></script>
 <script src="js/test_map.js"></script>
 <script src="js/filter-component.js"></script>
+<script src="js/calender.js"></script>
+
 </html>

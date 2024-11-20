@@ -4,13 +4,41 @@
     justify-content: center;
 }
 
-#map {
+#map{
     width: 100%;
-    height: 400px;
+    height: 450px;
     position: relative;
     background: transparent;
+    background-color: white;
+    padding: 20px;
+    border: red 1px solid;
+    border-radius: 5px;
 }
 
+#datatable-container
+{
+    width: 100%;
+    height: 450px;
+    position: relative;
+    overflow-y:scroll;
+    background-color: white;
+    padding: 0px;
+    border: red 1px solid;
+    border-radius: 5px;
+}
+
+#datatable_wrapper{
+    padding: 00px 20px 20px 20px;
+}
+
+#datatable_wrapper .dt-layout-row:first-child{
+    display: flex!important;
+    background-color: white;
+    position:sticky !important;
+    padding: 5px 10px 10px 10px; 
+    top: 0;
+    z-index: 10;
+}
 .content {
     padding: 20px;
     text-align: center;
