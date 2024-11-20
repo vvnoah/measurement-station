@@ -15,6 +15,22 @@ new L.Control.Zoom({
     position: 'bottomright',
 }).addTo(map);
 
+const legend = L.control({
+    position: "topleft",
+});
+
+legend.onAdd = function () {
+    const div = L.DomUtil.create('div', 'legend');
+    div.innerHTML = `
+    <i class="circle" style="background: blue"></i> Geselecteerd Station<br>
+    <i class="circle" style="background: green"></i> Online Stations<br>
+    <i class="circle" style="background: red"></i> Offline Stations<br>
+  `;
+    return div;
+};
+
+legend.addTo(map);
+
 // Fetch data from the API
 async function fetch_data() {
     const response = await fetch('/api/stations');
@@ -62,7 +78,7 @@ function addMarkers(stations) {
     stations.forEach(station => {
         const marker = L.circleMarker([station.latitude, station.longitude], {
             radius: 6,
-            color: "groeen",
+            color: "green",
             fillColor: "green",
             fillOpacity: 1
         }).addTo(map);
@@ -71,11 +87,15 @@ function addMarkers(stations) {
 
         marker.on('mouseover', function () {
             marker.openPopup();
-            marker.setStyle({radius: 8});
+            marker.setStyle({
+                radius: 8
+            });
         });
         marker.on('mouseout', function () {
             marker.closePopup();
-            marker.setStyle({ radius: 6 });
+            marker.setStyle({
+                radius: 6
+            });
         });
 
         // Marker click event

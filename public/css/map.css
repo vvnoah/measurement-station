@@ -4,7 +4,7 @@
     justify-content: center;
 }
 
-#map{
+#map {
     width: 100%;
     height: 450px;
     position: relative;
@@ -14,29 +14,29 @@
     border: 4px ridge var(--clr-static);
 }
 
-#datatable-container
-{
+#datatable-container {
     width: 100%;
     height: 450px;
     position: relative;
-    overflow-y:scroll;
+    overflow-y: scroll;
     background-color: white;
     padding: 0px;
     border: 4px ridge var(--clr-static);
 }
 
-#datatable_wrapper{
+#datatable_wrapper {
     padding: 00px 20px 20px 20px;
 }
 
-#datatable_wrapper .dt-layout-row:first-child{
-    display: flex!important;
+#datatable_wrapper .dt-layout-row:first-child {
+    display: flex !important;
     background-color: white;
-    position:sticky !important;
-    padding: 5px 10px 10px 10px; 
+    position: sticky !important;
+    padding: 5px 10px 10px 10px;
     top: 0;
     z-index: 10;
 }
+
 .content {
     padding: 20px;
     text-align: center;
@@ -44,6 +44,24 @@
 
 .leaflet-control-attribution {
     display: none;
+}
+
+.legend {
+    background: white;
+    padding: 10px;
+    line-height: 1.5;
+    font-size: 14px;
+    border-radius: 5px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.legend .circle {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 8px;
+    border-radius: 50%;
+    vertical-align: middle;
 }
 
 /* .leaflet-overlay-pane {
