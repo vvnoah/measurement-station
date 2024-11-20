@@ -31,6 +31,7 @@ legend.onAdd = function () {
 };
 legend.addTo(map);
 
+
 // Fetch data from the API
 async function fetch_data() {
     const response = await fetch('/api/stations');
