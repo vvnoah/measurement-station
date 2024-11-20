@@ -15,6 +15,7 @@ new L.Control.Zoom({
     position: 'bottomright',
 }).addTo(map);
 
+//legende toevoegen links boven op de kaart
 const legend = L.control({
     position: "topleft",
 });
@@ -28,7 +29,6 @@ legend.onAdd = function () {
   `;
     return div;
 };
-
 legend.addTo(map);
 
 // Fetch data from the API
