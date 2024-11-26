@@ -19,10 +19,10 @@ const legend = L.control({
 legend.onAdd = function () {
     const div = L.DomUtil.create('div', 'legend');
     div.innerHTML = `
-    <i class="circle" style="background: blue"></i> Geselecteerd Station<br>
-    <i class="circle" style="background: green"></i> Online Stations<br>
-    <i class="circle" style="background: red"></i> Offline Stations<br>
-  `;
+        <i class="circle" style="background: blue"></i> Geselecteerd Station<br>
+        <i class="circle" style="background: green"></i> Online Stations<br>
+        <i class="circle" style="background: red"></i> Offline Stations<br>
+    `;
     return div;
 };
 
@@ -79,7 +79,7 @@ function addMarkers(stations) {
     stations.forEach(station => {
         const marker = L.circleMarker([station.latitude, station.longitude], {
             radius: 6,
-            color: "groeen",
+            color: "green",
             fillColor: "green",
             fillOpacity: 1
         }).addTo(map);
@@ -110,16 +110,12 @@ function addMarkers(stations) {
 
             if (!isSelected) {
                 selectedIds.push(station.id);
-                const stationDataEntry = stationData.find(s => s.id === station.id);
-                addDatasetToCharts(stationDataEntry);
             } else {
                 selectedIds = selectedIds.filter(id => id !== station.id);
-                removeDatasetFromCharts(station.id);
             }
 
             syncCheckboxesWithSelection();
             syncMarkersWithSelection();
-            update_section_visibility();
         });
 
         marker.bindPopup(`<b>${station.location}</b><br>Temperature: ${station.temperature[0].y}°C`);

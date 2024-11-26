@@ -61,13 +61,13 @@ section > header {
 }
 
 .map-container{ display: none !important;}
-#section-view-stations:has(button[value~="map"][aria-pressed="true"])
+#section-view-stations:has(button[value~="btn-map"][aria-pressed="true"])
 .map-container{
   display: flex !important;
 }
 
 #datatable-container{ display: none !important;}
-#section-view-stations:has(button[value~="table"][aria-pressed="true"])
+#section-view-stations:has(button[value~="btn-table"][aria-pressed="true"])
 #datatable-container{
   display: block !important;
 }

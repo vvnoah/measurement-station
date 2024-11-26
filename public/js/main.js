@@ -36,14 +36,11 @@ $(document).ready(async function () {
                 return;
             }
             selectedIds.push(stationId);
-            addDatasetToCharts(station);
         } else {
             selectedIds = selectedIds.filter(id => id !== stationId);
-            removeDatasetFromCharts(stationId);
         }
 
         syncMarkersWithSelection();
-        update_section_visibility();
     });
 
     // Sync DataTable checkboxes with the selection state on page change
@@ -57,8 +54,6 @@ $(document).ready(async function () {
     windspeed_chart = create_line_chart("windspeed-chart", "Wind Speed (km/h)");
     rainfall_chart = create_line_chart("rainfall-chart", "Rainfall (mm)");
     airquality_chart = create_line_chart("airquality-chart", "Air Quality (PPM)");
-
-    update_section_visibility();
     */
     fetch_data().then(data => {
         temperature_chart = create_line_chart("temperature-chart", "Temperatuur (°C)");
@@ -70,7 +65,6 @@ $(document).ready(async function () {
         windspeed_chart_popup = create_line_chart("windspeed-chart-popup", "Windsnelheid (km/u)");
         rainfall_chart_popup = create_line_chart("rainfall-chart-popup", "Neerslag (mm)");
         airquality_chart_popup = create_line_chart("airquality-chart-popup", "PPM-waarden");
-        update_section_visibility();
     });
 
 });
