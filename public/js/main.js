@@ -46,13 +46,6 @@ $(document).ready(async function () {
         update_section_visibility();
     });
 
-    // Toggle Map and List View
-    document.getElementById('toggle-map-list').addEventListener('change', function () {
-        const isChecked = this.checked;
-        document.querySelector('#map').classList.toggle('hide', isChecked);
-        document.querySelector('#datatable-container').classList.toggle('hide', !isChecked);
-    });
-
     // Sync DataTable checkboxes with the selection state on page change
     table.on('draw', function () {
         syncCheckboxesWithSelection();

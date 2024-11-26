@@ -11,8 +11,7 @@
     background: transparent;
     background-color: white;
     padding: 20px;
-    border: red 1px solid;
-    border-radius: 5px;
+    border: 4px ridge var(--clr-static);
 }
 
 #datatable-container {
@@ -22,8 +21,7 @@
     overflow-y: scroll;
     background-color: white;
     padding: 0px;
-    border: red 1px solid;
-    border-radius: 5px;
+    border: 4px ridge var(--clr-static);
 }
 
 #datatable_wrapper {

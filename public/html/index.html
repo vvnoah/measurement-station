@@ -9,31 +9,33 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/content-grid.css">
-    <link rel="stylesheet" href="css/responsive-list.css">
+    <link rel="stylesheet" href="css/map.css" >
+    <link rel="stylesheet" href="css/filter.css">
     <link rel="stylesheet" href="css/map.css">
     <link rel="stylesheet" href="css/card.css">
     <link rel="stylesheet" href="css/filter.css">
+    <link rel="stylesheet" href="css/toggle-group.css">
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/clay/lib/css/atlas.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    
-    <script src="https://cdn.jsdelivr.net/npm/clay/lib/js/clay.js"></script>
+
+    <script src="js/toggle-group.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-    <title>Home</title>
+    <title>UCLL Meetstations</title>
 </head>
 
 <body>
     <div class="content-grid stick-to-top">
-        <div id="navbar-container" class="breakout">
+        <div id="navbar-container">
             <div id="navbar">
                 <div id="navbar-header">
-                    <span id="navbar-title">Measurment Stations</span>
+                    <span id="navbar-title">UCLL Meetstations</span>
                     <label for="navbar-toggle" id="navbar-toggle-label">☰</label>
                 </div>
                 <input type="checkbox" name="navbar-toggle" id="navbar-toggle">
@@ -45,56 +47,13 @@
         </div>
     </div>
     <main class="content-grid">
-        <section>
-            <header>
-                <!-- Popup-venster -->
-                <div id="popup" class="popup hidden">
-                    <div class="popup-content">
-                        <span id="close-popup" class="close-btn">&times;</span>
-                        <div id="popup-body">
-                            <header>
-                                <h2>Data van geselecteerde stations</h2>
-                            </header>
-                            <div class="responsive-list">
-                                    <!--
-                                    <-- Input voor het selecteren van één enkele datum ->
-                                    <label for="singleDate">Enkele Datum:</label>
-                                    <input type="text" id="singleDate" placeholder="Selecteer een datum">
-                                    -->
-                                    <!-- Input voor het selecteren van een datumbereik -->
-                                    <label for="dateRange">selecteer 1 datum(dubbel klik) of een periode:</label>
-                                    <input type="text" id="dateRange" placeholder="Selecteer een begindatum en einddatum">
-                            </div>
-                            <!-- hier nog een grafiek plaatse + zorgen dat de -->
-                            <div class="responsive-list">
-                                <div class="responsive-list-item">
-                                    <canvas id="temperature-chart-popup"></canvas>
-                                </div>
-                                <div class="responsive-list-item">
-                                    <canvas id="windspeed-chart-popup"></canvas>
-                                </div>
-                                <div class="responsive-list-item">
-                                    <canvas id="rainfall-chart-popup"></canvas>
-                                </div>
-                                <div class="responsive-list-item">
-                                    <canvas id="airquality-chart-popup"></canvas>
-                                </div>
-                            </div> 
-                        </div>
-                    </div>
-                </div>
+        <section id="section-view-stations">          
+            <header>                
                 <h2>De stations</h2>
-                <div class="form-group" id="list-or-map-select" name="list-or-map">
-                    <label class="toggle-switch">
-                        <input id="toggle-map-list" class="toggle-switch-check" type="checkbox"
-                            style="background-color: #4caf50;" />
-                        <span aria-hidden="true" class="toggle-switch-bar">
-                            <span class="toggle-switch-handle" data-label-off="Map View" data-label-on="List View">
-                            </span>
-                        </span>
-                    </label>
-                </div>
-
+                <toggle-group>
+                    <button value="map" aria-pressed="true"><b>Kaart</b></button>
+                    <button value="table"><b>Tabel</b></button>
+                </toggle-group>
             </header>
             <div class="map-container">
                 <div id="map"></div>
@@ -113,15 +72,13 @@
                 </table>
             </div>
         </section>
-        <!--Filter for data-->
         <section>
             <div class="filter-container">
                 <div>
                     <div class="filter-header">
                         <button class="filter-menu-toggle"><b>Sensors</b></button>
                         <div>
-                            <b>(<span id="filter-amount-selected">0</span><span>/</span><span
-                                    id="filter-amount-total">0</span>)</b>
+                            <b>(<span id="filter-amount-selected">0</span><span>/</span><span id="filter-amount-total">0</span>)</b>
                         </div>
                     </div>
                     <div class="filter-menu"></div>
@@ -129,37 +86,46 @@
                 <div class="filter-output"></div>
             </div>
         </section>
-        <section id="section-selected-data">
-            <header>
-                <h2>Data geselecteerde stations</h2>
-            </header>
-            <div class="responsive-list">
-                <div class="responsive-list-item">
-                    <canvas id="temperature-chart"></canvas>
-                </div>
-                <div class="responsive-list-item">
-                    <canvas id="windspeed-chart"></canvas>
-                </div>
-                <div class="responsive-list-item">
-                    <canvas id="rainfall-chart"></canvas>
-                </div>
-                <div class="responsive-list-item">
-                    <canvas id="airquality-chart"></canvas>
+        <section>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        </section>
+        <div id="popup" class="popup hidden">
+            <div class="popup-content">
+                <span id="close-popup" class="close-btn">&times;</span>
+                <div id="popup-body">
+                    <header>
+                        <h2>Data van geselecteerde stations</h2>
+                    </header>
+                    <div>
+                            <!--
+                            <-- Input voor het selecteren van één enkele datum ->
+                            <label for="singleDate">Enkele Datum:</label>
+                            <input type="text" id="singleDate" placeholder="Selecteer een datum">
+                            -->
+                            <!-- Input voor het selecteren van een datumbereik -->
+                            <label for="dateRange">selecteer 1 datum(dubbel klik) of een periode:</label>
+                            <input type="text" id="dateRange" placeholder="Selecteer een begindatum en einddatum">
+                    </div>
+                    <!-- hier nog een grafiek plaatse + zorgen dat de -->
+                    <div style="background-color: gray;min-height: 200px;"></div> 
                 </div>
             </div>
-        </section>
-    </main>
-    <div class="back-to-top content-grid">
-        <div>
-            <a href="#">naar boven</a>
         </div>
-    </div>
+    </main>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
 <script src="js/main.js"></script>
 <script src="js/charts.js"></script>
 <script src="js/test_map.js"></script>
+<script src="js/filter-component.js"></script>
 <script src="js/calender.js"></script>
 <script src="js/filter-component.js"></script>
 
