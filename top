@@ -1,0 +1,256 @@
+[33mcommit 4bffeec487f0c52226a2bf17222b62aee1a79d99[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: forcecrash <brent.willems1@hotmail.com>
+Date:   Wed Nov 20 14:43:47 2024 +0100
+
+    tretrsgg
+
+[33mcommit ee022cc28654518f36a3703b5bb8decae1bbc7c0[m
+Author: forcecrash <brent.willems1@hotmail.com>
+Date:   Wed Nov 20 14:38:08 2024 +0100
+
+    blabla
+
+[33mcommit df93179de58408184ffd71a01482b926aeb29981[m
+Merge: 1bfc31d 02199f0
+Author: forcecrash <brent.willems1@hotmail.com>
+Date:   Wed Nov 20 13:22:07 2024 +0100
+
+    mergen met main
+
+[33mcommit 1bfc31d46c1b994c66260200fd82006459e0c548[m
+Author: forcecrash <brent.willems1@hotmail.com>
+Date:   Wed Nov 20 13:19:54 2024 +0100
+
+    Datatable werkt eindelijk helemaal
+
+[33mcommit 02199f0ef2e0666f6239710ff46c0ee3252eb62e[m[33m ([m[1;31morigin/sprint4einde[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/halp[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: vvnoah <vvnoah@hotmail.com>
+Date:   Wed Nov 20 12:43:46 2024 +0100
+
+    updated btn styles
+
+[33mcommit e37c7f0ba51fc26486f8b9b167ec728d91f07416[m
+Author: vvnoah <vvnoah@hotmail.com>
+Date:   Wed Nov 20 05:10:11 2024 +0100
+
+    werkend prototype
+
+[33mcommit 2eda90abddb586538f121f296f3bdad061157676[m
+Merge: 98900cb 1e4fecf
+Author: vvnoah <vvnoah@hotmail.com>
+Date:   Wed Nov 20 01:19:20 2024 +0100
+
+    soort van werkende spaghetti
+
+[33mcommit 98900cb6b826be28abc1bd7915533b726f5b339e[m
+Author: vvnoah <vvnoah@hotmail.com>
+Date:   Wed Nov 20 00:17:51 2024 +0100
+
+    werkende spaghetti
+
+[33mcommit a7759b541d47708a4f92cc5b37ab5e03ac71d8cc[m
+Author: vvnoah <vvnoah@hotmail.com>
+Date:   Tue Nov 19 20:33:28 2024 +0100
+
+    filter almost done
+
+[33mcommit 1e4fecf09cb8896a109051812bced594cde54fe8[m
+Author: warrecapals <warre.capals@student.ucll.be>
+Date:   Tue Nov 19 19:42:30 2024 +0100
+
+    colors markers
+
+[33mcommit 1b9d43b63938cd0f3ff6ecd97091c93e11983892[m
+Author: Ragnar Heymbeeck <126241335+Ragnar55@users.noreply.github.com>
+Date:   Tue Nov 19 19:22:02 2024 +0100
+
+    grafiek terug
+
+[33mcommit 00ba019a32d522e11db17707416b4f0b6b859bfa[m
+Author: Ragnar Heymbeeck <126241335+Ragnar55@users.noreply.github.com>
+Date:   Tue Nov 19 18:47:29 2024 +0100
+
+    Update main.js
+
+[33mcommit 4c0b3703b3ab95dcb40cee5dc700a4e1fa374b4a[m
+Merge: d9bcac3 79512be
+Author: Ragnar Heymbeeck <126241335+Ragnar55@users.noreply.github.com>
+Date:   Tue Nov 19 18:46:07 2024 +0100
+
+    Merge branch 'popup+rommel' into halp
+
+[33mcommit 79512bed1442bfa52b15969959d4bca08679b359[m[33m ([m[1;31morigin/popup+rommel[m[33m)[m
+Author: Ragnar Heymbeeck <126241335+Ragnar55@users.noreply.github.com>
+Date:   Tue Nov 19 18:44:11 2024 +0100
+
+    klaar maken vr merge
+
+[33mcommit 125941daa1ecc50ac53e61cae30aceb7b7cf0852[m
+Author: Ragnar Heymbeeck <126241335+Ragnar55@users.noreply.github.com>
+Date:   Tue Nov 19 18:30:27 2024 +0100
+
+    Update index.html
+
+[33mcommit 987a732c90979c427baeaf22298947ee0fd1d00f[m
+Author: Ragnar Heymbeeck <126241335+Ragnar55@users.noreply.github.com>
+Date:   Tue Nov 19 18:20:04 2024 +0100
+
+    grafieken in popup gezet
+    
+    eeuh nu nog kunnen updaten met ingegeven begin en eind datum
+
+[33mcommit 2854659b8217aca7095352a77f8ce1c1076f7a24[m
+Author: Ragnar Heymbeeck <126241335+Ragnar55@users.noreply.github.com>
+Date:   Tue Nov 19 18:02:59 2024 +0100
+
+    calender staat juist
+    
+    klaar voor grafiek
+
+[33mcommit 9d5ec1efe185bc5d0c8d258b501066f5d4a88128[m
+Author: Ragnar Heymbeeck <126241335+Ragnar55@users.noreply.github.com>
+Date:   Tue Nov 19 17:47:23 2024 +0100
+
+    fix calender+ zoom knop
+    
+    SO naar Jelle voor fixen van de zoomknop.
+    
+    kan maar 1 keer worden geopend op dit moment
+
+[33mcommit d9bcac3d360801ae622667c2cfce509a4b4f3ffd[m
+Merge: 6780699 cc2bb63
+Author: warrecapals <warre.capals@student.ucll.be>
+Date:   Tue Nov 19 16:37:32 2024 +0100
+
+    Merge branch 'main' of https://github.com/vvnoah/measurement-station
+
+[33mcommit 67806990d629c22fb2506f1cfa92d936e96b53f5[m
+Author: warrecapals <warre.capals@student.ucll.be>
+Date:   Tue Nov 19 16:36:37 2024 +0100
+
+    synchronization bug fix + styles map & list
+
+[33mcommit 009fe727e26f712f53b2aaf82ebd3cb2105f427a[m
+Author: Ragnar Heymbeeck <ragnar.heymbeeck@student.ucll.be>
+Date:   Tue Nov 19 12:58:29 2024 +0100
+
+    d
+
+[33mcommit 86033cae771c3ee77b7130ba52eb8060313715d6[m
+Author: Ragnar Heymbeeck <ragnar.heymbeeck@student.ucll.be>
+Date:   Tue Nov 19 12:08:42 2024 +0100
+
+    sluiten
+
+[33mcommit 03d5ba6529603282afa8cd290ffd5441467ee690[m
+Author: Ragnar Heymbeeck <ragnar.heymbeeck@student.ucll.be>
+Date:   Tue Nov 19 12:04:15 2024 +0100
+
+    create
+
+[33mcommit cc2bb636244963c52571511bff9d7fd0e7307149[m
+Merge: e38d530 2ba4109
+Author: Ragnar Heymbeeck <ragnar.heymbeeck@student.ucll.be>
+Date:   Tue Nov 19 11:37:21 2024 +0100
+
+    Merge branch 'Grafiek_Data_DetailsPage' into ragnarTest
+
+[33mcommit 2ba41098a9f5626969f2631865733161015c5dca[m[33m ([m[1;31morigin/Grafiek_Data_DetailsPage[m[33m)[m
+Author: Jelle2003 <jelle.kerkhofs@outlook.com>
+Date:   Tue Nov 19 11:34:43 2024 +0100
+
+    Update calender.js
+
+[33mcommit e38d53012af5b9e68e428fcdacec3c9a92c10e9e[m
+Merge: ad08735 529b601
+Author: warrecapals <warre.capals@student.ucll.be>
+Date:   Wed Nov 13 17:08:43 2024 +0100
+
+    Merge branch 'main' of https://github.com/vvnoah/measurement-station
+
+[33mcommit ad08735ae64a78429c3b9672fcad9b4025f412f6[m
+Author: warrecapals <warre.capals@student.ucll.be>
+Date:   Wed Nov 13 17:05:04 2024 +0100
+
+    datatable + css map & list
+
+[33mcommit 2bd623f7045971b1cce3528c5c631efe2c2bfd8c[m[33m ([m[1;31morigin/BrentBranch[m[33m, [m[1;32mBrentBranch[m[33m)[m
+Author: forcecrash <brent.willems1@hotmail.com>
+Date:   Wed Nov 13 15:44:54 2024 +0100
+
+    Verder werken aan buggs kaart en datatable
+
+[33mcommit d4f27641aeceef89c000c4e1b19d676017c4eee3[m
+Author: Ragnar Heymbeeck <ragnar.heymbeeck@student.ucll.be>
+Date:   Wed Nov 13 15:22:57 2024 +0100
+
+    calender in andere file
+
+[33mcommit 93ad223aceca8ee19fa677cb6d2b7de3c5c0670e[m
+Author: Ragnar Heymbeeck <ragnar.heymbeeck@student.ucll.be>
+Date:   Wed Nov 13 15:03:56 2024 +0100
+
+    kalender toevoegen
+
+[33mcommit 4900302b32db067f86b222f6fd4fda326fe83dc9[m[33m ([m[1;31morigin/selected_stations_overview[m[33m)[m
+Author: steffenPousset <steffen.pousset@live.be>
+Date:   Wed Nov 13 14:23:58 2024 +0100
+
+    pilss ronder
+
+[33mcommit 772fd09b7950a64cbc094a748b4cc69c2c5df96b[m
+Author: vvnoah <vvnoah@hotmail.com>
+Date:   Wed Nov 13 13:53:37 2024 +0100
+
+    menu toggle working
+
+[33mcommit 5f1955a0bbdcdbad0bd2858d928720aed3d045f5[m
+Author: Ragnar Heymbeeck <ragnar.heymbeeck@student.ucll.be>
+Date:   Wed Nov 13 13:47:16 2024 +0100
+
+    navbar fix
+    
+    -navbar is nu gelijk qua style
+    -huidige pagina underlined
+
+[33mcommit 529b6010387f7367562328d80330868f24b745c6[m
+Author: Jelle2003 <jelle.kerkhofs@outlook.com>
+Date:   Tue Nov 12 11:59:25 2024 +0100
+
+    Details Page toegevoegd
+    
+    De details page is toegevoegd met een extra link in de nav bar, je kan tussen de home page en detail page navigeren.
+
+[33mcommit 7964a5a5a1501150b2f63dfe77011688bac78912[m
+Merge: d23d0b5 cc1417b
+Author: forcecrash <brent.willems1@hotmail.com>
+Date:   Tue Nov 12 11:46:21 2024 +0100
+
+    Merge branch 'main' of https://github.com/vvnoah/weatherstation-web
+
+[33mcommit d23d0b53a8523ff34f255c32c66504934e8c7c0c[m
+Author: forcecrash <brent.willems1@hotmail.com>
+Date:   Tue Nov 12 11:46:16 2024 +0100
+
+    Datatable aangepast van code. Staat nu vanonder in de index.html in script tags. Bugs zijn allemaal weg normaal gezien"
+
+[33mcommit 6369e6ebec52380d8894118dbc3e2a117fb31900[m
+Author: vvnoah <vvnoah@hotmail.com>
+Date:   Tue Nov 12 11:40:35 2024 +0100
+
+    basis of filter layout
+
+[33mcommit cc1417b1dd9a5633b8541844ef76e82ac523bca0[m
+Author: warrecapals <warre.capals@student.ucll.be>
+Date:   Wed Nov 6 16:49:29 2024 +0100
+
+    dropdown replaced toggle button
+
+[33mcommit c519ac8b33ca1716f139f39c050fa34280457746[m[33m ([m[1;31morigin/ragnar[m[33m)[m
+Author: vvnoah <vvnoah@hotmail.com>
+Date:   Wed Nov 6 14:26:10 2024 +0100
+
+    removed unused cards
+
+[33mcommit c1d716d85a63b9bdcc3d15056b9441e8523dd866[m
+Author: warrec
