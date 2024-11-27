@@ -19,7 +19,7 @@ $(document).ready(async function () {
                 }
             },
             { data: 'id' },
-            { data: 'location' }
+            { data: 'description' }
         ],
     });
 
