@@ -126,7 +126,7 @@ function removeDatasetFromCharts(stationId) {
     removeDatasetFromChart(temperature_chart, stationId);
     removeDatasetFromChart(windspeed_chart, stationId);
     removeDatasetFromChart(rainfall_chart, stationId);
-    removeDatasetFromChart(airquality_chart, stationId);   
+    removeDatasetFromChart(airquality_chart, stationId);
 }
 
 // Chart helper functions
@@ -166,13 +166,12 @@ function update_section_visibility() {
     document.getElementById("section-selected-data").style.display = selectedIds.length > 0 ? "block" : "none";
 }
 
-// Event listener om de popup te openen met inhoud
-document.getElementById('details-btn').addEventListener('click', function (event) {
-    event.preventDefault(); // Voorkom standaard gedrag van de link
+//popup open
+function popup() {
     document.querySelector('.leaflet-control-zoom').style.display = 'none';
     // Toon de popup
     document.getElementById('popup').classList.remove('hidden');
-});
+}
 
 // Event listener om de popup te sluiten
 document.getElementById('close-popup').addEventListener('click', function () {

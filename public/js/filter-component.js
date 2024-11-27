@@ -83,12 +83,12 @@ menu_toggle.addEventListener("click", toggle_menu)
 function main() {
   let total_amount = 0
   input_data.forEach(station => {
-      station.sensors.forEach(sensor => {
-        if (!filters.some(filter => filter.id === sensor.id)) {
-          filters.push(
-            {"id": sensor.id,"type": sensor.type, "checked": false})
-          total_amount += 1
-        }
+    station.sensors.forEach(sensor => {
+      if (!filters.some(filter => filter.id === sensor.id)) {
+        filters.push(
+          { "id": sensor.id, "type": sensor.type, "checked": false })
+        total_amount += 1
+      }
     })
   })
   document.querySelector("#filter-amount-total").innerHTML = total_amount
@@ -106,7 +106,7 @@ function main() {
   filters.forEach(filter => {
     let input = document.getElementById("filter-input-" + filter.id)
     input.addEventListener("change", (event) => {
-      if(event.currentTarget.checked) {
+      if (event.currentTarget.checked) {
         filter.checked = true
         amount_selected += 1
         update_output_new()
@@ -125,20 +125,20 @@ main()
 function update_output() {
   output.innerHTML = ""
   filters.forEach(filter => {
-    if(filter.checked == true) {
+    if (filter.checked == true) {
       let template = `
         <div class="filter-output-card" id="filter-output-card-${filter.id}">
           <b>${filter.type}</b>
         </div>`
       output.innerHTML += template
-    }    
-  })  
+    }
+  })
 }
 
 function update_output_new() {
   output.innerHTML = ""
   filters.forEach(filter => {
-    if(filter.checked) {
+    if (filter.checked) {
       let stations_info = ""
       input_data.forEach(station => {
         // Find the sensor with the matching filter ID in this station
@@ -153,11 +153,11 @@ function update_output_new() {
       })
       output.innerHTML += `
         <div class="filter-output-card" id="filter-output-card-${filter.id}">
-            <b>${filter.type}</b>
-            ${stations_info}
-            <div style="display:flex;justify-content:end;">
-              <button><b>details</b></button>
-            </div>
+        <b>${filter.type}</b>
+        ${stations_info}
+        <div style="display:flex;justify-content:end;">
+          <button onclick=popup();><b>details</b></button>
+        </div>
         </div>`
     }
   })
