@@ -79,7 +79,7 @@ function addMarkers(stations) {
     //console.log(stations.latitude);
     stations.forEach(station => {
         // Log the individual station, not the entire array each iteration
-        console.log("Station:", station);
+        //console.log("Station:", station);
 
         // Create a circle marker for each station using latitude and longitude
         const marker = L.circleMarker([station.latitude, station.longitude], {
