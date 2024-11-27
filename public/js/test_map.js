@@ -71,23 +71,15 @@ fetch('data/flanders.geojson')
     .catch(error => console.error('Error loading the geoJSON file:', error));
 
 
-// Function to add markers for stations on the map
-// Add markers to the map
 function addMarkers(stations) {
-    //console.log(stations.latitude);
     stations.forEach(station => {
-        // Log the individual station, not the entire array each iteration
-        //console.log("Station:", station);
-
-        // Create a circle marker for each station using latitude and longitude
         const marker = L.circleMarker([station.latitude, station.longitude], {
             radius: 6,
             color: "green",
             fillColor: "green",
             fillOpacity: 1,
         }).addTo(map);
-
-        // Store marker in the markersMap if necessary (by id)
+        
         markersMap[station.id] = marker;
 
         marker.on('mouseover', function () {
@@ -122,13 +114,11 @@ function addMarkers(stations) {
             syncCheckboxesWithSelection();
             syncMarkersWithSelection();
         });
-
-        //marker.bindPopup(`<b>${station.description}</b><br>Temperature: °C`);
     });
 }
 
 function get_popup_content(station) {
-    const temperature = getLastTemperature(station); // Haal de laatste temperatuurwaarde op
+    const temperature = get_last_temp(station);
     const popup_content = temperature 
         ? `<b>${station.description}:</b> <br>${temperature}°C ` 
         : `<b>${station.description}:</b> <br>Geen temperatuurdata beschikbaar`;
@@ -136,13 +126,12 @@ function get_popup_content(station) {
     return popup_content
 }
 
-// Functie om de laatste temperatuurwaarde op te halen
-function getLastTemperature(station) {
+function get_last_temp(station) {
     const temperatureSensor = station.sensors.find(sensor => sensor.type === "temperature");
     if (!temperatureSensor || !temperatureSensor.measurements.length) {
-        return null; // Geen temperatuurdata beschikbaar
+        return null;
     }
 
-    const lastMeasurement = temperatureSensor.measurements.at(-1); // Pak de laatste meting
+    const lastMeasurement = temperatureSensor.measurements.at(-1); // laatste meting
     return lastMeasurement ? lastMeasurement.sensorValue : null;
 }
