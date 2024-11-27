@@ -94,7 +94,7 @@ function addMarkers(stations) {
 
         marker.on('mouseover', function () {
             marker.openPopup();
-            showStationTemperaturePopup(station);
+            showStationPopup(station);
             marker.setStyle({
                 radius: 8
             });
@@ -129,11 +129,11 @@ function addMarkers(stations) {
     });
 }
 
-function showStationTemperaturePopup(station) {
+function showStationPopup(station) {
     const temperature = getLastTemperature(station); // Haal de laatste temperatuurwaarde op
     const popupContent = temperature 
         ? `<b>${station.description}:</b> <br>${temperature}°C ` 
-        : `<b>${station.description}:<b> <br>Geen temperatuurdata beschikbaar`;
+        : `<b>${station.description}:</b> <br>Geen temperatuurdata beschikbaar`;
 
     // Maak of update een popup op de juiste locatie
     L.popup()
@@ -152,46 +152,3 @@ function getLastTemperature(station) {
     const lastMeasurement = temperatureSensor.measurements.at(-1); // Pak de laatste meting
     return lastMeasurement ? lastMeasurement.sensorValue : null;
 }
-
-markersMap[station.id] = marker;
-
-marker.on('mouseover', function () {
-    marker.openPopup();
-    marker.setStyle({
-        radius: 8
-    });
-});
-marker.on('mouseout', function () {
-    marker.closePopup();
-    marker.setStyle({
-        radius: 6
-    });
-});
-
-// Marker click event
-marker.on('click', function () {
-    const isSelected = selectedIds.includes(station.id);
-
-    if (!isSelected && selectedIds.length >= 3) {
-        alert("You can only select up to 3 stations.");
-        return;
-    }
-
-    if (!isSelected) {
-        selectedIds.push(station.id);
-    } else {
-        selectedIds = selectedIds.filter(id => id !== station.id);
-    }
-
-    syncCheckboxesWithSelection();
-    syncMarkersWithSelection();
-});
-
-//marker.bindPopup(`<b>${station.location}</b><br>Temperature: ${station.temperature[0].y}°C`);
-
-// Fetch data and add markers when map loads
-/*
-fetch_data().then(data => {
-    addMarkers(data.stations);
-});
-*/
