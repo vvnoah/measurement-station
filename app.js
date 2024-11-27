@@ -3980,7 +3980,7 @@ const stations = [{
 
 const stations = [
     {
-        "id": "station_142b2f9336d0",
+        "id": "station_142b2f9sdf6d0",
         "batteryLevel": null,
         "latitude": 51.054342,
         "longitude": 3.717424,
@@ -4131,7 +4131,7 @@ const stations = [
         ]
     },
     {
-        "id": "station_142b2fa3f4e8",
+        "id": "station_142b2sdfsda3f4e8",
         "batteryLevel": null,
         "latitude": 51.329448,
         "longitude": 4.402464,
@@ -4160,7 +4160,7 @@ const stations = [
         ]
     },
     {
-        "id": "station_4c7525b1e63c",
+        "id": "station_4c75sdfb1e63c",
         "batteryLevel": null,
         "latitude": 51.2194,
         "longitude": 4.4025,
@@ -4452,7 +4452,7 @@ const stations = [
         ]
     },
     {
-        "id": "station_d4d4da9d6754",
+        "id": "station_d4d4da9hg754",
         "batteryLevel": null,
         "latitude": 51.1055,
         "longitude": 3.9937,
@@ -4461,7 +4461,7 @@ const stations = [
         "sensors": []
     },
     {
-        "id": "station_test",
+        "id": "station_tesvbt",
         "batteryLevel": null,
         "latitude": 51.2093,
         "longitude": 3.2247,
@@ -4482,7 +4482,7 @@ const stations = [
         ]
     },
     { 
-        "id": "station_4c7525b1e63c",
+        "id": "station_4c7525b1vbnhn3c",
         "batteryLevel": null,
         "latitude": 50.928467,
         "longitude": 5.394843,
@@ -4774,7 +4774,7 @@ const stations = [
         ]
     },
     {
-        "id": "station_4c7525b1e63c",
+        "id": "station_4c7525b1e6ghkghjc",
         "batteryLevel": null,
         "latitude": 50.870927,
         "longitude": 5.518267,
@@ -5066,7 +5066,7 @@ const stations = [
         ]
     },
     {
-        "id": "station_4c7525b1e63c",
+        "id": "station_4c751e63c",
         "batteryLevel": null,
         "latitude": 50.9304,
         "longitude": 5.3372,
@@ -5358,7 +5358,7 @@ const stations = [
         ]
     },
     {
-        "id": "station_6545965465",
+        "id": "station_65459fghfggfh465",
         "batteryLevel": null,
         "latitude": 50.9307,
         "longitude": 5.3322,
@@ -5509,7 +5509,7 @@ const stations = [
         ]
       },
       {
-        "id": "station_uhb+365dfgvb",
+        "id": "station_uhb+3gvb",
         "batteryLevel": null,
         "latitude": 51.1651,
         "longitude": 4.9891,
@@ -5538,7 +5538,7 @@ const stations = [
         ]
     },
     {
-        "id": "station_996663fghfghf",
+        "id": "station_9966sssssss3fghfghf",
         "batteryLevel": null,
         "latitude": 50.8445,
         "longitude": 3.6072,

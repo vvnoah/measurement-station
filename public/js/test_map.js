@@ -76,7 +76,12 @@ let markersMap = {};
 // Function to add markers for stations on the map
 // Add markers to the map
 function addMarkers(stations) {
+    //console.log(stations.latitude);
     stations.forEach(station => {
+        // Log the individual station, not the entire array each iteration
+        console.log("Station:", station);
+
+        // Create a circle marker for each station using latitude and longitude
         const marker = L.circleMarker([station.latitude, station.longitude], {
             radius: 6,
             color: "green",
@@ -84,6 +89,7 @@ function addMarkers(stations) {
             fillOpacity: 1
         }).addTo(map);
 
+        // Store marker in the markersMap if necessary (by id)
         markersMap[station.id] = marker;
 
         marker.on('mouseover', function () {
@@ -118,7 +124,7 @@ function addMarkers(stations) {
             syncMarkersWithSelection();
         });
 
-        marker.bindPopup(`<b>${station.location}</b><br>Temperature: ${station.temperature[0].y}°C`);
+        marker.bindPopup(`<b>${station.description}</b><br>Temperature: °C`);
     });
 }
 
