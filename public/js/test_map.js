@@ -12,7 +12,7 @@ var map = L.map('map', {
 }).setView([51.1000, 4.4517]);
 
 //legende toevoegen links boven op de kaart
-const legend = L.control({
+const legend = L.control({ 
     position: "topleft",
 });
 
@@ -70,59 +70,52 @@ fetch('data/flanders.geojson')
     })
     .catch(error => console.error('Error loading the geoJSON file:', error));
 
-// Map of station IDs to marker objects
-let markersMap = {};
 
 // Function to add markers for stations on the map
 // Add markers to the map
 function addMarkers(stations) {
+    console.log(stations)
+
     stations.forEach(station => {
         const marker = L.circleMarker([station.latitude, station.longitude], {
             radius: 6,
             color: "green",
             fillColor: "green",
             fillOpacity: 1
-        }).addTo(map);
-
-        markersMap[station.id] = marker;
+        }).addTo(map)
 
         marker.on('mouseover', function () {
             marker.openPopup();
             marker.setStyle({
                 radius: 8
-            });
-        });
+            })
+        })
+
         marker.on('mouseout', function () {
             marker.closePopup();
             marker.setStyle({
                 radius: 6
-            });
-        });
+            })
+        })
 
-        // Marker click event
         marker.on('click', function () {
-            const isSelected = selectedIds.includes(station.id);
+            const is_selected = selectedIds.includes(station.id)
 
-            if (!isSelected && selectedIds.length >= 3) {
-                alert("You can only select up to 3 stations.");
-                return;
+            if (!is_selected && selectedIds.length >= 3) {
+                alert("You can only select up to 3 stations.")
+                return
             }
 
-            if (!isSelected) {
-                selectedIds.push(station.id);
+            if (!is_selected) {
+                selectedIds.push(station)
             } else {
-                selectedIds = selectedIds.filter(id => id !== station.id);
+                selectedIds = selectedIds.filter(id => id !== station.id)
             }
 
-            syncCheckboxesWithSelection();
-            syncMarkersWithSelection();
-        });
+            syncCheckboxesWithSelection()
+            syncMarkersWithSelection()
+        })
 
-        marker.bindPopup(`<b>${station.location}</b><br>Temperature: ${station.temperature[0].y}°C<br>Batterij: 50%`);
-    });
+        marker.bindPopup(`<br>Temperature: 10°C <br> Batterij: 50%`)
+    })
 }
-
-// Fetch data and add markers when map loads
-fetch_data().then(data => {
-    addMarkers(data.stations);
-});
