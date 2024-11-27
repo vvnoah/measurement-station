@@ -81,48 +81,52 @@ function addMarkers(stations) {
             radius: 6,
             color: "green",
             fillColor: "green",
-            fillOpacity: 1
+            fillOpacity: 1,
         }).addTo(map);
 
-        markersMap[station.id] = marker;
 
-        marker.on('mouseover', function () {
-            marker.openPopup();
-            marker.setStyle({
-                radius: 8
-            });
-        });
-        marker.on('mouseout', function () {
-            marker.closePopup();
-            marker.setStyle({
-                radius: 6
-            });
-        });
-
-        // Marker click event
-        marker.on('click', function () {
-            const isSelected = selectedIds.includes(station.id);
-
-            if (!isSelected && selectedIds.length >= 3) {
-                alert("You can only select up to 3 stations.");
-                return;
-            }
-
-            if (!isSelected) {
-                selectedIds.push(station.id);
-            } else {
-                selectedIds = selectedIds.filter(id => id !== station.id);
-            }
-
-            syncCheckboxesWithSelection();
-            syncMarkersWithSelection();
-        });
-
-        marker.bindPopup(`<b>${station.location}</b><br>Temperature: ${station.temperature[0].y}°C`);
     });
 }
 
+markersMap[station.id] = marker;
+
+marker.on('mouseover', function () {
+    marker.openPopup();
+    marker.setStyle({
+        radius: 8
+    });
+});
+marker.on('mouseout', function () {
+    marker.closePopup();
+    marker.setStyle({
+        radius: 6
+    });
+});
+
+// Marker click event
+marker.on('click', function () {
+    const isSelected = selectedIds.includes(station.id);
+
+    if (!isSelected && selectedIds.length >= 3) {
+        alert("You can only select up to 3 stations.");
+        return;
+    }
+
+    if (!isSelected) {
+        selectedIds.push(station.id);
+    } else {
+        selectedIds = selectedIds.filter(id => id !== station.id);
+    }
+
+    syncCheckboxesWithSelection();
+    syncMarkersWithSelection();
+});
+
+//marker.bindPopup(`<b>${station.location}</b><br>Temperature: ${station.temperature[0].y}°C`);
+
 // Fetch data and add markers when map loads
+/*
 fetch_data().then(data => {
     addMarkers(data.stations);
 });
+*/
