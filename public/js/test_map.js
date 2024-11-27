@@ -19,9 +19,9 @@ const legend = L.control({
 legend.onAdd = function () {
     const div = L.DomUtil.create('div', 'legend');
     div.innerHTML = `
-        <i class="circle" style="background: blue"></i> Geselecteerd Station<br>
-        <i class="circle" style="background: green"></i> Online Stations<br>
-        <i class="circle" style="background: red"></i> Offline Stations<br>
+        <i class="circle" style="background: blue"></i> Geselecteerde<br>
+        <i class="circle" style="background: green"></i> Online<br>
+        <i class="circle" style="background: red"></i> Offline<br>
     `;
     return div;
 };
@@ -118,7 +118,7 @@ function addMarkers(stations) {
             syncMarkersWithSelection();
         });
 
-        marker.bindPopup(`<b>${station.location}</b><br>Temperature: ${station.temperature[0].y}°C`);
+        marker.bindPopup(`<b>${station.location}</b><br>Temperature: ${station.temperature[0].y}°C<br>Batterij: 50%`);
     });
 }
 
