@@ -80,7 +80,6 @@ function addMarkers(stations) {
     stations.forEach(station => {
         // Log the individual station, not the entire array each iteration
         //console.log("Station:", station);
-
         // Create a circle marker for each station using latitude and longitude
         const marker = L.circleMarker([station.latitude, station.longitude], {
             radius: 6,
@@ -131,11 +130,27 @@ function addMarkers(stations) {
 
 function get_popup_content(station) {
     const temperature = getLastTemperature(station); // Haal de laatste temperatuurwaarde op
-    const popup_content = temperature 
-        ? `<b>${station.description}:</b> <br>${temperature}°C ` 
-        : `<b>${station.description}:</b> <br>Geen temperatuurdata beschikbaar`;
+    var popup_content_temperature; /* = temperature
+    
+        ? `<b>${station.description}:</b> <br>${temperature}°C, <br> <b>BatteryLevel:</b> ${station.batteryLevel}%` 
+        : `<b>${station.description}:</b> <br>Geen temperatuurdata beschikbaar,<br> <b>BatteryLevel:</b> ${station.batteryLevel}`;*/
 
-    return popup_content
+        if(temperature != null)
+        {
+           popup_content_temperature = `<b>${station.description}:</b> <br>${temperature}°C`
+        } else {
+            popup_content_temperature = `<b>${station.description}:</b> <br>Geen temperatuurdata beschikbaar`
+        }
+
+        if(station.batteryLevel != null)
+        {
+            popup_content_temperature += `<br> <b>BatteryLevel:</b> ${station.batteryLevel}%`
+        } else {
+            popup_content_temperature += `<br> <b>BatteryLevel:</b> ${station.batteryLevel}`
+        }
+
+
+    return popup_content_temperature
 }
 
 // Functie om de laatste temperatuurwaarde op te halen

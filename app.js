@@ -3981,7 +3981,7 @@ const stations = [{
 const stations = [
     {
         "id": "station_142b2f9sdf6d0",
-        "batteryLevel": null,
+        "batteryLevel": 38,
         "latitude": 51.054342,
         "longitude": 3.717424,
         "name": "Test Station_1",
@@ -4132,7 +4132,7 @@ const stations = [
     },
     {
         "id": "station_142b2sdfsda3f4e8",
-        "batteryLevel": null,
+        "batteryLevel": 72,
         "latitude": 51.329448,
         "longitude": 4.402464,
         "name": null,
@@ -4453,7 +4453,7 @@ const stations = [
     },
     {
         "id": "station_d4d4da9hg754",
-        "batteryLevel": null,
+        "batteryLevel": 2,
         "latitude": 51.1055,
         "longitude": 3.9937,
         "name": null,
@@ -4462,7 +4462,7 @@ const stations = [
     },
     {
         "id": "station_tesvbt",
-        "batteryLevel": null,
+        "batteryLevel": 88.47,
         "latitude": 51.2093,
         "longitude": 3.2247,
         "name": null,
@@ -4483,7 +4483,7 @@ const stations = [
     },
     { 
         "id": "station_4c7525b1vbnhn3c",
-        "batteryLevel": null,
+        "batteryLevel": 0,
         "latitude": 50.928467,
         "longitude": 5.394843,
         "name": null,

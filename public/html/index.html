@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/content-grid.css">
-    <link rel="stylesheet" href="css/map.css">
+    <link rel="stylesheet" href="css/map.css" >
     <link rel="stylesheet" href="css/map.css">
     <link rel="stylesheet" href="css/filter.css">
     <link rel="stylesheet" href="css/toggle-group.css">
@@ -39,13 +39,14 @@
                 <input type="checkbox" name="navbar-toggle" id="navbar-toggle">
                 <nav id="navbar-navigation">
                     <a href="/" style="text-decoration: underline;">Home</a>
+                    <a href="#" id="details-btn">Details</a>
                 </nav>
             </div>
         </div>
     </div>
     <main class="content-grid">
-        <section id="section-view-stations">
-            <header>
+        <section id="section-view-stations">          
+            <header>                
                 <h2>De stations</h2>
                 <toggle-group>
                     <button value="btn-map" aria-pressed="true"><b>Kaart</b></button>
@@ -75,8 +76,7 @@
                     <div class="filter-header">
                         <button class="filter-menu-toggle"><b>Sensors</b></button>
                         <div>
-                            <b>(<span id="filter-amount-selected">0</span><span>/</span><span
-                                    id="filter-amount-total">0</span>)</b>
+                            <b>(<span id="filter-amount-selected">0</span><span>/</span><span id="filter-amount-total">0</span>)</b>
                         </div>
                     </div>
                     <div class="filter-menu"></div>
@@ -85,7 +85,6 @@
             </div>
         </section>
         <section>
-            <!-- wtf is dit -->
             <br>
             <br>
             <br>
@@ -101,12 +100,17 @@
                         <h2>Data van geselecteerde stations</h2>
                     </header>
                     <div>
-                        <!-- Input voor het selecteren van een datumbereik -->
-                        <label for="dateRange">Selecteer een begindatum en einddatum:</label>
-                        <input type="text" id="dateRange" placeholder="Selecteer een begindatum en einddatum">
+                            <!--
+                            <-- Input voor het selecteren van één enkele datum ->
+                            <label for="singleDate">Enkele Datum:</label>
+                            <input type="text" id="singleDate" placeholder="Selecteer een datum">
+                            -->
+                            <!-- Input voor het selecteren van een datumbereik -->
+                            <label for="dateRange">selecteer 1 datum(dubbel klik) of een periode:</label>
+                            <input type="text" id="dateRange" placeholder="Selecteer een begindatum en einddatum">
                     </div>
                     <!-- hier nog een grafiek plaatse + zorgen dat de -->
-                    <div style="background-color: gray;min-height: 200px;"></div>
+                    <div style="background-color: gray;min-height: 200px;"></div> 
                 </div>
             </div>
         </div>
