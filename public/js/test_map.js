@@ -76,7 +76,12 @@ let markersMap = {};
 // Function to add markers for stations on the map
 // Add markers to the map
 function addMarkers(stations) {
+    //console.log(stations.latitude);
     stations.forEach(station => {
+        // Log the individual station, not the entire array each iteration
+        console.log("Station:", station);
+
+        // Create a circle marker for each station using latitude and longitude
         const marker = L.circleMarker([station.latitude, station.longitude], {
             radius: 6,
             color: "green",
@@ -84,8 +89,68 @@ function addMarkers(stations) {
             fillOpacity: 1,
         }).addTo(map);
 
+        // Store marker in the markersMap if necessary (by id)
+        markersMap[station.id] = marker;
 
+        marker.on('mouseover', function () {
+            marker.openPopup();
+            showStationTemperaturePopup(station);
+            marker.setStyle({
+                radius: 8
+            });
+        });
+        marker.on('mouseout', function () {
+            marker.closePopup();
+            marker.setStyle({
+                radius: 6
+            });
+        });
+
+        // Marker click event
+        marker.on('click', function () {
+            const isSelected = selectedIds.includes(station.id);
+
+            if (!isSelected && selectedIds.length >= 3) {
+                alert("You can only select up to 3 stations.");
+                return;
+            }
+
+            if (!isSelected) {
+                selectedIds.push(station.id);
+            } else {
+                selectedIds = selectedIds.filter(id => id !== station.id);
+            }
+
+            syncCheckboxesWithSelection();
+            syncMarkersWithSelection();
+        });
+
+        //marker.bindPopup(`<b>${station.description}</b><br>Temperature: °C`);
     });
+}
+
+function showStationTemperaturePopup(station) {
+    const temperature = getLastTemperature(station); // Haal de laatste temperatuurwaarde op
+    const popupContent = temperature 
+        ? `<b>${station.description}:</b> <br>${temperature}°C ` 
+        : `<b>${station.description}:<b> <br>Geen temperatuurdata beschikbaar`;
+
+    // Maak of update een popup op de juiste locatie
+    L.popup()
+        .setLatLng([station.latitude, station.longitude]) // Zet de locatie van de popup
+        .setContent(popupContent) // Zet de inhoud van de popup
+        .openOn(map); // Toon de popup op de kaart
+}
+
+// Functie om de laatste temperatuurwaarde op te halen
+function getLastTemperature(station) {
+    const temperatureSensor = station.sensors.find(sensor => sensor.type === "temperature");
+    if (!temperatureSensor || !temperatureSensor.measurements.length) {
+        return null; // Geen temperatuurdata beschikbaar
+    }
+
+    const lastMeasurement = temperatureSensor.measurements.at(-1); // Pak de laatste meting
+    return lastMeasurement ? lastMeasurement.sensorValue : null;
 }
 
 markersMap[station.id] = marker;
