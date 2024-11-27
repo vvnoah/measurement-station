@@ -93,8 +93,8 @@ function addMarkers(stations) {
         markersMap[station.id] = marker;
 
         marker.on('mouseover', function () {
-            marker.openPopup();
-            showStationPopup(station);
+            marker.bindPopup(get_popup_content(station))
+            marker.openPopup()
             marker.setStyle({
                 radius: 8
             });
@@ -129,17 +129,13 @@ function addMarkers(stations) {
     });
 }
 
-function showStationPopup(station) {
+function get_popup_content(station) {
     const temperature = getLastTemperature(station); // Haal de laatste temperatuurwaarde op
-    const popupContent = temperature 
+    const popup_content = temperature 
         ? `<b>${station.description}:</b> <br>${temperature}°C ` 
         : `<b>${station.description}:</b> <br>Geen temperatuurdata beschikbaar`;
 
-    // Maak of update een popup op de juiste locatie
-    L.popup()
-        .setLatLng([station.latitude, station.longitude]) // Zet de locatie van de popup
-        .setContent(popupContent) // Zet de inhoud van de popup
-        .openOn(map); // Toon de popup op de kaart
+    return popup_content
 }
 
 // Functie om de laatste temperatuurwaarde op te halen
