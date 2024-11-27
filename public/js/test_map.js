@@ -74,18 +74,25 @@ fetch('data/flanders.geojson')
 // Function to add markers for stations on the map
 // Add markers to the map
 function addMarkers(stations) {
-    console.log(stations)
-
+    //console.log(stations.latitude);
     stations.forEach(station => {
+        // Log the individual station, not the entire array each iteration
+        //console.log("Station:", station);
+
+        // Create a circle marker for each station using latitude and longitude
         const marker = L.circleMarker([station.latitude, station.longitude], {
             radius: 6,
             color: "green",
             fillColor: "green",
-            fillOpacity: 1
-        }).addTo(map)
+            fillOpacity: 1,
+        }).addTo(map);
+
+        // Store marker in the markersMap if necessary (by id)
+        markersMap[station.id] = marker;
 
         marker.on('mouseover', function () {
-            marker.openPopup();
+            marker.bindPopup(get_popup_content(station))
+            marker.openPopup()
             marker.setStyle({
                 radius: 8
             })
@@ -112,10 +119,30 @@ function addMarkers(stations) {
                 selectedIds = selectedIds.filter(id => id !== station.id)
             }
 
-            syncCheckboxesWithSelection()
-            syncMarkersWithSelection()
-        })
+            syncCheckboxesWithSelection();
+            syncMarkersWithSelection();
+        });
 
-        marker.bindPopup(`<br>Temperature: 10°C <br> Batterij: 50%`)
-    })
+        //marker.bindPopup(`<b>${station.description}</b><br>Temperature: °C`);
+    });
+}
+
+function get_popup_content(station) {
+    const temperature = getLastTemperature(station); // Haal de laatste temperatuurwaarde op
+    const popup_content = temperature 
+        ? `<b>${station.description}:</b> <br>${temperature}°C ` 
+        : `<b>${station.description}:</b> <br>Geen temperatuurdata beschikbaar`;
+
+    return popup_content
+}
+
+// Functie om de laatste temperatuurwaarde op te halen
+function getLastTemperature(station) {
+    const temperatureSensor = station.sensors.find(sensor => sensor.type === "temperature");
+    if (!temperatureSensor || !temperatureSensor.measurements.length) {
+        return null; // Geen temperatuurdata beschikbaar
+    }
+
+    const lastMeasurement = temperatureSensor.measurements.at(-1); // Pak de laatste meting
+    return lastMeasurement ? lastMeasurement.sensorValue : null;
 }
