@@ -168,14 +168,70 @@ function update_section_visibility() {
 }
 
 //popup open
-function popup() {
-    document.querySelector('.leaflet-control-zoom').style.display = 'none';
-    // Toon de popup
-    document.getElementById('popup').classList.remove('hidden');
+function popup(sensorId) {
+    const popup = document.getElementById("popup");
+    popup.classList.remove("hidden");
+
+    // Zoek het juiste station en sensor
+    let selectedSensor;
+    input_data.forEach(station => {
+        let sensor = station.sensors.find(s => s.id === sensorId);
+        if (sensor) {
+            selectedSensor = sensor;
+        }
+    });
+
+    if (!selectedSensor) {
+        console.error(`Geen sensor gevonden met ID ${sensorId}`);
+        return;
+    }
+
+    // Prepareer data voor de grafiek
+    const data = {
+        timestamps: selectedSensor.measurements.map(m => m.timestamp.split("T")[1]), // Gebruik tijd
+        values: selectedSensor.measurements.map(m => parseFloat(m.value)),
+    };
+
+    // Render grafiek
+    initializeDetailsChart(data);
 }
+
 
 // Event listener om de popup te sluiten
 document.getElementById('close-popup').addEventListener('click', function () {
     document.querySelector('.leaflet-control-zoom').style.display = 'block';
     document.getElementById('popup').classList.add('hidden');
 });
+
+function initializeDetailsChart(data) {
+    const chartElement = document.getElementById("details-popup-chart");
+
+    if (chartElement.chartInstance) {
+        // Update bestaande grafiek
+        chartElement.chartInstance.data.labels = data.timestamps;
+        chartElement.chartInstance.data.datasets[0].data = data.values;
+        chartElement.chartInstance.update();
+    } else {
+        // Maak een nieuwe grafiek
+        chartElement.chartInstance = new Chart(chartElement, {
+            type: "line",
+            data: {
+                labels: data.timestamps,
+                datasets: [{
+                    label: "Sensor Waarden",
+                    data: data.values,
+                    borderColor: "blue",
+                    backgroundColor: "lightblue",
+                    fill: true,
+                }],
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: true },
+                    title: { display: true, text: "Sensor Data" },
+                },
+            },
+        });
+    }
+}
