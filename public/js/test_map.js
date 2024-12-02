@@ -146,7 +146,7 @@ function get_popup_content(station) {
         {
             popup_content_temperature += `<br> <b>BatteryLevel:</b> ${station.batteryLevel}%`
         } else {
-            popup_content_temperature += `<br> <b>BatteryLevel:</b> ${station.batteryLevel}`
+            popup_content_temperature += `<br> <b>Geen batterijdata</b>`
         }
 
 
