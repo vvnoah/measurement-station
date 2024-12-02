@@ -156,7 +156,7 @@ function update_output_new() {
         <b>${filter.type}</b>
         ${stations_info}
         <div style="display:flex;justify-content:end;">
-          <button onclick=popup();><b>details</b></button>
+          <button onclick=popup(${filter.id});><b>details</b></button>
         </div>
         </div>`
     }
