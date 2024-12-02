@@ -19,7 +19,7 @@ const legend = L.control({
 legend.onAdd = function () {
     const div = L.DomUtil.create('div', 'legend');
     div.innerHTML = `
-        <i class="circle" style="background: blue"></i> Geselecteerd Station<br>
+        <i class="circle" style="background: blue"></i> Geselecteerd Station(s)<br>
         <i class="circle" style="background: green"></i> Online Stations<br>
         <i class="circle" style="background: red"></i> Offline Stations<br>
     `;
