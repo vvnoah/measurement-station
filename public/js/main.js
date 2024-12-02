@@ -1,7 +1,7 @@
 // Global variables
 let selectedIds = []; // Array to track selected station IDs
 let temperature_chart, windspeed_chart, rainfall_chart, airquality_chart;
-let temperature_chart_popup, windspeed_chart_popup, rainfall_chart_popup, airquality_chart_popup;
+//let temperature_chart_popup, windspeed_chart_popup, rainfall_chart_popup, airquality_chart_popup;
 let stationData = []; // Store station data for reference
 
 $(document).ready(async function () {
@@ -60,11 +60,12 @@ $(document).ready(async function () {
         windspeed_chart = create_line_chart("windspeed-chart", "Windsnelheid (km/u)");
         rainfall_chart = create_line_chart("rainfall-chart", "Neerslag (mm)");
         airquality_chart = create_line_chart("airquality-chart", "PPM-waarden");
-
+/*
         temperature_chart_popup = create_line_chart("temperature-chart-popup", "Temperatuur (°C)");
         windspeed_chart_popup = create_line_chart("windspeed-chart-popup", "Windsnelheid (km/u)");
         rainfall_chart_popup = create_line_chart("rainfall-chart-popup", "Neerslag (mm)");
         airquality_chart_popup = create_line_chart("airquality-chart-popup", "PPM-waarden");
+        */
     });
 
 });
@@ -104,11 +105,11 @@ function updateMarkerStyle(stationId, isSelected) {
 }
 
 // Add datasets to all charts
-function addDatasetToCharts(station) {
+function addDatasetToCharts(station) {/*
     addDatasetToChart(temperature_chart_popup, station, 'temperature');
     addDatasetToChart(windspeed_chart_popup, station, 'windspeed');
     addDatasetToChart(rainfall_chart_popup, station, 'rainfall');
-    addDatasetToChart(airquality_chart_popup, station, 'airquality');
+    addDatasetToChart(airquality_chart_popup, station, 'airquality');*/
 
     addDatasetToChart(temperature_chart, station, 'temperature');
     addDatasetToChart(windspeed_chart, station, 'windspeed');
@@ -117,11 +118,11 @@ function addDatasetToCharts(station) {
 }
 
 // Remove datasets from all charts
-function removeDatasetFromCharts(stationId) {
+function removeDatasetFromCharts(stationId) {/*
     removeDatasetFromChart(temperature_chart_popup, stationId);
     removeDatasetFromChart(windspeed_chart_popup, stationId);
     removeDatasetFromChart(rainfall_chart_popup, stationId);
-    removeDatasetFromChart(airquality_chart_popup, stationId);
+    removeDatasetFromChart(airquality_chart_popup, stationId);*/
 
     removeDatasetFromChart(temperature_chart, stationId);
     removeDatasetFromChart(windspeed_chart, stationId);
