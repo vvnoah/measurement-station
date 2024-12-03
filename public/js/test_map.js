@@ -135,19 +135,17 @@ function get_popup_content(station) {
         ? `<b>${station.description}:</b> <br>${temperature}°C, <br> <b>BatteryLevel:</b> ${station.batteryLevel}%` 
         : `<b>${station.description}:</b> <br>Geen temperatuurdata beschikbaar,<br> <b>BatteryLevel:</b> ${station.batteryLevel}`;*/
 
-        if(temperature != null)
-        {
-           popup_content_temperature = `<b>${station.description}:</b> <br>${temperature}°C`
-        } else {
-            popup_content_temperature = `<b>${station.description}:</b> <br>Geen temperatuurdata beschikbaar`
-        }
+    if (temperature != null) {
+        popup_content_temperature = `<b>${station.description}:</b> <br>${temperature}°C`
+    } else {
+        popup_content_temperature = `<b>${station.description}:</b> <br>Geen temperatuurdata beschikbaar`
+    }
 
-        if(station.batteryLevel != null)
-        {
-            popup_content_temperature += `<br> <b>BatteryLevel:</b> ${station.batteryLevel}%`
-        } else {
-            popup_content_temperature += `<br> <b>Geen batterijdata</b>`
-        }
+    if (station.batteryLevel != null) {
+        popup_content_temperature += `<br> <b>BatteryLevel:</b> ${station.batteryLevel}%`
+    } else {
+        popup_content_temperature += `<br> <b>Geen batterijdata</b>`
+    }
 
 
     return popup_content_temperature

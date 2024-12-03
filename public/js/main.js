@@ -60,12 +60,12 @@ $(document).ready(async function () {
         windspeed_chart = create_line_chart("windspeed-chart", "Windsnelheid (km/u)");
         rainfall_chart = create_line_chart("rainfall-chart", "Neerslag (mm)");
         airquality_chart = create_line_chart("airquality-chart", "PPM-waarden");
-/*
-        temperature_chart_popup = create_line_chart("temperature-chart-popup", "Temperatuur (°C)");
-        windspeed_chart_popup = create_line_chart("windspeed-chart-popup", "Windsnelheid (km/u)");
-        rainfall_chart_popup = create_line_chart("rainfall-chart-popup", "Neerslag (mm)");
-        airquality_chart_popup = create_line_chart("airquality-chart-popup", "PPM-waarden");
-        */
+        /*
+                temperature_chart_popup = create_line_chart("temperature-chart-popup", "Temperatuur (°C)");
+                windspeed_chart_popup = create_line_chart("windspeed-chart-popup", "Windsnelheid (km/u)");
+                rainfall_chart_popup = create_line_chart("rainfall-chart-popup", "Neerslag (mm)");
+                airquality_chart_popup = create_line_chart("airquality-chart-popup", "PPM-waarden");
+                */
     });
 
 });
