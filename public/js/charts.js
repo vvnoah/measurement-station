@@ -10,12 +10,12 @@ function create_line_chart(chart_element_id, chart_title) {
         intersect: false,
         mode: 'index',
       },
-      
+
       plugins: {
         title: {
-            display: true,
-            text: chart_title,
-            position: "left",
+          display: true,
+          text: chart_title,
+          position: "left",
         }
       }
     }
