@@ -26,22 +26,26 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://npmcdn.com/flatpickr/dist/l10n/nl.js"></script>
 
-    <title>UCLL Meetstations</title>
+    <title>UCLL MEETSTATIONS</title>
 </head>
-
 <body>
+    <style>
+        available-sensors {
+            --clr-bg-header: royalblue;
+        }
+    </style>
     <div class="content-grid stick-to-top">
         <div id="navbar-container">
             <div id="navbar">
                 <div id="navbar-header">
-                    <span id="navbar-title">UCLL Meetstations</span>
-                    <label for="navbar-toggle" id="navbar-toggle-label">☰</label>
+                    <span id="navbar-title">UCLL MEETSTATIONS</span>
+                    <!-- <label for="navbar-toggle" id="navbar-toggle-label">☰</label> -->
                 </div>
-                <input type="checkbox" name="navbar-toggle" id="navbar-toggle">
-                <nav id="navbar-navigation">
-                    <a href="/" style="text-decoration: underline;">Home</a>
-                    <a href="#" id="details-btn">Details</a>
-                </nav>
+                <!-- <div>
+                    <input type="checkbox" name="navbar-toggle" id="navbar-toggle">
+                    <nav id="navbar-navigation">
+                    </nav>
+                </div> -->
             </div>
         </div>
     </div>
@@ -72,18 +76,7 @@
             </div>
         </section>
         <section>
-            <div class="filter-container">
-                <div>
-                    <div class="filter-header">
-                        <button class="filter-menu-toggle"><b>Sensors</b></button>
-                        <div>
-                            <b>(<span id="filter-amount-selected">0</span><span>/</span><span id="filter-amount-total">0</span>)</b>
-                        </div>
-                    </div>
-                    <div class="filter-menu"></div>
-                </div>
-                <div class="filter-output"></div>
-            </div>
+            <available-sensors></available-sensors>
         </section>
         <section>
             <br>
@@ -121,8 +114,8 @@
 <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
 <script src="js/main.js"></script>
 <script src="js/charts.js"></script>
+<script src="js/available-sensors.js"></script>
 <script src="js/test_map.js"></script>
-<script src="js/filter-component.js"></script>
 <script src="js/calender.js"></script>
 
 </html>

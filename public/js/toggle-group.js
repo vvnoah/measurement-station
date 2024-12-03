@@ -1,4 +1,5 @@
-class ToggleGroup extends HTMLElement {
+class ToggleGroup extends HTMLElement 
+{
 	connectedCallback() {
         this.addEventListener("click", this.#handleClick);
     }
@@ -84,5 +85,4 @@ class ToggleGroup extends HTMLElement {
         button.setAttribute("aria-pressed", toggledValue);
     }
 }
-
 customElements.define("toggle-group", ToggleGroup);

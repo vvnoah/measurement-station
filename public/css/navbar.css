@@ -1,12 +1,12 @@
 #navbar-container {
     --clr-navbar-header: white;
     --clr-navbar-links: white;
-    --clr-bg-navbar: var(--color-secondary);
+    --clr-bg-navbar: crimson;
 
     container-type: inline-size;
     padding-block: 0.5rem;
 
-    background-color: var(--clr-bg-navbar);
+    background-color: crimson;
 }
 .stick-to-top {
     position: sticky;
@@ -17,7 +17,8 @@
 }
 #navbar-header {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: space-around;
     align-items: center;
 }
 #navbar-title, #navbar-toggle-label {

@@ -4,6 +4,8 @@ let temperature_chart, windspeed_chart, rainfall_chart, airquality_chart;
 let temperature_chart_popup, windspeed_chart_popup, rainfall_chart_popup, airquality_chart_popup;
 let stationData = []; // Store station data for reference
 
+let selectedStations = []
+
 $(document).ready(async function () {
     // Fetch station data and initialize
     stationData = await fetch_data();
@@ -27,7 +29,7 @@ $(document).ready(async function () {
     $('#datatable tbody').on('change', '.select-checkbox', function () {
         const stationId = $(this).data('id');
         const isChecked = $(this).is(':checked');
-        const station = stationData.find(s => s.id === stationId);
+        const station = stationData.find(s => s.id === stationId)
 
         if (isChecked) {
             if (selectedIds.length >= 3) {
@@ -35,47 +37,36 @@ $(document).ready(async function () {
                 $(this).prop('checked', false);
                 return;
             }
+            selectedStations.push(station)
             selectedIds.push(stationId);
         } else {
+            selectedStations.pop(station)
             selectedIds = selectedIds.filter(id => id !== stationId);
         }
 
-        syncMarkersWithSelection();
+        updateSelection();
     });
-
-    // Sync DataTable checkboxes with the selection state on page change
-    table.on('draw', function () {
-        syncCheckboxesWithSelection();
-    });
-
-    // Initialize charts
-    /*
-    temperature_chart = create_line_chart("temperature-chart", "Temperature (°C)");
-    windspeed_chart = create_line_chart("windspeed-chart", "Wind Speed (km/h)");
-    rainfall_chart = create_line_chart("rainfall-chart", "Rainfall (mm)");
-    airquality_chart = create_line_chart("airquality-chart", "Air Quality (PPM)");
-    */
-    fetch_data().then(data => {
-        temperature_chart = create_line_chart("temperature-chart", "Temperatuur (°C)");
-        windspeed_chart = create_line_chart("windspeed-chart", "Windsnelheid (km/u)");
-        rainfall_chart = create_line_chart("rainfall-chart", "Neerslag (mm)");
-        airquality_chart = create_line_chart("airquality-chart", "PPM-waarden");
-
-        temperature_chart_popup = create_line_chart("temperature-chart-popup", "Temperatuur (°C)");
-        windspeed_chart_popup = create_line_chart("windspeed-chart-popup", "Windsnelheid (km/u)");
-        rainfall_chart_popup = create_line_chart("rainfall-chart-popup", "Neerslag (mm)");
-        airquality_chart_popup = create_line_chart("airquality-chart-popup", "PPM-waarden");
-    });
-
 });
 
 // Fetch data from the API
-/*
 async function fetch_data() {
     const response = await fetch('/api/stations');
     return await response.json();
 }
-*/
+
+function updateSelection() {
+    syncAvailableSensorsWithSelection()
+    syncCheckboxesWithSelection()
+    syncMarkersWithSelection()
+}
+
+function syncAvailableSensorsWithSelection() {
+    console.log(selectedStations)
+    const availableSensors = document.querySelector("available-sensors")
+    const json = JSON.stringify(selectedStations)
+    availableSensors.setAttribute("data", json)
+}
+
 // Sync table checkboxes with the selection array
 function syncCheckboxesWithSelection() {
     $('#datatable tbody .select-checkbox').each(function () {
@@ -97,8 +88,8 @@ function updateMarkerStyle(stationId, isSelected) {
     const marker = markersMap[stationId];
     if (marker) {
         marker.setStyle({
-            color: isSelected ? "blue" : "green",
-            fillColor: isSelected ? "blue" : "green"
+            color: "royalblue",
+            fillColor: isSelected ? "royalblue" : "limegreen"
         });
     }
 }

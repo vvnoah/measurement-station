@@ -19,9 +19,9 @@ const legend = L.control({
 legend.onAdd = function () {
     const div = L.DomUtil.create('div', 'legend');
     div.innerHTML = `
-        <i class="circle" style="background: blue"></i> Geselecteerd Station<br>
-        <i class="circle" style="background: green"></i> Online Stations<br>
-        <i class="circle" style="background: red"></i> Offline Stations<br>
+        <i class="circle" style="background: royalblue"></i> Geselecteerd Station<br>
+        <i class="circle" style="background: limegreen"></i> Online Stations<br>
+        <i class="circle" style="background: crimson"></i> Offline Stations<br>
     `;
     return div;
 };
@@ -31,14 +31,6 @@ legend.addTo(map);
 new L.Control.Zoom({
     position: 'bottomright',
 }).addTo(map);
-
-// Fetch data from the API
-async function fetch_data() {
-    const response = await fetch('/api/stations');
-    const data = await response.json();
-    //console.log(data);
-    return data;
-}
 
 // Load the greyed-out Flanders region from GeoJSON
 fetch('data/flanders.geojson')
@@ -83,8 +75,9 @@ function addMarkers(stations) {
         // Create a circle marker for each station using latitude and longitude
         const marker = L.circleMarker([station.latitude, station.longitude], {
             radius: 6,
-            color: "green",
-            fillColor: "green",
+            weight: 2,
+            color: "royalblue",
+            fillColor: "limegreen",
             fillOpacity: 1,
         }).addTo(map);
 
@@ -115,13 +108,14 @@ function addMarkers(stations) {
             }
 
             if (!isSelected) {
+                selectedStations.push(station)
                 selectedIds.push(station.id);
             } else {
+                selectedStations.pop(station)
                 selectedIds = selectedIds.filter(id => id !== station.id);
             }
 
-            syncCheckboxesWithSelection();
-            syncMarkersWithSelection();
+            updateSelection()
         });
 
         //marker.bindPopup(`<b>${station.description}</b><br>Temperature: °C`);
@@ -130,11 +124,7 @@ function addMarkers(stations) {
 
 function get_popup_content(station) {
     const temperature = getLastTemperature(station); // Haal de laatste temperatuurwaarde op
-    var popup_content_temperature; /* = temperature
-    
-        ? `<b>${station.description}:</b> <br>${temperature}°C, <br> <b>BatteryLevel:</b> ${station.batteryLevel}%` 
-        : `<b>${station.description}:</b> <br>Geen temperatuurdata beschikbaar,<br> <b>BatteryLevel:</b> ${station.batteryLevel}`;*/
-
+    var popup_content_temperature; 
         if(temperature != null)
         {
            popup_content_temperature = `<b>${station.description}:</b> <br>${temperature}°C`
