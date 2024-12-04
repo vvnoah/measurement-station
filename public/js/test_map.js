@@ -129,13 +129,13 @@ function addMarkers(stations) {
 
 function get_popup_content(station) {
     const temperature = getLastTemperature(station); // Haal de laatste temperatuurwaarde op
-    var popup_content_temperature; 
-        if(temperature != null)
-        {
-           popup_content_temperature = `<b>${station.description}:</b> <br>${temperature}°C`
-        } else {
-            popup_content_temperature = `<b>${station.description}:</b> <br>Geen temperatuurdata beschikbaar`
-        }
+    let popup_content_temperature;
+    if(temperature != null)
+    {
+        popup_content_temperature = `<b>${station.description}:</b> <br>${temperature}°C`
+    } else {
+        popup_content_temperature = `<b>${station.description}:</b> <br>Geen temperatuurdata beschikbaar`
+    }
 
     if (station.batteryLevel != null) {
         popup_content_temperature += `<br> <b>BatteryLevel:</b> ${station.batteryLevel}%`

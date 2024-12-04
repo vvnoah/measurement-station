@@ -90,7 +90,7 @@ function updateMarkerStyle(stationId, isSelected) {
     if (marker && station) {
         const baseColor = station.onlineStatus === 'Online' ? "limegreen" : "crimson";
 
-        const color = isSelected ? "blue" : baseColor;
+        const color = isSelected ? "royalblue" : baseColor;
 
         marker.setStyle({
             color: color,
