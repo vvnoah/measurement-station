@@ -95,11 +95,17 @@ function syncMarkersWithSelection() {
 
 // Update marker style
 function updateMarkerStyle(stationId, isSelected) {
+    const station = stationData.find(s => s.id === stationId);
     const marker = markersMap[stationId];
-    if (marker) {
+
+    if (marker && station) {
+        const baseColor = station.onlineStatus === 'Online' ? "green" : "red";
+
+        const color = isSelected ? "blue" : baseColor;
+
         marker.setStyle({
-            color: isSelected ? "blue" : "green",
-            fillColor: isSelected ? "blue" : "green"
+            color: color,
+            fillColor: color
         });
     }
 }

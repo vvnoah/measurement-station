@@ -33,10 +33,16 @@ new L.Control.Zoom({
 }).addTo(map);
 
 // Fetch data from the API
+// async function fetch_data() {
+//     const response = await fetch('/api/stations');
+//     const data = await response.json();
+//     //console.log(data);
+//     return data;
+// }
 async function fetch_data() {
     const response = await fetch('/api/stations');
     const data = await response.json();
-    //console.log(data);
+    console.log(data);
     return data;
 }
 
@@ -78,13 +84,18 @@ let markersMap = {};
 function addMarkers(stations) {
     //console.log(stations.latitude);
     stations.forEach(station => {
+        //console.log(station);
+        
         // Log the individual station, not the entire array each iteration
         //console.log("Station:", station);
         // Create a circle marker for each station using latitude and longitude
+
+        const markerColor = station.onlineStatus == 'Online' ? "green" : "red";
+        console.log(markerColor);
         const marker = L.circleMarker([station.latitude, station.longitude], {
             radius: 6,
-            color: "green",
-            fillColor: "green",
+            color: markerColor,
+            fillColor: markerColor,
             fillOpacity: 1,
         }).addTo(map);
 
