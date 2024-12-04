@@ -1,17 +1,17 @@
 class ToggleGroup extends HTMLElement {
-	connectedCallback() {
+    connectedCallback() {
         this.addEventListener("click", this.#handleClick);
     }
-    
+
     disconnectedCallback() {
         this.removeEventListener("click", this.#handleClick);
     }
 
-	// Properties
+    // Properties
     get multiple() {
         return this.hasAttribute("multiple");
     }
-    
+
     set multiple(value) {
         if (value === true) {
             this.setAttribute("multiple", "");
@@ -46,17 +46,17 @@ class ToggleGroup extends HTMLElement {
         }
     }
 
-	// Internal methods
+    // Internal methods
     #handleClick(event) {
         const target = event.target;
-    
+
         // Bail out, in case someone puts a non-button element inside this component
         if (target.localName !== "button") return;
-    
+
         // Prevent form submission when the toggle group is inside a form element
         // for progressive enhancement
         event.preventDefault();
-    
+
         // If the toggle group is a multi-select, toggle the event target and
         // we're all done, otherwise set the state of the control
         if (this.multiple) {
@@ -64,7 +64,7 @@ class ToggleGroup extends HTMLElement {
         } else {
             this.#setState([target.value]);
         }
-    
+
         this.dispatchEvent(new CustomEvent(
             "togglechange",
             { detail: { value: this.value } },
