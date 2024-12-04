@@ -8,6 +8,12 @@
 //FILTER DATA ITH CHOSEN FILTERS
 //OUTPUT DATA TO TEMPLATE
 
+
+
+//mag normaal weg denk ik
+
+
+
 let input_data = [
   {
     "id": "1",

@@ -165,7 +165,11 @@ class AvailableSensors extends HTMLElement
                         card.innerHTML += `
                             <div>
                                 <span>${station.description}: </span><span> ${sensor.measurements[0].sensorValue}</span><span> ${sensor.unit}</span>
-                            </div>`
+                                    <div style="display:flex;justify-content:end;">
+                                        <button onclick=popup(${checkedSensor.id});><b>details</b></button>
+                                    </div>
+                            </div>
+                            `
                     }
                 })
             })
