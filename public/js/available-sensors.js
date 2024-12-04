@@ -103,6 +103,9 @@ class AvailableSensors extends HTMLElement
         this.selectedStations = JSON.parse(data)
         this.availableSensors = []
         this.updateAvailableSensors()
+        this.updateMenu()
+        this.updateAmountSelectedLabel()
+        this.updateOutput()
     }
 
     updateAvailableSensors() {
@@ -115,7 +118,6 @@ class AvailableSensors extends HTMLElement
             })
         })
         this.shadowRoot.querySelector("#total-amount").textContent = i
-        this.updateMenu()
     }
 
     updateMenu() {
@@ -141,9 +143,13 @@ class AvailableSensors extends HTMLElement
         const checkboxId = parseInt(event.target.id.replace("checkbox-", ""), 10)
         const sensor = this.availableSensors.find(x => x.id === checkboxId)
         sensor.isChecked = event.target.checked
+        this.updateAmountSelectedLabel()
+        this.updateOutput()
+    }
+
+    updateAmountSelectedLabel() {
         const amountSelected = this.availableSensors.filter(x => x.isChecked).length
         this.shadowRoot.querySelector("#amount-selected").textContent = amountSelected
-        this.updateOutput()
     }
 
     updateOutput() {
