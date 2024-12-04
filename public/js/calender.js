@@ -21,14 +21,14 @@ flatpickr("#dateRange", {
     onChange: function (selectedDates) {
         // Controleer of er 1 of 2 datums zijn geselecteerd
         if (selectedDates.length === 1) {
-            var selectedDate = formatDateToLocal(selectedDates[0]).split('T')[0]; // Gebruik lokale datum
+            var selectedDate = formatDateToLocal(selectedDates[0]).split('T')[0];
             console.log("Geselecteerde datum (enkele datum):", selectedDate);
         } else if (selectedDates.length === 2) {
             const startDate = formatDateToLocal(selectedDates[0]).split('T')[0];
             const endDate = formatDateToLocal(selectedDates[1]).split('T')[0];
             console.log("Geselecteerd bereik:", startDate, "tot", endDate);
 
-            getMeasurementsByDate(selectedDates);
+            getMeasurementsByDate([startDate, endDate]);
         }
     },
     onOpen: function () {
@@ -60,27 +60,30 @@ async function getMockData() {
 }
 
 // Functie om gegevens voor een specifieke datum op te halen
-function getMeasurementsByDate(selectedDate) {
+function getMeasurementsByDate(selectedDates) {
     getMockData().then(stations => {
         stations.forEach(station => {
             console.log(`Station: ${station.name}, Locatie: ${station.description}`);
 
             station.sensors.forEach(sensor => {
-                const filteredMeasurements = sensor.measurements.filter(measurements =>
-                    measurements.timestamp.startsWith(selectedDate)
-                );
-                console.log(filteredMeasurements);
-                console.log("selectedDate:", selectedDate);
+                const filteredMeasurements = sensor.measurements.filter(measurements => {
+                    return selectedDates.some(date => measurements.timestamp.startsWith(date));
+                });
+                //measurements.timestamp.startsWith(selectedDate)
+                //);
+                //console.log(filteredMeasurements);
+                //console.log("selectedDate:", selectedDate);
 
 
                 if (filteredMeasurements.length > 0) {
-                    console.log(`Sensor (${sensors.type}, ${sensors.unit}):`);
+                    console.log(`Sensor (${sensor.type}, ${sensor.unit}):`);
                     filteredMeasurements.forEach(measurement => {
                         console.log(`Tijd: ${measurement.timestamp}, Waarde: ${measurement.sensorValue}`);
-                    });
-                } else {
-                    console.log('Geen gegevens voor deze datum.');
+                    })
                 }
+                /*else {
+                                   console.log('Geen gegevens voor deze datum.');
+                               }*/
             });
         });
     });
