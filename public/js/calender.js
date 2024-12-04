@@ -9,12 +9,15 @@ console.log("Standaard datum (vandaag):", defaultDate);
 
 //Initialiseer flatpickr voor een datumreeksselectie
 flatpickr("#dateRange", {
+    position: "auto", // Zorgt ervoor dat de kalender zich automatisch plaatst
+    static: true, // Zorgt ervoor dat de kalender "in de flow" van de pagina blijft
     mode: "range", // Zet modus op 'range' voor begindatum en einddatum
     dateFormat: "d-m-Y",
     allowInput: true,
     defaultDate: [vandaag],
     maxDate: vandaag,
-    locale: "nl",
+    "locale": "nl",
+
     onChange: function (selectedDates) {
         // Controleer of er 1 of 2 datums zijn geselecteerd
         if (selectedDates.length === 1) {
@@ -27,6 +30,10 @@ flatpickr("#dateRange", {
 
             getMeasurementsByDate(selectedDates);
         }
+    },
+    onOpen: function () {
+        // Reset de breedte van het input veld naar 100%
+        document.getElementById("dateRange").style.width = "100%";
     }
 });
 
