@@ -1,7 +1,6 @@
 // Global variables
 let selectedIds = []; // Array to track selected station IDs
 let temperature_chart, windspeed_chart, rainfall_chart, airquality_chart;
-let temperature_chart_popup, windspeed_chart_popup, rainfall_chart_popup, airquality_chart_popup;
 let stationData = []; // Store station data for reference
 
 let selectedStations = []
@@ -85,87 +84,22 @@ function syncMarkersWithSelection() {
 
 // Update marker style
 function updateMarkerStyle(stationId, isSelected) {
+    const station = stationData.find(s => s.id === stationId);
     const marker = markersMap[stationId];
-    if (marker) {
+
+    if (marker && station) {
+        const baseColor = station.onlineStatus === 'Online' ? "limegreen" : "crimson";
+
+        const color = isSelected ? "blue" : baseColor;
+
         marker.setStyle({
-            color: "royalblue",
-            fillColor: isSelected ? "royalblue" : "limegreen"
+            color: color,
+            fillColor: color
         });
     }
-}
-
-// Add datasets to all charts
-function addDatasetToCharts(station) {
-    addDatasetToChart(temperature_chart_popup, station, 'temperature');
-    addDatasetToChart(windspeed_chart_popup, station, 'windspeed');
-    addDatasetToChart(rainfall_chart_popup, station, 'rainfall');
-    addDatasetToChart(airquality_chart_popup, station, 'airquality');
-
-    addDatasetToChart(temperature_chart, station, 'temperature');
-    addDatasetToChart(windspeed_chart, station, 'windspeed');
-    addDatasetToChart(rainfall_chart, station, 'rainfall');
-    addDatasetToChart(airquality_chart, station, 'airquality');
-}
-
-// Remove datasets from all charts
-function removeDatasetFromCharts(stationId) {
-    removeDatasetFromChart(temperature_chart_popup, stationId);
-    removeDatasetFromChart(windspeed_chart_popup, stationId);
-    removeDatasetFromChart(rainfall_chart_popup, stationId);
-    removeDatasetFromChart(airquality_chart_popup, stationId);
-
-    removeDatasetFromChart(temperature_chart, stationId);
-    removeDatasetFromChart(windspeed_chart, stationId);
-    removeDatasetFromChart(rainfall_chart, stationId);
-    removeDatasetFromChart(airquality_chart, stationId);
-}
-
-// Chart helper functions
-function create_line_chart(elementId, title) {
-    return new Chart(document.getElementById(elementId).getContext('2d'), {
-        type: 'line',
-        data: {
-            labels: [],
-            datasets: []
-        },
-        options: {
-            responsive: true,
-            title: {
-                display: true,
-                text: title
-            }
-        }
-    });
-}
-
-function addDatasetToChart(chart, station, dataType) {
-    chart.data.datasets.push({
-        id: station.id,
-        label: station.location,
-        data: station[dataType],
-    });
-    chart.update();
-}
-
-function removeDatasetFromChart(chart, stationId) {
-    chart.data.datasets = chart.data.datasets.filter(dataset => dataset.id !== stationId);
-    chart.update();
 }
 
 // Update section visibility
 function update_section_visibility() {
     document.getElementById("section-selected-data").style.display = selectedIds.length > 0 ? "block" : "none";
 }
-
-//popup open
-function popup() {
-    document.querySelector('.leaflet-control-zoom').style.display = 'none';
-    // Toon de popup
-    document.getElementById('popup').classList.remove('hidden');
-}
-
-// Event listener om de popup te sluiten
-document.getElementById('close-popup').addEventListener('click', function () {
-    document.querySelector('.leaflet-control-zoom').style.display = 'block';
-    document.getElementById('popup').classList.add('hidden');
-});

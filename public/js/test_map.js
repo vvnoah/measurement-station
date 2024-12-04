@@ -70,14 +70,19 @@ let markersMap = {};
 function addMarkers(stations) {
     //console.log(stations.latitude);
     stations.forEach(station => {
+        //console.log(station);
+        
         // Log the individual station, not the entire array each iteration
         //console.log("Station:", station);
         // Create a circle marker for each station using latitude and longitude
+
+        const markerColor = station.onlineStatus == 'Online' ? "limegreen" : "crimson";
+        console.log(markerColor);
         const marker = L.circleMarker([station.latitude, station.longitude], {
             radius: 6,
             weight: 2,
-            color: "royalblue",
-            fillColor: "limegreen",
+            color: markerColor,
+            fillColor: markerColor,
             fillOpacity: 1,
         }).addTo(map);
 
@@ -132,12 +137,11 @@ function get_popup_content(station) {
             popup_content_temperature = `<b>${station.description}:</b> <br>Geen temperatuurdata beschikbaar`
         }
 
-        if(station.batteryLevel != null)
-        {
-            popup_content_temperature += `<br> <b>BatteryLevel:</b> ${station.batteryLevel}%`
-        } else {
-            popup_content_temperature += `<br> <b>BatteryLevel:</b> ${station.batteryLevel}`
-        }
+    if (station.batteryLevel != null) {
+        popup_content_temperature += `<br> <b>BatteryLevel:</b> ${station.batteryLevel}%`
+    } else {
+        popup_content_temperature += `<br> <b>Geen batterijdata</b>`
+    }
 
 
     return popup_content_temperature

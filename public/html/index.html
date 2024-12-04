@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/content-grid.css">
-    <link rel="stylesheet" href="css/map.css" >
+    <link rel="stylesheet" href="css/map.css">
     <link rel="stylesheet" href="css/map.css">
     <link rel="stylesheet" href="css/filter.css">
     <link rel="stylesheet" href="css/toggle-group.css">
@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
     <script src="js/toggle-group.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://d3js.org/d3.v6.min.js"></script>
@@ -50,8 +49,8 @@
         </div>
     </div>
     <main class="content-grid">
-        <section id="section-view-stations">          
-            <header>                
+        <section id="section-view-stations">
+            <header>
                 <h2>De stations</h2>
                 <toggle-group>
                     <button value="btn-map" aria-pressed="true"><b>Kaart</b></button>
@@ -70,21 +69,22 @@
                             <th>Description</th>
                         </tr>
                     </thead>
-                    <tbody>
-                    </tbody>
                 </table>
             </div>
         </section>
         <section>
-            <available-sensors></available-sensors>
-        </section>
-        <section>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
+            <div class="filter-container">
+                <div>
+                    <div class="filter-header">
+                        <button class="filter-menu-toggle"><b>Sensors</b></button>
+                        <div>
+                            <b>(<span id="filter-amount-selected">0</span><span>/</span><span id="filter-amount-total">0</span>)</b>
+                        </div>
+                    </div>
+                    <div class="filter-menu"></div>
+                </div>
+                <div class="filter-output"></div>
+            </div>
         </section>
         <div id="popup" class="popup hidden">
             <div class="popup-content">
@@ -94,22 +94,18 @@
                         <h2>Data van geselecteerde stations</h2>
                     </header>
                     <div>
-                            <!--
-                            <-- Input voor het selecteren van één enkele datum ->
-                            <label for="singleDate">Enkele Datum:</label>
-                            <input type="text" id="singleDate" placeholder="Selecteer een datum">
-                            -->
-                            <!-- Input voor het selecteren van een datumbereik -->
-                            <label for="dateRange">selecteer 1 datum(dubbel klik) of een periode:</label>
-                            <input type="text" id="dateRange" placeholder="Selecteer een begindatum en einddatum">
+                        <!-- Input voor het selecteren van een datumbereik -->
+                        <label for="dateRange"> 📅selecteer 1 datum(dubbel klik) of een periode:</label>
+                        <input type="text" id="dateRange" placeholder="📅 Selecteer een begindatum en einddatum">
                     </div>
-                    <!-- hier nog een grafiek plaatse + zorgen dat de -->
-                    <div style="background-color: gray;min-height: 200px;"></div> 
+                    <!-- hier nog een grafiek plaatse + zorgen dat de | parameter word mee gegeven zeker? -->
+                    <canvas id="details-popup-chart" style="width: 100%; height: 200px;"></canvas>
                 </div>
             </div>
         </div>
     </main>
 </body>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
 <script src="js/main.js"></script>
@@ -117,5 +113,6 @@
 <script src="js/available-sensors.js"></script>
 <script src="js/test_map.js"></script>
 <script src="js/calender.js"></script>
+<script src="js/detailsPage.js"></script>
 
 </html>

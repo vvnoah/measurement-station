@@ -5844,10 +5844,19 @@ app.get('/detailsPage.html', (req, res) => { // .html moet er bijstaan om te kun
     res.sendFile(path.join(__dirname, '/public/html/detailsPage.html'));
 });
 
-app.get('/api/stations', (req, res) => {
-    res.json(stations);
-})
+// app.get('/api/stations', (req, res) => {
+//     res.json(stations);
+// })
 
+app.get('/api/stations', async (req, res) => {
+    try {
+        const response = await fetch('https://school.rogiersj.be/api/v1/Station/Latest?measurementAmount=1');
+        const data = await response.json();
+        res.json(data);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to fetch stations' });
+    }
+});
 
 app.listen(port, () => {
     console.log(`Server hosting on: http://localhost:${port}`);
