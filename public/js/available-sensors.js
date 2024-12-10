@@ -153,28 +153,43 @@ class AvailableSensors extends HTMLElement
     }
 
     updateOutput() {
-        let output = this.shadowRoot.querySelector("#output")
-        output.innerHTML = ""
+        let output = this.shadowRoot.querySelector("#output");
+        output.innerHTML = "";
+    
+        // Loop door de geselecteerde sensoren
         this.availableSensors.filter(x => x.isChecked).forEach(checkedSensor => {
-            let card = document.createElement("div")
-            card.setAttribute("class", "card")
-            card.innerHTML += `<b>${checkedSensor.type}</b>`
+            let card = document.createElement("div");
+            card.setAttribute("class", "card");
+            card.innerHTML += `<b>${checkedSensor.type}</b>`;
+    
+            // Verzamel gegevens van alle stations voor deze sensor
+            let sensorData = [];
             this.selectedStations.forEach(station => {
                 station.sensors.forEach(sensor => {
-                    if(sensor.id === checkedSensor.id) {
-                        card.innerHTML += `
+                    if (sensor.id === checkedSensor.id) {
+                        sensorData.push(`
                             <div>
-                                <span>${station.description}: </span><span> ${sensor.measurements[0].sensorValue}</span><span> ${sensor.unit}</span>
-                                    <div style="display:flex;justify-content:end;">
-                                        <button onclick=popup(${checkedSensor.id});><b>details</b></button>
-                                    </div>
+                                <span>${station.description}: </span>
+                                <span>${sensor.measurements[0].sensorValue}</span>
+                                <span>${sensor.unit}</span>
                             </div>
-                            `
+                        `);
                     }
-                })
-            })
-            output.appendChild(card)
-        })
+                });
+            });
+    
+            // Voeg de verzamelde gegevens toe aan de card
+            card.innerHTML += sensorData.join("");
+    
+            // Voeg slechts één details-knop toe voor de sensor
+            card.innerHTML += `
+                <div style="display:flex;justify-content:end;">
+                    <button onclick=popup(${checkedSensor.id});><b>details</b></button>
+                </div>`;
+    
+            output.appendChild(card);
+        });
     }
+    
 }
 customElements.define("available-sensors", AvailableSensors)
