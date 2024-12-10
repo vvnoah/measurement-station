@@ -6,6 +6,8 @@ eenWeekGeleden.setDate(vandaag.getDate() - 6) // Stel een week gelden in (7 dage
 
 const defaultDate = vandaag.toLocaleDateString('be-BE'); // Lokale datumformattering
 console.log("Standaard datum (vandaag):", defaultDate);
+var startDate = "";
+var endDate = "";
 
 //Initialiseer flatpickr voor een datumreeksselectie
 flatpickr("#dateRange", {
@@ -24,11 +26,12 @@ flatpickr("#dateRange", {
             var selectedDate = formatDateToLocal(selectedDates[0]).split('T')[0];
             console.log("Geselecteerde datum (enkele datum):", selectedDate);
         } else if (selectedDates.length === 2) {
-            const startDate = formatDateToLocal(selectedDates[0]).split('T')[0];
-            const endDate = formatDateToLocal(selectedDates[1]).split('T')[0];
+            startDate = formatDateToLocal(selectedDates[0]).split('T')[0];
+            endDate = formatDateToLocal(selectedDates[1]).split('T')[0];
             console.log("Geselecteerd bereik:", startDate, "tot", endDate);
 
             getMeasurementsByDate([startDate, endDate]);
+            fetch_specific_data(startDate, endDate);
         }
     },
     onOpen: function () {
@@ -36,6 +39,43 @@ flatpickr("#dateRange", {
         document.getElementById("dateRange").style.width = "100%";
     }
 });
+
+async function fetch_specific_data(startDate, endDate) 
+{
+    console.log("fetching data from " + startDate + " to " + endDate);
+    console.log("Selected ID's:",selectedIds);
+    console.log("SelectedStations", selectedStations);
+    console.log("GLOBAL SENSORID", globalSensorId);
+
+    for (const stationId of selectedStations) {
+        console.log("StationIDDDDDD", stationId.id);
+        if (typeof stationId.id !== 'string') {
+            console.error(`Invalid station ID: ${stationId}. Must be a string.`);
+            continue; // Skip invalid entries
+        }
+
+        console.log(`Fetching data for station ${stationId.id}...`);
+        try {
+            const response = await fetch(
+                `/api/fetch-specific-data?stationId=${stationId.id}&sensors=${globalSensorId}&startDate=${startDate}&endDate=${endDate}`,
+                {
+                    method: 'GET',
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error(`Error fetching data for station ${stationId.id}: ${response.statusText}`);
+            }
+
+            const data = await response.json();
+            console.log(`Data for Station ${stationId.id}:`, data);
+
+            // Optionally, process the data further here
+        } catch (error) {
+            console.error(`Error fetching data for station ${stationId}:`, error);
+        }
+    }
+}
 
 function formatDateToLocal(date) {
     // Zet de datum om naar lokale tijd in ISO-achtige notatie (YYYY-MM-DD)

@@ -5858,6 +5858,38 @@ app.get('/api/stations', async (req, res) => {
     }
 });
 
+// Proxy route to fetch data
+app.get('/api/fetch-specific-data', async (req, res) => {
+    const { stationId, sensors, startDate, endDate } = req.query;
+
+    // Validate input
+    if (!stationId || !sensors || !startDate || !endDate) {
+        return res.status(400).json({ error: "Missing required query parameters" });
+    }
+
+    const apiUrl = `https://school.rogiersj.be/api/v1/measurement/station/${stationId}`;
+
+    try {
+        // Fetch data from the external API
+        const response = await fetch(`${apiUrl}?sensors=${sensors}&startDate=${startDate}&endDate=${endDate}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            return res.status(response.status).json({ error: response.statusText });
+        }
+
+        const data = await response.json();
+        res.json(data); // Send the API response back to the frontend
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 app.listen(port, () => {
     console.log(`Server hosting on: http://localhost:${port}`);
 });

@@ -3,7 +3,8 @@ let selectedIds = []; // Array to track selected station IDs
 let temperature_chart, windspeed_chart, rainfall_chart, airquality_chart;
 let stationData = []; // Store station data for reference
 
-let selectedStations = []
+let selectedStations = [];
+let specificData = [];
 
 $(document).ready(async function () {
     // Fetch station data and initialize

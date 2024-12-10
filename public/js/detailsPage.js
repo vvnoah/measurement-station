@@ -1,7 +1,10 @@
+var globalSensorId ;
 //popup open
 function popup(sensorId) {
     const popup = document.getElementById("popup");
     popup.classList.remove("hidden");
+    console.log(sensorId);
+    globalSensorId = sensorId;
 
     // Zoek het juiste station en sensor
     let selectedSensor;
@@ -9,6 +12,7 @@ function popup(sensorId) {
         let sensor = station.sensors.find(s => s.id === sensorId);
         if (sensor) {
             selectedSensor = sensor;
+            //console.log(selectedSensor);
         }
     });
 
