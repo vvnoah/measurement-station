@@ -16,7 +16,7 @@ flatpickr("#dateRange", {
     allowInput: true,
     defaultDate: [vandaag],
     maxDate: vandaag,
-    "locale": "nl",
+    locale: "nl",
 
     onChange: function (selectedDates) {
         // Controleer of er 1 of 2 datums zijn geselecteerd
