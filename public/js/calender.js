@@ -10,7 +10,7 @@ var startDate = "";
 var endDate = "";
 
 //Initialiseer flatpickr voor een datumreeksselectie
-flatpickr("#dateRange", {
+const datepicker = flatpickr("#dateRange", {
     position: "auto", // Zorgt ervoor dat de kalender zich automatisch plaatst
     static: true, // Zorgt ervoor dat de kalender "in de flow" van de pagina blijft
     mode: "range", // Zet modus op 'range' voor begindatum en einddatum
@@ -59,8 +59,9 @@ async function fetch_specific_data(startDate, endDate) {
         console.log(`Fetching data for station ${stationId.id}...`);
         try {
             const response = await fetch(
-                `/api/fetch-specific-data?stationId=${stationId.id}&sensors=${globalSensorId}&startDate=${startDate}&endDate=${endDate}`,
-                { method: "GET" }
+                `/api/fetch-specific-data?stationId=${stationId.id}&sensors=${globalSensorId}&startDate=${startDate}&endDate=${endDate}`, {
+                    method: "GET"
+                }
             );
 
             if (!response.ok) {
@@ -91,6 +92,16 @@ async function fetch_specific_data(startDate, endDate) {
 
     const closeButton = document.getElementById('close-popup');
     closeButton.addEventListener('click', () => {
+
+        // Format de standaarddatum volgens het opgegeven formaat
+        const formattedToday = flatpickr.formatDate(vandaag, "d-m-Y");
+
+        // Reset de kalender
+        datepicker.clear(); // Verwijder huidige selectie
+        datepicker.setDate(formattedToday, true); // Stel de standaarddatum in
+        startDate = "";
+        endDate = "";
+
         // Clear the datepicker
         //flatpickr("#dateRange").defaultDate = [vandaag];
 
@@ -147,13 +158,12 @@ function renderChart(datasets, startDate, endDate) {
     }
 
     // Prepare labels (time axis) based on the first dataset
-    const labels = datasets[0]
-        ? datasets[0].data.map((_, index) => {
+    const labels = datasets[0] ?
+        datasets[0].data.map((_, index) => {
             const timestamp = new Date(startDate);
             timestamp.setMinutes(index * 15); // Example: 15-minute intervals
             return timestamp.toLocaleString();
-        })
-        : [];
+        }) : [];
 
     // Create the chart with multiple datasets
     window.myChart = new Chart(ctx, {
@@ -163,6 +173,8 @@ function renderChart(datasets, startDate, endDate) {
             datasets: datasets, // Pass all datasets for different stations
         },
         options: {
+            //pointBackgroundColor: 'rgba(0, 0, 0, 0)', //maakt de punten transparant, maar je kan wel de data nog zien als je met de muis er over beweegt
+            //pointBorderColor: 'rgba(0, 0, 0, 0)',
             responsive: true,
             plugins: {
                 title: {
@@ -196,4 +208,3 @@ function formatDateToLocal(date) {
         '-' + String(date.getMonth() + 1).padStart(2, '0') +
         '-' + String(date.getDate()).padStart(2, '0');
 }
-
