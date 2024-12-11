@@ -5874,7 +5874,6 @@ app.get('/api/fetch-specific-data', async (req, res) => {
     try {
         // Fetch data from the external API
         const response = await fetch(`${apiUrl}?sensors=${sensors}&startDate=${startDateObj}&endDate=${endDateObj}`, {
-        const response = await fetch(`${apiUrl}?sensors=${sensors}&startDate=${startDateObj}&endDate=${endDateObj}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
