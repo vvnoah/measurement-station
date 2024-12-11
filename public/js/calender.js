@@ -19,20 +19,12 @@ flatpickr("#dateRange", {
     defaultDate: [vandaag],
     maxDate: vandaag,
     "locale": "nl",
-
+    
     onChange: function (selectedDates) {
-        // Controleer of er 1 of 2 datums zijn geselecteerd
-        if (selectedDates.length === 1) {
-            var selectedDate = formatDateToLocal(selectedDates[0]).split('T')[0];
-            //startDate =selectedDate;
-            //endDate = selectedDate;
-            console.log("Geselecteerde datum (enkele datum):", selectedDate);
-        } else if (selectedDates.length === 2) {
+        if (selectedDates.length === 2) {
             startDate = formatDateToLocal(selectedDates[0]).split('T')[0];
             endDate = formatDateToLocal(selectedDates[1]).split('T')[0];
             console.log("Geselecteerd bereik:", startDate, "tot", endDate);
-
-            //getMeasurementsByDate([startDate, endDate]);
             fetch_specific_data(startDate, endDate);
         }
     },
@@ -42,6 +34,28 @@ flatpickr("#dateRange", {
     }
 
 });
+
+function berekenDagenVerschil(datum1, datum2) {
+    // Zorg dat de datums worden geconverteerd naar geldige Date-objecten
+    const d1 = new Date(datum1);
+    const d2 = new Date(datum2);
+
+    if (isNaN(d1) || isNaN(d2)) {
+        throw new Error("Ongeldige datum ingevoerd.");
+    }
+
+    // Stel beide datums in op middernacht om tijdcomponenten te negeren
+    d1.setHours(0, 0, 0, 0);
+    d2.setHours(0, 0, 0, 0);
+
+    // Bereken het verschil in milliseconden
+    const verschilMs = Math.abs(d1 - d2);
+
+    // Converteer het verschil naar dagen
+    const dagen = verschilMs / (1000 * 60 * 60 * 24);
+
+    return dagen;
+}
 
 //FETCH DATA VOOR SPECIFIEKE DATUM & SPECIFIEKE SENSOR! (API)
 async function fetch_specific_data(startDate, endDate) {
@@ -85,6 +99,7 @@ async function fetch_specific_data(startDate, endDate) {
         } catch (error) {
             console.error(`Error fetching data for station ${stationId.id}:`, error);
         }
+
     }
 
     renderChart(datasets, startDate, endDate); // Pass datasets to renderChart
@@ -104,6 +119,69 @@ async function fetch_specific_data(startDate, endDate) {
         endDate = "";
     });
 }
+
+async function fetch_specific_singledata(startDate, endDate) {
+    console.log("Fetching data from " + startDate + " to " + endDate);
+
+    const datasets = []; // To hold datasets for each station
+    const colors = ["rgba(75, 192, 192, 1)", "rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)", "rgba(255, 206, 86, 1)"]; // Predefined colors
+
+    for (const [index, stationId] of selectedStations.entries()) {
+        if (typeof stationId.id !== "string") {
+            console.error(`Invalid station ID: ${stationId}. Must be a string.`);
+            continue; // Skip invalid entries
+        }
+
+        console.log(`Fetching data for station ${stationId.id}...`);
+        try {
+            const response = await fetch(
+                `/api/fetch-specific-singledate?stationId=${stationId.id}&sensors=${globalSensorId}&startDate=${startDate}T00:00&endDate=${endDate}T23:59`,
+                { method: "GET" }
+            );
+
+            if (!response.ok) {
+                throw new Error(`Error fetching data for station ${stationId.id}: ${response.statusText}`);
+            }
+
+            const rawData = await response.json();
+            console.log(`Data for Station ${stationId.id}:`, rawData);
+
+            const measurements = rawData[0].measurements;
+            const reducedData = downsampleMeasurements(measurements, 20); // Downsample to 20 points
+            console.log("REDUCED DATA", reducedData);
+
+            // Prepare a dataset for the chart
+            datasets.push({
+                label: `Station ${stationId.id}`, // Label for the station
+                data: reducedData.map((point) => point.sensorValue), // Sensor values
+                borderColor: colors[index % colors.length], // Assign unique color
+                backgroundColor: colors[index % colors.length].replace("1)", "0.2)"), // Transparent background
+                tension: 0.1,
+            });
+        } catch (error) {
+            console.error(`Error fetching data for station ${stationId.id}:`, error);
+        }
+
+    }
+
+    renderChart(datasets, startDate, endDate); // Pass datasets to renderChart
+
+    const closeButton = document.getElementById('close-popup');
+    closeButton.addEventListener('click', () => {
+        // Clear the datepicker
+        //flatpickr("#dateRange").defaultDate = [vandaag];
+
+        // Clear the existing chart
+        if (window.myChart) {
+            window.myChart.destroy();
+        }
+
+        // Reset the startDate and endDate variables
+        startDate = "";
+        endDate = "";
+    });
+}
+
 
 
 //MEASUREMENTS DOWNSAMPLEN

@@ -24,6 +24,21 @@
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://npmcdn.com/flatpickr/dist/l10n/nl.js"></script>
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+    <script>
+        
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+var pusher = new Pusher('49d9d357bd1cd6ab9268', {
+  cluster: 'eu'
+});
+
+var channel = pusher.subscribe('WheaterStation-Channel');
+channel.bind('StationId-Event', function(data) {
+  //alert(JSON.stringify(data));
+});
+    </script>
 
     <title>UCLL MEETSTATIONS</title>
 </head>
