@@ -10,7 +10,7 @@ var startDate = "";
 var endDate = "";
 
 //Initialiseer flatpickr voor een datumreeksselectie
-flatpickr("#dateRange", {
+const datepicker = flatpickr("#dateRange", {
     position: "auto", // Zorgt ervoor dat de kalender zich automatisch plaatst
     static: true, // Zorgt ervoor dat de kalender "in de flow" van de pagina blijft
     mode: "range", // Zet modus op 'range' voor begindatum en einddatum
@@ -225,13 +225,12 @@ function renderChart(datasets, startDate, endDate) {
     }
 
     // Prepare labels (time axis) based on the first dataset
-    const labels = datasets[0]
-        ? datasets[0].data.map((_, index) => {
+    const labels = datasets[0] ?
+        datasets[0].data.map((_, index) => {
             const timestamp = new Date(startDate);
             timestamp.setMinutes(index * 15); // Example: 15-minute intervals
             return timestamp.toLocaleString();
-        })
-        : [];
+        }) : [];
 
     // Create the chart with multiple datasets
     window.myChart = new Chart(ctx, {
@@ -241,6 +240,8 @@ function renderChart(datasets, startDate, endDate) {
             datasets: datasets, // Pass all datasets for different stations
         },
         options: {
+            //pointBackgroundColor: 'rgba(0, 0, 0, 0)', //maakt de punten transparant, maar je kan wel de data nog zien als je met de muis er over beweegt
+            //pointBorderColor: 'rgba(0, 0, 0, 0)',
             responsive: true,
             plugins: {
                 title: {
@@ -274,4 +275,3 @@ function formatDateToLocal(date) {
         '-' + String(date.getMonth() + 1).padStart(2, '0') +
         '-' + String(date.getDate()).padStart(2, '0');
 }
-
