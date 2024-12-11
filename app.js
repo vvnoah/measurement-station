@@ -5869,9 +5869,12 @@ app.get('/api/fetch-specific-data', async (req, res) => {
 
     const apiUrl = `https://school.rogiersj.be/api/v1/measurement/station/${stationId}`;
 
+    const startDateObj = `${startDate}T00:01`;
+    const endDateObj = `${endDate}T23:59`;
+
     try {
         // Fetch data from the external API
-        const response = await fetch(`${apiUrl}?sensors=${sensors}&startDate=${startDate}&endDate=${endDate}`, {
+        const response = await fetch(`${apiUrl}?sensors=${sensors}&startDate=${startDateObj}&endDate=${endDateObj}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

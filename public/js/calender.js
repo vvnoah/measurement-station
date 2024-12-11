@@ -21,18 +21,20 @@ const datepicker = flatpickr("#dateRange", {
     "locale": "nl",
 
     onChange: function (selectedDates) {
-        // Controleer of er 1 of 2 datums zijn geselecteerd
         if (selectedDates.length === 1) {
-            var selectedDate = formatDateToLocal(selectedDates[0]).split('T')[0];
-            //startDate =selectedDate;
-            //endDate = selectedDate;
-            console.log("Geselecteerde datum (enkele datum):", selectedDate);
+            // Single date selected: include the time
+            const selectedDate = formatDateToLocal(selectedDates[0]);
+            // startDate = `${selectedDate}T00:01`;
+            // endDate = `${selectedDate}T23:59`;
+            startDate = selectedDate;
+            endDate = selectedDate;
+            console.log("Geselecteerde datum (enkele datum):", startDate, "tot", endDate);
+            fetch_specific_data(startDate, endDate);
         } else if (selectedDates.length === 2) {
-            startDate = formatDateToLocal(selectedDates[0]).split('T')[0];
-            endDate = formatDateToLocal(selectedDates[1]).split('T')[0];
+            // Date range selected: use dates without time
+            startDate = formatDateToLocal(selectedDates[0]);
+            endDate = formatDateToLocal(selectedDates[1]);
             console.log("Geselecteerd bereik:", startDate, "tot", endDate);
-
-            //getMeasurementsByDate([startDate, endDate]);
             fetch_specific_data(startDate, endDate);
         }
     },
