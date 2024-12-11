@@ -93,12 +93,9 @@ async function fetch_specific_data(startDate, endDate) {
     const closeButton = document.getElementById('close-popup');
     closeButton.addEventListener('click', () => {
 
-        // Format de standaarddatum volgens het opgegeven formaat
-        const formattedToday = flatpickr.formatDate(vandaag, "d-m-Y");
-
         // Reset de kalender
         datepicker.clear(); // Verwijder huidige selectie
-        datepicker.setDate(formattedToday, true); // Stel de standaarddatum in
+        datepicker.setDate(defaultDate, true); // Stel de standaarddatum in
         startDate = "";
         endDate = "";
 
