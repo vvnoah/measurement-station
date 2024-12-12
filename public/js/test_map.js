@@ -1,3 +1,7 @@
+//global vars:
+//attempt loading icon:
+var isLoadig = false;
+
 // Initialize the map with the specified settings
 var map = L.map('map', {
     maxZoom: 20,
@@ -77,7 +81,7 @@ function addMarkers(stations) {
         // Create a circle marker for each station using latitude and longitude
 
         const markerColor = station.onlineStatus == 'Online' ? "limegreen" : "crimson";
-        console.log(markerColor);
+        //console.log(markerColor);
         const marker = L.circleMarker([station.latitude, station.longitude], {
             radius: 6,
             weight: 2,
@@ -128,23 +132,18 @@ function addMarkers(stations) {
 }
 
 function get_popup_content(station) {
-    const temperature = getLastTemperature(station); // Haal de laatste temperatuurwaarde op
+    const temperature = getLastTemperature(station) !== null
+        ? Number(getLastTemperature(station)).toFixed(2)
+        : "N/A";
+
+    const batteryLevel = station.batteryLevel !== null
+        ? `${Number(station.batteryLevel).toFixed(2)}%`
+        : "N/A";
+        
     let popup_content_temperature;
-    if(temperature != null)
-    {
-        popup_content_temperature = `<b>${station.description}:</b> <br>${temperature}°C`
-    } else {
-        popup_content_temperature = `<b>${station.description}:</b> <br>Geen temperatuurdata beschikbaar`
-    }
-
-    if (station.batteryLevel != null) {
-        popup_content_temperature += `<br> <b>BatteryLevel:</b> ${station.batteryLevel}%`
-    } else {
-        popup_content_temperature += `<br> <b>Geen batterijdata</b>`
-    }
-
-
-    return popup_content_temperature
+    popup_content_temperature = `<b>${station.description}:</b> <br>Temperature: ${temperature}°C`;
+    popup_content_temperature += `<br> <i>BatteryLevel: </b> ${batteryLevel}`;
+    return popup_content_temperature;
 }
 
 // Functie om de laatste temperatuurwaarde op te halen

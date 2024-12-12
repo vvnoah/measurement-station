@@ -8,13 +8,13 @@ function popup(sensorId) {
 
     // Zoek het juiste station en sensor
     let selectedSensor;
-    input_data.forEach(station => {
-        let sensor = station.sensors.find(s => s.id === sensorId);
-        if (sensor) {
-            selectedSensor = sensor;
-            //console.log(selectedSensor);
-        }
-    });
+    // input_data.forEach(station => {
+    //     let sensor = station.sensors.find(s => s.id === sensorId);
+    //     if (sensor) {
+    //         selectedSensor = sensor;
+    //         //console.log(selectedSensor);
+    //     }
+    // });
 
     if (!selectedSensor) {
         console.error(`Geen sensor gevonden met ID ${sensorId}`);

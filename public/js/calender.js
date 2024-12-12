@@ -9,61 +9,89 @@ console.log("Standaard datum (vandaag):", defaultDate);
 var startDate = "";
 var endDate = "";
 
+//EVENTLISTENER VOOR DE CLOSE BUTTON IN DE POPUP
+// => reset de date and reload chart.
+document.addEventListener("DOMContentLoaded", function () 
+{
+    const closeButton = document.getElementById('close-popup');
+    closeButton.addEventListener('click', () => {
+        //console.log('Close button clicked');
+
+        // Format de standaarddatum volgens het opgegeven formaat
+        const formattedToday = flatpickr.formatDate(vandaag, "d-m-Y");
+
+        // Reset calendar
+        datepicker.clear(); // Verwijder huidige selectie
+        datepicker.setDate(defaultDate, true); // Stel de standaarddatum in
+        startDate = "";
+        endDate = "";
+
+        // Clear bestaande chart
+        if (window.myChart) {
+            window.myChart.destroy();
+            window.myChart = null;
+        }
+        startDate = "";
+        endDate = "";
+    });
+});
+
 //Initialiseer flatpickr voor een datumreeksselectie
+// Datepicker instellingen blijven hetzelfde zoals hierboven
 const datepicker = flatpickr("#dateRange", {
-    position: "auto", // Zorgt ervoor dat de kalender zich automatisch plaatst
-    static: true, // Zorgt ervoor dat de kalender "in de flow" van de pagina blijft
-    mode: "range", // Zet modus op 'range' voor begindatum en einddatum
+    position: "auto",
+    static: true,
+    mode: "range",
     dateFormat: "d-m-Y",
     allowInput: true,
     defaultDate: [vandaag],
     maxDate: vandaag,
-    "locale": "nl",
-
+    locale: "nl",
     onChange: function (selectedDates) {
-        if (selectedDates.length === 1) {
-            // Single date selected: include the time
-            const selectedDate = formatDateToLocal(selectedDates[0]);
-            // startDate = `${selectedDate}T00:01`;
-            // endDate = `${selectedDate}T23:59`;
-            startDate = selectedDate;
-            endDate = selectedDate;
-            console.log("Geselecteerde datum (enkele datum):", startDate, "tot", endDate);
+        if (selectedDates.length === 1) 
+        {
+            startDate = formatDateToLocal(selectedDates[0]);
+            endDate = formatDateToLocal(selectedDates[0]);
             fetch_specific_data(startDate, endDate);
-        } else if (selectedDates.length === 2) {
-            // Date range selected: use dates without time
+        } 
+        else if (selectedDates.length === 2) 
+        {
             startDate = formatDateToLocal(selectedDates[0]);
             endDate = formatDateToLocal(selectedDates[1]);
-            console.log("Geselecteerd bereik:", startDate, "tot", endDate);
             fetch_specific_data(startDate, endDate);
         }
     },
-    onOpen: function () {
-        // Reset de breedte van het input veld naar 100%
-        document.getElementById("dateRange").style.width = "100%";
+});
+
+//TIJDSINTERVALLEN GENEREREN GRAFIEK
+function generateTimeIntervals(startDate, endDate, stepSize = 15, timeUnit = "minute") {
+    const intervals = [];
+    const start = new Date(startDate).getTime();
+    const end = new Date(endDate).getTime();
+    const stepInMillis = {
+        minute: stepSize * 60 * 1000,
+        hour: stepSize * 60 * 60 * 1000,
+        day: stepSize * 24 * 60 * 60 * 1000,
+    }[timeUnit];
+
+    for (let time = start; time <= end; time += stepInMillis) {
+        intervals.push(new Date(time).toISOString());
     }
 
-});
+    return intervals;
+}
 
 //FETCH DATA VOOR SPECIFIEKE DATUM & SPECIFIEKE SENSOR! (API)
 async function fetch_specific_data(startDate, endDate) {
-    console.log("Fetching data from " + startDate + " to " + endDate);
+    console.log(`Fetching data from ${startDate} to ${endDate}`);
 
-    const datasets = []; // To hold datasets for each station
-    const colors = ["rgba(75, 192, 192, 1)", "rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)", "rgba(255, 206, 86, 1)"]; // Predefined colors
+    const datasets = [];
+    const colors = ["rgba(75, 192, 192, 1)", "rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)", "rgba(255, 206, 86, 1)"];
 
     for (const [index, stationId] of selectedStations.entries()) {
-        if (typeof stationId.id !== "string") {
-            console.error(`Invalid station ID: ${stationId}. Must be a string.`);
-            continue; // Skip invalid entries
-        }
-
-        console.log(`Fetching data for station ${stationId.id}...`);
         try {
             const response = await fetch(
-                `/api/fetch-specific-data?stationId=${stationId.id}&sensors=${globalSensorId}&startDate=${startDate}&endDate=${endDate}`, {
-                    method: "GET"
-                }
+                `/api/fetch-specific-data?stationId=${stationId.id}&sensors=${globalSensorId}&startDate=${startDate}&endDate=${endDate}`
             );
 
             if (!response.ok) {
@@ -71,18 +99,32 @@ async function fetch_specific_data(startDate, endDate) {
             }
 
             const rawData = await response.json();
-            console.log(`Data for Station ${stationId.id}:`, rawData);
+            console.log('rawData:', rawData);
+            // LEGE DATA => continue next station
+            if (!rawData || rawData.length === 0) {
+                console.warn(`No data found for station ${stationId.id}`);
+                continue; // Skip 
+            }
 
             const measurements = rawData[0].measurements;
-            const reducedData = downsampleMeasurements(measurements, 20); // Downsample to 20 points
-            console.log("REDUCED DATA", reducedData);
 
-            // Prepare a dataset for the chart
+            //LEGE MEASUREMENTS => Skip
+            if (!measurements || measurements.length === 0) {
+                console.warn(`No measurements found for station ${stationId.id}`);
+                continue;
+            }
+
+            const reducedData = downsampleMeasurements(measurements, 50); //aantal measurements meegeven voor op chart (INT)
+            console.log('reducedData:', reducedData);
+
             datasets.push({
-                label: `Station ${stationId.id}`, // Label for the station
-                data: reducedData.map((point) => point.sensorValue), // Sensor values
-                borderColor: colors[index % colors.length], // Assign unique color
-                backgroundColor: colors[index % colors.length].replace("1)", "0.2)"), // Transparent background
+                label: `Station ${stationId.id}`,
+                data: reducedData.map((point) => ({
+                    x: new Date(point.timestamp).toISOString(),
+                    y: point.sensorValue,
+                })), // Align timestamp and value
+                borderColor: colors[index % colors.length],
+                backgroundColor: colors[index % colors.length].replace("1)", "0.2)"),
                 tension: 0.1,
             });
         } catch (error) {
@@ -90,120 +132,191 @@ async function fetch_specific_data(startDate, endDate) {
         }
     }
 
-    renderChart(datasets, startDate, endDate); // Pass datasets to renderChart
-
-    const closeButton = document.getElementById('close-popup');
-    closeButton.addEventListener('click', () => {
-
-        // Reset de kalender
-        datepicker.clear(); // Verwijder huidige selectie
-        datepicker.setDate(defaultDate, true); // Stel de standaarddatum in
-        startDate = "";
-        endDate = "";
-
-        // Clear the datepicker
-        //flatpickr("#dateRange").defaultDate = [vandaag];
-
-        // Clear the existing chart
+    // Render als data correct
+    if (datasets.length > 0) {
+        renderChart(datasets, startDate, endDate);
+    } else {
+        console.log('No data available to render chart');
         if (window.myChart) {
             window.myChart.destroy();
         }
+    }
+}
 
-        // Reset the startDate and endDate variables
-        startDate = "";
-        endDate = "";
-    });
+// FORMATTEREN DATUM LEESBAAR FORMAAT CODE
+function formatDateToLocal(date) 
+{
+    return date.getFullYear() +
+        "-" + String(date.getMonth() + 1).padStart(2, "0") +
+        "-" + String(date.getDate()).padStart(2, "0");
 }
 
 
-//MEASUREMENTS DOWNSAMPLEN
+//MEASUREMENTS DOWNSAMPLEN NAAR GEWENST AANTAL
 function downsampleMeasurements(measurements, targetSamples) {
     if (measurements.length <= targetSamples) {
-        // If the data already has fewer points than the target, return all points!!!!
-        return measurements;
+        return measurements; // ALS MINDER DAN TARGETSAMPLES, RETURN ALLE BESCHIKBARE MEASUREMENTS
     }
 
-    // Sort the data by timestamp (just in case it isn't sorted)
-    measurements.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+    measurements.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp)); // Sort by timestamp
 
-    const step = Math.floor(measurements.length / targetSamples); // Step size to pick samples
+    const step = Math.floor(measurements.length / targetSamples); 
     const downsampled = [];
 
     for (let i = 0; i < measurements.length; i += step) {
-        downsampled.push(measurements[i]);
+        downsampled.push(measurements[i]); 
     }
 
-    // Ensure we include the last measurement (if it wasn't included due to step rounding)
-    if (measurements.length % step !== 0 && downsampled[downsampled.length - 1] !== measurements[measurements.length - 1]) {
-        downsampled.push(measurements[measurements.length - 1]);
+    // Laatste meting toevoegen voor correcte weergave
+    const latestMeasurement = measurements[measurements.length - 1];
+    if (!downsampled.some((m) => m.timestamp === latestMeasurement.timestamp)) {
+        downsampled.push(latestMeasurement);
     }
 
     return downsampled;
 }
 
 
-//RENDER CHART
+
+//RENDER CHART DETAILSPAGE
 function renderChart(datasets, startDate, endDate) {
     const canvas = document.getElementById("details-popup-chart");
     const ctx = canvas.getContext("2d");
 
-    // Explicitly set fixed size for the canvas
-    canvas.width = 800; // Fixed width
-    canvas.height = 350; // Fixed height
+    canvas.width = 800;
+    canvas.height = 350;
 
-    // Clear existing chart if needed
+    // VERDELING Y-AS:
+    let globalMin = Infinity;
+    let globalMax = -Infinity;
+
+    datasets.forEach(dataset => {
+        dataset.data.forEach(point => {
+            if (point.y < globalMin) globalMin = point.y;
+            if (point.y > globalMax) globalMax = point.y;
+        });
+    });
+    //console.log("MIN & MAX GLOBAL", globalMin, globalMax);
+
+    // Als min & max equal => +1 en -1 voor buffer
+     if (globalMin === globalMax) {
+         globalMin -= 1; 
+         globalMax += 1; 
+     }
+
+    // const range = globalMax - globalMin;
+    // const buffer = range * 0.2; // 20% buffer
+    var newMin = (globalMin*1) - (globalMin * 0.4); // 40% buffer
+    var newMax = (globalMax*1) + (globalMax * 0.4);
+
+    var m = newMin - globalMin;
+    var x = newMax - globalMax;
+    var EqualDifference = (m + x)/2;
+
+    //console.log("EQUALDIFFERENCE", EqualDifference);
+
+    const calculatedMinValue = globalMin - EqualDifference; 
+    const calculatedMaxValue = (globalMax*1) + EqualDifference; 
+    //console.log("MIN & MAX CALCULATED", calculatedMinValue, calculatedMaxValue);
+
+
     if (window.myChart) {
         window.myChart.destroy();
+        window.myChart = null;
     }
 
-    // Prepare labels (time axis) based on the first dataset
-    const labels = datasets[0] ?
-        datasets[0].data.map((_, index) => {
-            const timestamp = new Date(startDate);
-            timestamp.setMinutes(index * 15); // Example: 15-minute intervals
-            return timestamp.toLocaleString();
-        }) : [];
+    // VERDELING X-AS:
+    const rangeStart = new Date(startDate).getTime();
+    const rangeEnd = new Date(endDate).getTime();
+    const rangeDuration = rangeEnd - rangeStart;
 
-    // Create the chart with multiple datasets
+    let timeUnit, stepSize, tooltipFormat, displayFormats;
+
+    // Range van 2 days of minder: display hours and minutes with the day
+    if (rangeDuration <= 2 * 24 * 60 * 60 * 1000) 
+    {
+        timeUnit = "minute";
+        stepSize = 15; //ticks every 15 minutes
+        tooltipFormat = "dd-MM-yyyy HH:mm";
+        displayFormats = {
+            minute: "dd-MM HH:mm", // day, hours, and minutes
+            hour: "dd-MM HH:mm",   // For hourly data
+        };
+    } 
+    // Voor range van 7 days of minder: display hours and the day
+    else if (rangeDuration <= 7 * 24 * 60 * 60 * 1000) 
+    {
+        timeUnit = "hour";
+        stepSize = 1; //ticks every hour
+        tooltipFormat = "dd-MM-yyyy HH:mm";
+        displayFormats = {
+            hour: "dd-MM HH:mm", // Show day and hours
+            day: "dd-MM",        // For fallback
+        };
+    } 
+    // Grote ranges: display only days
+    else 
+    {
+        timeUnit = "day";
+        stepSize = 1; // ticks every day
+        tooltipFormat = "dd-MM-yyyy";
+        displayFormats = {
+            day: "dd-MM", // Show only day
+            week: "dd-MM-yyyy", // Fallback for very large ranges
+        };
+    }
+
+    // Generate fallback labels for the X-axis if datasets are empty
+    const labels = datasets.length === 0
+        ? generateTimeIntervals(startDate, endDate, stepSize, timeUnit) // Generate intervals
+        : datasets[0].data.map((point) => point.x);
+
     window.myChart = new Chart(ctx, {
         type: "line",
         data: {
-            labels: labels, // X-axis time labels
-            datasets: datasets, // Pass all datasets for different stations
+            labels: labels,
+            datasets: datasets,
         },
         options: {
+            //VRAGEN AAN KLANT OF GEWENST!
             //pointBackgroundColor: 'rgba(0, 0, 0, 0)', //maakt de punten transparant, maar je kan wel de data nog zien als je met de muis er over beweegt
             //pointBorderColor: 'rgba(0, 0, 0, 0)',
             responsive: true,
             plugins: {
                 title: {
                     display: true,
-                    text: `Sensor Data Comparison (${startDate} to ${endDate})`,
+                    text: `Sensor Data (${startDate} to ${endDate})`,
                 },
             },
             scales: {
                 x: {
+                    type: "time", // Time scale, punten dynamisch plotten
+                    time: {
+                        unit: timeUnit, // Adjust dynamically
+                        stepSize: stepSize, // Set step size dynamically
+                        tooltipFormat: tooltipFormat, // Tooltip format
+                        displayFormats: displayFormats, // Dynamic display formats
+                    },
                     title: {
                         display: true,
-                        text: "Time",
+                        text: "Time (Day and Hours)",
                     },
+                    // min: new Date(startDate).toISOString(),
+                    // max: new Date(endDate).toISOString(),
+                    //min: new Date(new Date(startDate).getTime() - 12 * 60 * 60 * 1000), // 12 hours before
+                    //max: new Date(new Date(endDate).getTime() + 12 * 60 * 60 * 1000),  // 12 hours after
+                    min: new Date(new Date(startDate).getTime() -1*60*60*1000), // 12 hours before
+                    max: new Date(new Date(endDate).getTime() + 24 * 60 * 60 * 1000),  // 12 hours after
                 },
                 y: {
                     title: {
                         display: true,
                         text: "Sensor Value",
                     },
+                    min: calculatedMinValue,
+                    max: calculatedMaxValue,
                 },
             },
         },
     });
-}
-
-
-
-function formatDateToLocal(date) {
-    // Zet de datum om naar lokale tijd in ISO-achtige notatie (YYYY-MM-DD)
-    return date.getFullYear() +
-        '-' + String(date.getMonth() + 1).padStart(2, '0') +
-        '-' + String(date.getDate()).padStart(2, '0');
 }

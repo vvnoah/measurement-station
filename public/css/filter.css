@@ -80,8 +80,3 @@
     color: var(--clr-txt-on-interactable);
     border: 4px inset var(--clr-interactable);
 }
-
-.chart-container {
-    width: 100%;
-    height: 300px !important;
-}

@@ -5869,7 +5869,7 @@ app.get('/api/fetch-specific-data', async (req, res) => {
 
     const apiUrl = `https://school.rogiersj.be/api/v1/measurement/station/${stationId}`;
 
-    const startDateObj = `${startDate}T00:01`;
+    const startDateObj = `${startDate}T00:00`;
     const endDateObj = `${endDate}T23:59`;
 
     try {
