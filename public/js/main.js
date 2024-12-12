@@ -7,7 +7,8 @@ let selectedStations = [];
 let specificData = [];
 
 $(document).ready(async function () {
-    // Fetch station data and initialize
+    showLoadingOverlay();
+
     stationData = await fetch_data();
 
     // Initialize DataTable
@@ -24,6 +25,10 @@ $(document).ready(async function () {
             { data: 'description' }
         ],
     });
+
+    addMarkers(stationData);
+
+    hideLoadingOverlay();
 
     // Handle checkbox toggle in the DataTable
     $('#datatable tbody').on('change', '.select-checkbox', function () {
@@ -47,6 +52,16 @@ $(document).ready(async function () {
         updateSelection();
     });
 });
+
+function showLoadingOverlay() 
+{
+    document.getElementById("loading-overlay").style.display = "flex";
+}
+
+function hideLoadingOverlay()
+{
+    document.getElementById("loading-overlay").style.display = "none";
+}
 
 // Fetch data from the API
 async function fetch_data() {

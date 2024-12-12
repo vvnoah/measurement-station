@@ -40,6 +40,7 @@ new L.Control.Zoom({
 fetch('data/flanders.geojson')
     .then(response => response.json())
     .then(data => {
+        //showLoadingOverlay();
         var flandersLayer = L.geoJSON(data, {
             style: function (feature) {
                 return {
@@ -61,10 +62,15 @@ fetch('data/flanders.geojson')
 
         // Fetch station data after GeoJSON is loaded
         fetch_data().then(data => {
-            addMarkers(data);
+            //addMarkers(data);
+        }).finally(() => {
+            //hideLoadingOverlay();
         });
     })
-    .catch(error => console.error('Error loading the geoJSON file:', error));
+    .catch(error => {
+        console.error('Error loading the geoJSON file:', error);
+        hideLoadingOverlay(); // Ensure overlay is hidden even on error
+    });
 
 // Map of station IDs to marker objects
 let markersMap = {};
