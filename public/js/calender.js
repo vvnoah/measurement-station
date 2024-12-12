@@ -130,6 +130,7 @@ async function fetch_specific_data(startDate, endDate) {
         } catch (error) {
             console.error(`Error fetching data for station ${stationId.id}:`, error);
         }
+
     }
 
     // Render als data correct
@@ -150,6 +151,7 @@ function formatDateToLocal(date)
         "-" + String(date.getMonth() + 1).padStart(2, "0") +
         "-" + String(date.getDate()).padStart(2, "0");
 }
+
 
 
 //MEASUREMENTS DOWNSAMPLEN NAAR GEWENST AANTAL
