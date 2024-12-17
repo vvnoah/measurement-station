@@ -172,7 +172,7 @@ class AvailableSensors extends HTMLElement
                         sensorData.push(`
                             <div>
                                 <span>${station.name}: </span>
-                                <span>${sensor.measurements[0].sensorValue}</span>
+                                <span>${Math.round(sensor.measurements[0].sensorValue * 100) / 100}</span>
                                 <span>${sensor.unit}</span>
                             </div>
                         `,

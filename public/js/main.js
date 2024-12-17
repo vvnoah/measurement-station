@@ -21,6 +21,7 @@ $(document).ready(async function () {
                     return `<input type="checkbox" class="select-checkbox" data-id="${data.id}">`;
                 }
             },
+            { data: 'name'},
             { data: 'id' },
             { data: 'description' }
         ],
