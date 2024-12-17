@@ -1,5 +1,4 @@
-
-//let checkedSensor;
+let checkedSensorName;
 class AvailableSensors extends HTMLElement 
 {
     constructor() {
@@ -163,6 +162,7 @@ class AvailableSensors extends HTMLElement
             let card = document.createElement("div");
             card.setAttribute("class", "card");
             card.innerHTML += `<b>${checkedSensor.type}</b>`;
+            checkedSensorName = checkedSensor.type;
     
             // Verzamel gegevens van alle stations voor deze sensor
             let sensorData = [];
@@ -175,7 +175,9 @@ class AvailableSensors extends HTMLElement
                                 <span>${sensor.measurements[0].sensorValue}</span>
                                 <span>${sensor.unit}</span>
                             </div>
-                        `);
+                        `,
+                    
+                    );
                     }
                 });
             });
