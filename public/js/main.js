@@ -1,3 +1,5 @@
+//const { Title } = require("chart.js");
+
 // Global variables
 let selectedIds = []; // Array to track selected station IDs
 let temperature_chart, windspeed_chart, rainfall_chart, airquality_chart;
@@ -21,15 +23,20 @@ $(document).ready(async function () {
                     return `<input type="checkbox" class="select-checkbox" data-id="${data.id}">`;
                 }
             },
+            { data: 'name', title: 'Name' },
             { data: 'name'},
-            { data: 'id' },
-            { data: 'description' }
+            { data: 'id', title: 'ID' },
+            { data: 'description', title: 'Description' },
         ],
         pageLength: 5,
         lengthMenu: [
             [5, 10, 25, 50],
             [5, 10, 25, 50]
-        ]
+        ],
+         drawCallback: function () {
+            // Sync checkboxes after every redraw
+            syncCheckboxesWithSelection();
+        }
     });
 
     addMarkers(stationData);
@@ -79,6 +86,9 @@ function updateSelection() {
     syncAvailableSensorsWithSelection()
     syncCheckboxesWithSelection()
     syncMarkersWithSelection()
+
+    // Force a redraw to apply checkbox changes
+    $('#datatable').DataTable().draw(false);
 }
 
 function syncAvailableSensorsWithSelection() {
@@ -89,12 +99,28 @@ function syncAvailableSensorsWithSelection() {
 }
 
 // Sync table checkboxes with the selection array
+// function syncCheckboxesWithSelection() {
+//     $('#datatable tbody .select-checkbox').each(function () {
+//         const stationId = $(this).data('id');
+//         $(this).prop('checked', selectedIds.includes(stationId));
+//     });
+// }
 function syncCheckboxesWithSelection() {
-    $('#datatable tbody .select-checkbox').each(function () {
-        const stationId = $(this).data('id');
-        $(this).prop('checked', selectedIds.includes(stationId));
+    const table = $('#datatable').DataTable();
+
+    table.rows().every(function () {
+        const data = this.data(); // Fetch data for the row
+        const stationId = data.id; // Station ID for this row
+        const isChecked = selectedIds.includes(stationId);
+
+        // Update the checkbox directly
+        const row = this.node();
+        const checkbox = $(row).find('.select-checkbox');
+
+        checkbox.prop('checked', isChecked);
     });
 }
+
 
 // Sync map markers with the selection array
 function syncMarkersWithSelection() {
