@@ -24,7 +24,6 @@ $(document).ready(async function () {
                 }
             },
             { data: 'name', title: 'Name' },
-            { data: 'name'},
             { data: 'id', title: 'ID' },
             { data: 'description', title: 'Description' },
         ],
