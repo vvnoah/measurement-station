@@ -16,7 +16,7 @@
 
 #datatable-container {
     width: 100%;
-    height: 450px;
+    height: 450px !important;
     position: relative;
     overflow-y: scroll;
     background-color: white;
@@ -124,4 +124,9 @@
     #datatable-container {
         position: relative;
         height: 100%;
+    }
+
+    /*No data div*/
+    .hidden {
+        display: none;
     }

@@ -24,6 +24,11 @@ $(document).ready(async function () {
             { data: 'id' },
             { data: 'description' }
         ],
+        pageLength: 5,
+        lengthMenu: [
+            [5, 10, 25, 50],
+            [5, 10, 25, 50]
+        ]
     });
 
     addMarkers(stationData);

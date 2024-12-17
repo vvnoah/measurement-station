@@ -133,11 +133,15 @@ async function fetch_specific_data(startDate, endDate) {
 
     }
 
+    const noDataMessage = document.getElementById('no-data-message');
     // Render als data correct
     if (datasets.length > 0) {
+        noDataMessage.classList.add('hidden');
         renderChart(datasets, startDate, endDate);
     } else {
         console.log('No data available to render chart');
+        
+        noDataMessage.classList.remove('hidden');
         if (window.myChart) {
             window.myChart.destroy();
         }
