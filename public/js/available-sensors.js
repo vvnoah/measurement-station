@@ -100,7 +100,7 @@ class AvailableSensors extends HTMLElement
 
     update() {
         const data = this.getAttribute("data") || "[]"
-        console.log(data)
+        //console.log(data)
         this.selectedStations = JSON.parse(data)
         this.availableSensors = []
         this.updateAvailableSensors()

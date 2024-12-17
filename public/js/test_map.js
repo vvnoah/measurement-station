@@ -125,9 +125,11 @@ function addMarkers(stations) {
             if (!isSelected) {
                 selectedStations.push(station)
                 selectedIds.push(station.id);
+                //console.log(selectedIds);
             } else {
                 selectedStations.pop(station)
                 selectedIds = selectedIds.filter(id => id !== station.id);
+                //console.log(selectedIds);
             }
 
             updateSelection()

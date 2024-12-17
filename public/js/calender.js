@@ -291,7 +291,7 @@ function renderChart(datasets, startDate, endDate) {
             plugins: {
                 title: {
                     display: true,
-                    text: `${checkedSensorName} sensor Data (${startDate} to ${endDate})`,
+                    text: `Data ${checkedSensorName} sensor (${startDate} to ${endDate})`,
                 },
             },
             scales: {
