@@ -147,7 +147,7 @@ function get_popup_content(station) {
         : "N/A";
         
     let popup_content_temperature;
-    popup_content_temperature = `<b>${station.description}:</b> <br>Temperature: ${temperature}°C`;
+    popup_content_temperature = `<b>${station.name}:</b> <br>Temperature: ${temperature}°C`;
     popup_content_temperature += `<br> <i>BatteryLevel: </b> ${batteryLevel}`;
     return popup_content_temperature;
 }

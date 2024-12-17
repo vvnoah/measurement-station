@@ -171,7 +171,7 @@ class AvailableSensors extends HTMLElement
                     if (sensor.id === checkedSensor.id) {
                         sensorData.push(`
                             <div>
-                                <span>${station.description}: </span>
+                                <span>${station.name}: </span>
                                 <span>${sensor.measurements[0].sensorValue}</span>
                                 <span>${sensor.unit}</span>
                             </div>
