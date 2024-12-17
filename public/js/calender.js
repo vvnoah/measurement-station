@@ -21,18 +21,21 @@ document.addEventListener("DOMContentLoaded", function ()
         const formattedToday = flatpickr.formatDate(vandaag, "d-m-Y");
 
         // Reset calendar
-        datepicker.clear(); // Verwijder huidige selectie
-        datepicker.setDate(defaultDate, true); // Stel de standaarddatum in
-        startDate = "";
-        endDate = "";
+        //datepicker.clear(); // Verwijder huidige selectie
+        //datepicker.setDate(defaultDate, true); // Stel de standaarddatum in
+        //startDate = "";
+        //endDate = "";
 
         // Clear bestaande chart
         if (window.myChart) {
+            console.log("we get here bitch")
             window.myChart.destroy();
-            window.myChart = null;
+            const noDataMessage = document.getElementById('no-data-message');
+            noDataMessage.classList.remove('hidden');
+            //window.myChart = null;
         }
-        startDate = "";
-        endDate = "";
+        //startDate = "";
+        //endDate = "";
     });
 });
 
