@@ -1,6 +1,6 @@
 // er is eigenlijk maar 1 chart nodig
 //dus moet nog nagekeken worden wat weg moet en wat niet
-
+/*
 function create_line_chart(chart_element_id, chart_title) {
   const config = {
     type: 'line',
@@ -31,7 +31,7 @@ function create_line_chart(chart_element_id, chart_title) {
 
   return chart;
 }
-
+*/
 // Add datasets to all charts
 //dees moet toch beter kunnen
 function addDatasetToCharts(station) {
@@ -49,7 +49,7 @@ function removeDatasetFromCharts(stationId) {
   removeDatasetFromChart(rainfall_chart, stationId);
   removeDatasetFromChart(airquality_chart, stationId);
 }
-
+/*
 // Chart helper functions
 function create_line_chart(elementId, title) {
   return new Chart(document.getElementById(elementId).getContext('2d'), {
@@ -67,7 +67,7 @@ function create_line_chart(elementId, title) {
     }
   });
 }
-
+*/
 function addDatasetToChart(chart, station, dataType) {
   chart.data.datasets.push({
     id: station.id,

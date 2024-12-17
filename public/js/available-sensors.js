@@ -1,3 +1,5 @@
+
+let checkedSensor;
 class AvailableSensors extends HTMLElement 
 {
     constructor() {
