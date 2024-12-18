@@ -103,6 +103,7 @@ async function fetch_specific_data(startDate, endDate) {
 
             const rawData = await response.json();
             console.log('rawData:', rawData);
+            checkedSensorName = rawData[0].type;
             // LEGE DATA => continue next station
             if (!rawData || rawData.length === 0) {
                 console.warn(`No data found for station ${stationId.id}`);

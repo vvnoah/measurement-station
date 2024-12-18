@@ -26,7 +26,6 @@ function popup(sensorId) {
         timestamps: selectedSensor.measurements.map(m => m.timestamp.split("T")[1]), // Gebruik tijd
         values: selectedSensor.measurements.map(m => parseFloat(m.value)),
     };
-
     // Render grafiek
     initializeDetailsChart(data);
 }
