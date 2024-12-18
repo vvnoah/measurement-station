@@ -122,7 +122,7 @@ async function fetch_specific_data(startDate, endDate) {
             console.log('reducedData:', reducedData);
 
             datasets.push({
-                label: `Station ${stationId.id}`,
+                label: `Station ${stationId.name}`,
                 data: reducedData.map((point) => ({
                     x: new Date(point.timestamp).toISOString(),
                     y: point.sensorValue,
