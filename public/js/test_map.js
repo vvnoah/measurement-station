@@ -14,6 +14,7 @@ var map = L.map('map', {
     dragging: true,
     zoomSnap: 0.1,
 }).setView([51.1000, 4.4517]);
+//////////////////////////////////////////////////////////////////////////////////////
 
 //legende toevoegen links boven op de kaart
 const legend = L.control({
@@ -35,6 +36,8 @@ legend.addTo(map);
 new L.Control.Zoom({
     position: 'bottomright',
 }).addTo(map);
+
+//////////////////////////////////////////////////////////////////////////////////////
 
 // Load the greyed-out Flanders region from GeoJSON
 fetch('data/flanders.geojson')
