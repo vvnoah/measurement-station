@@ -1,5 +1,3 @@
-//const { Title } = require("chart.js");
-
 // Global variables
 let selectedIds = []; // Array to track selected station IDs
 let temperature_chart, windspeed_chart, rainfall_chart, airquality_chart;
@@ -32,7 +30,7 @@ $(document).ready(async function () {
             [5, 10, 25, 50],
             [5, 10, 25, 50]
         ],
-         drawCallback: function () {
+        drawCallback: function () {
             // Sync checkboxes after every redraw
             syncCheckboxesWithSelection();
         }
@@ -65,13 +63,11 @@ $(document).ready(async function () {
     });
 });
 
-function showLoadingOverlay() 
-{
+function showLoadingOverlay() {
     document.getElementById("loading-overlay").style.display = "flex";
 }
 
-function hideLoadingOverlay()
-{
+function hideLoadingOverlay() {
     document.getElementById("loading-overlay").style.display = "none";
 }
 

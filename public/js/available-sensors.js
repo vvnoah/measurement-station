@@ -1,9 +1,8 @@
 let checkedSensorName;
-class AvailableSensors extends HTMLElement 
-{
+class AvailableSensors extends HTMLElement {
     constructor() {
         super();
-        this.attachShadow({mode: "open"})
+        this.attachShadow({ mode: "open" })
         this.shadowRoot.innerHTML = `
             <style>
                 #header-container {
@@ -79,11 +78,11 @@ class AvailableSensors extends HTMLElement
                 
                 </div>
             </div>`
-        
+
         this.selectedStations = []
         this.availableSensors = []
     }
-    
+
     connectedCallback() {
         this.update();
     }
@@ -113,8 +112,8 @@ class AvailableSensors extends HTMLElement
         let i = 0
         this.selectedStations.forEach(station => {
             station.sensors.forEach(sensor => {
-                if(this.availableSensors.some(x => x.id === sensor.id)) return
-                this.availableSensors.push({ id: sensor.id, type: sensor.type, isChecked: false})
+                if (this.availableSensors.some(x => x.id === sensor.id)) return
+                this.availableSensors.push({ id: sensor.id, type: sensor.type, isChecked: false })
                 i++
             })
         })
@@ -130,7 +129,7 @@ class AvailableSensors extends HTMLElement
             let checkbox = document.createElement("input")
             checkbox.addEventListener("change", (ev) => this.onMenuItemChange(ev))
             checkbox.setAttribute("type", "checkbox")
-            checkbox.setAttribute("id",  `checkbox-${sensor.id}`)
+            checkbox.setAttribute("id", `checkbox-${sensor.id}`)
             let label = document.createElement("label")
             label.setAttribute("for", `checkbox-${sensor.id}`)
             label.textContent = sensor.type
@@ -156,14 +155,14 @@ class AvailableSensors extends HTMLElement
     updateOutput() {
         let output = this.shadowRoot.querySelector("#output");
         output.innerHTML = "";
-    
+
         // Loop door de geselecteerde sensoren
         this.availableSensors.filter(x => x.isChecked).forEach(checkedSensor => {
             let card = document.createElement("div");
             card.setAttribute("class", "card");
             card.innerHTML += `<b>${checkedSensor.type}</b>`;
             checkedSensorName = checkedSensor.type;
-    
+
             // Verzamel gegevens van alle stations voor deze sensor
             let sensorData = [];
             this.selectedStations.forEach(station => {
@@ -176,24 +175,24 @@ class AvailableSensors extends HTMLElement
                                 <span>${sensor.unit}</span>
                             </div>
                         `,
-                    
-                    );
+
+                        );
                     }
                 });
             });
-    
+
             // Voeg de verzamelde gegevens toe aan de card
             card.innerHTML += sensorData.join("");
-    
+
             // Voeg slechts één details-knop toe voor de sensor
             card.innerHTML += `
                 <div style="display:flex;justify-content:end;">
                     <button onclick=popup(${checkedSensor.id});><b>details</b></button>
                 </div>`;
-    
+
             output.appendChild(card);
         });
     }
-    
+
 }
 customElements.define("available-sensors", AvailableSensors)

@@ -84,7 +84,7 @@ function addMarkers(stations) {
     //console.log(stations.latitude);
     stations.forEach(station => {
         //console.log(station);
-        
+
         // Log the individual station, not the entire array each iteration
         //console.log("Station:", station);
         // Create a circle marker for each station using latitude and longitude
@@ -150,7 +150,7 @@ function get_popup_content(station) {
     const batteryLevel = station.batteryLevel !== null
         ? `${Number(station.batteryLevel).toFixed(2)}%`
         : "N/A";
-        
+
     let popup_content_temperature;
     popup_content_temperature = `<b>${station.name}:</b> <br>Temperature: ${temperature}°C`;
     popup_content_temperature += `<br> <i>BatteryLevel: </b> ${batteryLevel}`;

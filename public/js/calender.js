@@ -11,8 +11,7 @@ var endDate = "";
 
 //EVENTLISTENER VOOR DE CLOSE BUTTON IN DE POPUP
 // => reset de date and reload chart.
-document.addEventListener("DOMContentLoaded", function () 
-{
+document.addEventListener("DOMContentLoaded", function () {
     const closeButton = document.getElementById('close-popup');
     closeButton.addEventListener('click', () => {
         //console.log('Close button clicked');
@@ -51,14 +50,12 @@ const datepicker = flatpickr("#dateRange", {
     maxDate: vandaag,
     locale: "nl",
     onChange: function (selectedDates) {
-        if (selectedDates.length === 1) 
-        {
+        if (selectedDates.length === 1) {
             startDate = formatDateToLocal(selectedDates[0]);
             endDate = formatDateToLocal(selectedDates[0]);
             fetch_specific_data(startDate, endDate);
-        } 
-        else if (selectedDates.length === 2) 
-        {
+        }
+        else if (selectedDates.length === 2) {
             startDate = formatDateToLocal(selectedDates[0]);
             endDate = formatDateToLocal(selectedDates[1]);
             fetch_specific_data(startDate, endDate);
@@ -144,7 +141,7 @@ async function fetch_specific_data(startDate, endDate) {
         renderChart(datasets, startDate, endDate);
     } else {
         console.log('No data available to render chart');
-        
+
         noDataMessage.classList.remove('hidden');
         if (window.myChart) {
             window.myChart.destroy();
@@ -153,8 +150,7 @@ async function fetch_specific_data(startDate, endDate) {
 }
 
 // FORMATTEREN DATUM LEESBAAR FORMAAT CODE
-function formatDateToLocal(date) 
-{
+function formatDateToLocal(date) {
     return date.getFullYear() +
         "-" + String(date.getMonth() + 1).padStart(2, "0") +
         "-" + String(date.getDate()).padStart(2, "0");
@@ -170,11 +166,11 @@ function downsampleMeasurements(measurements, targetSamples) {
 
     measurements.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp)); // Sort by timestamp
 
-    const step = Math.floor(measurements.length / targetSamples); 
+    const step = Math.floor(measurements.length / targetSamples);
     const downsampled = [];
 
     for (let i = 0; i < measurements.length; i += step) {
-        downsampled.push(measurements[i]); 
+        downsampled.push(measurements[i]);
     }
 
     // Laatste meting toevoegen voor correcte weergave
@@ -209,24 +205,24 @@ function renderChart(datasets, startDate, endDate) {
     //console.log("MIN & MAX GLOBAL", globalMin, globalMax);
 
     // Als min & max equal => +1 en -1 voor buffer
-     if (globalMin === globalMax) {
-         globalMin -= 1; 
-         globalMax += 1; 
-     }
+    if (globalMin === globalMax) {
+        globalMin -= 1;
+        globalMax += 1;
+    }
 
     // const range = globalMax - globalMin;
     // const buffer = range * 0.2; // 20% buffer
-    var newMin = (globalMin*1) - (globalMin * 0.4); // 40% buffer
-    var newMax = (globalMax*1) + (globalMax * 0.4);
+    var newMin = (globalMin * 1) - (globalMin * 0.4); // 40% buffer
+    var newMax = (globalMax * 1) + (globalMax * 0.4);
 
     var m = newMin - globalMin;
     var x = newMax - globalMax;
-    var EqualDifference = (m + x)/2;
+    var EqualDifference = (m + x) / 2;
 
     //console.log("EQUALDIFFERENCE", EqualDifference);
 
-    const calculatedMinValue = globalMin - EqualDifference; 
-    const calculatedMaxValue = (globalMax*1) + EqualDifference; 
+    const calculatedMinValue = globalMin - EqualDifference;
+    const calculatedMaxValue = (globalMax * 1) + EqualDifference;
     //console.log("MIN & MAX CALCULATED", calculatedMinValue, calculatedMaxValue);
 
 
@@ -243,8 +239,7 @@ function renderChart(datasets, startDate, endDate) {
     let timeUnit, stepSize, tooltipFormat, displayFormats;
 
     // Range van 2 days of minder: display hours and minutes with the day
-    if (rangeDuration <= 2 * 24 * 60 * 60 * 1000) 
-    {
+    if (rangeDuration <= 2 * 24 * 60 * 60 * 1000) {
         timeUnit = "minute";
         stepSize = 15; //ticks every 15 minutes
         tooltipFormat = "dd-MM-yyyy HH:mm";
@@ -252,10 +247,9 @@ function renderChart(datasets, startDate, endDate) {
             minute: "dd-MM HH:mm", // day, hours, and minutes
             hour: "dd-MM HH:mm",   // For hourly data
         };
-    } 
+    }
     // Voor range van 7 days of minder: display hours and the day
-    else if (rangeDuration <= 7 * 24 * 60 * 60 * 1000) 
-    {
+    else if (rangeDuration <= 7 * 24 * 60 * 60 * 1000) {
         timeUnit = "hour";
         stepSize = 1; //ticks every hour
         tooltipFormat = "dd-MM-yyyy HH:mm";
@@ -263,10 +257,9 @@ function renderChart(datasets, startDate, endDate) {
             hour: "dd-MM HH:mm", // Show day and hours
             day: "dd-MM",        // For fallback
         };
-    } 
+    }
     // Grote ranges: display only days
-    else 
-    {
+    else {
         timeUnit = "day";
         stepSize = 1; // ticks every day
         tooltipFormat = "dd-MM-yyyy";
@@ -315,7 +308,7 @@ function renderChart(datasets, startDate, endDate) {
                     // max: new Date(endDate).toISOString(),
                     //min: new Date(new Date(startDate).getTime() - 12 * 60 * 60 * 1000), // 12 hours before
                     //max: new Date(new Date(endDate).getTime() + 12 * 60 * 60 * 1000),  // 12 hours after
-                    min: new Date(new Date(startDate).getTime() -1*60*60*1000), // 12 hours before
+                    min: new Date(new Date(startDate).getTime() - 1 * 60 * 60 * 1000), // 12 hours before
                     max: new Date(new Date(endDate).getTime() + 24 * 60 * 60 * 1000),  // 12 hours after
                 },
                 y: {
