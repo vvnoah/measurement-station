@@ -5,6 +5,9 @@ class AvailableSensors extends HTMLElement {
         this.attachShadow({ mode: "open" })
         this.shadowRoot.innerHTML = `
             <style>
+                #container {
+                    container-type: inline-size;
+                }
                 #header-container {
                     display: grid;
                     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
@@ -50,9 +53,21 @@ class AvailableSensors extends HTMLElement {
                     display: none;
                 }
                 #output:has(.card) {
-                    padding-block: 2rem;
                     display: grid;
+                    padding-block: 2rem;
                     gap: 2rem;
+                }
+                @container (min-width: 600px) {
+                    #output:has(.card) {
+                        grid-template-columns: 1fr 1fr;
+                        gap: 1rem;
+                    }
+                }
+                @container (min-width: 800px) {
+                    #output:has(.card) {
+                        grid-template-columns: 1fr 1fr 1fr;
+                        gap: 1rem;
+                    }
                 }
                 .card {
                     display: grid;
