@@ -302,7 +302,7 @@ function renderChart(datasets, startDate, endDate) {
                     },
                     title: {
                         display: true,
-                        text: "Time (Day and Hours)",
+                        text: "Time",
                     },
                     // min: new Date(startDate).toISOString(),
                     // max: new Date(endDate).toISOString(),
