@@ -198,32 +198,36 @@ function renderChart(datasets, startDate, endDate) {
 
     datasets.forEach(dataset => {
         dataset.data.forEach(point => {
-            if (point.y < globalMin) globalMin = point.y;
-            if (point.y > globalMax) globalMax = point.y;
+            if (parseFloat(point.y) < globalMin) globalMin = parseFloat(point.y);
+            if (parseFloat(point.y) > globalMax) globalMax = parseFloat(point.y);
+
         });
     });
-    //console.log("MIN & MAX GLOBAL", globalMin, globalMax);
 
-    // Als min & max equal => +1 en -1 voor buffer
+    // constante waarden?
     if (globalMin === globalMax) {
-        globalMin -= 1;
-        globalMax += 1;
+        // Als min & max equal => +1 en -1 voor buffer
+        if (globalMin === 0) {
+            globalMin = -1;
+            globalMax = 1;
+        } else {
+            //percentage buffer
+            const buffer = Math.abs(globalMin * 0.1);
+            globalMin -= buffer;
+            globalMax += buffer;
+        }
     }
 
-    // const range = globalMax - globalMin;
-    // const buffer = range * 0.2; // 20% buffer
-    var newMin = (globalMin * 1) - (globalMin * 0.4); // 40% buffer
-    var newMax = (globalMax * 1) + (globalMax * 0.4);
+    const range = globalMax - globalMin;
+    const bufferPercentage = 0.15; // 15% buffer
+    const buffer = range * bufferPercentage;
 
-    var m = newMin - globalMin;
-    var x = newMax - globalMax;
-    var EqualDifference = (m + x) / 2;
+    // small ranges use abs buf
+    const minBuffer = parseFloat(Math.max(buffer, Math.abs(globalMax * 0.1)));
 
-    //console.log("EQUALDIFFERENCE", EqualDifference);
-
-    const calculatedMinValue = globalMin - EqualDifference;
-    const calculatedMaxValue = (globalMax * 1) + EqualDifference;
-    //console.log("MIN & MAX CALCULATED", calculatedMinValue, calculatedMaxValue);
+    const calculatedMinValue = globalMin - minBuffer;
+    const calculatedMaxValue = globalMax + minBuffer;
+    //console.log('calculatedMaxValue:', calculatedMaxValue);
 
 
     if (window.myChart) {
