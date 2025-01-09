@@ -14,27 +14,17 @@ var endDate = "";
 document.addEventListener("DOMContentLoaded", function () {
     const closeButton = document.getElementById('close-popup');
     closeButton.addEventListener('click', () => {
-        //console.log('Close button clicked');
+        document.getElementById('popup').classList.add('hidden');
 
         // Format de standaarddatum volgens het opgegeven formaat
         const formattedToday = flatpickr.formatDate(vandaag, "d-m-Y");
 
-        // Reset calendar
-        //datepicker.clear(); // Verwijder huidige selectie
-        //datepicker.setDate(defaultDate, true); // Stel de standaarddatum in
-        //startDate = "";
-        //endDate = "";
-
         // Clear bestaande chart
         if (window.myChart) {
-            console.log("we get here bitch")
             window.myChart.destroy();
             const noDataMessage = document.getElementById('no-data-message');
             noDataMessage.classList.remove('hidden');
-            //window.myChart = null;
         }
-        //startDate = "";
-        //endDate = "";
     });
 });
 
