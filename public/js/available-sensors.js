@@ -85,13 +85,9 @@ class AvailableSensors extends HTMLElement {
                         </b>
                         <b>sensoren geselecteerd</b>
                     </div>
-                    <div id="menu">
-    
-                    </div>
+                    <div id="menu"></div>
                 </div>
-                <div id="output">
-                
-                </div>
+                <div id="output"></div>
             </div>`
 
         this.selectedStations = []

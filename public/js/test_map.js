@@ -130,7 +130,11 @@ function addMarkers(stations) {
                 selectedIds.push(station.id);
                 //console.log(selectedIds);
             } else {
-                selectedStations.pop(station)
+                const index = selectedStations.findIndex(s => s.id === station.id)
+                if (index !== -1) {
+                    selectedStations.splice(index, 1)
+                }
+
                 selectedIds = selectedIds.filter(id => id !== station.id);
                 //console.log(selectedIds);
             }
